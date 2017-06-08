@@ -38,7 +38,7 @@
                             die("Connection failed: " . $conn->connect_error);
                         }
                         // <Wijzigingsopdracht>
-                        $sql = "SELECT * FROM video where `nieuw` = '1'";
+                        $sql = "SELECT * FROM video where `nieuw` = "klant"";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {

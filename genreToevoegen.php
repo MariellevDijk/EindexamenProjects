@@ -1,5 +1,5 @@
 <?php
-$userrole = array("klant", "bezorger", "admin", "baliemedewerker", "eigenaar");
+$rol = array("admin", "bezorger", "klant", "baliemedewerker", "eigenaar");
 require_once("./security.php");
 ?>
 

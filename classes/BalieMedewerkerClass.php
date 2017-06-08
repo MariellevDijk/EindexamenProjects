@@ -48,12 +48,12 @@ class BalieMedewerkerClass
         $database->fire_query($query2);
         $database->fire_query($query3);
                 
-        $sql1 = "SELECT a.email FROM login AS a INNER JOIN reservering AS b ON a.idKlant = b.idKlant where idVideo =             '".$_POST['idVideo']."'";
+        $sql1 = "SELECT a.emailAdres FROM login AS a INNER JOIN reservering AS b ON a.idUser = b.idUser where idVideo =             '".$_POST['idVideo']."'";
         $result = $database->fire_query($sql1);
 
         if ($result->num_rows > 0){
             while ($row = $result->fetch_assoc()) {
-                self::send_email($row['email']);
+                self::send_email($row['emailAdres']);
             }
         }
     }
@@ -61,7 +61,7 @@ class BalieMedewerkerClass
     private static function send_email($email)
 	{
 		$to = $email;
-		$subject = "Activatiemail webshop Marklin";
+		$subject = "Activatiemail webshop AutoTrader";
 		$message = "Dear sir/madam <br> ";
 
 		$message .= '<style>a { color:red;}</style>';
@@ -69,11 +69,11 @@ class BalieMedewerkerClass
 		$message .= "Log in on your account to hire the video"."<br>";
 		$message .= "Your reservation ends in 7 days."."<br>";
 		$message .= "Greetings,"."<br>";
-		$message .= "Dylan Griffioen"."<br>";
+		$message .= "Marielle van Dijk"."<br>";
 
-		$headers = 'From: no-reply@webshopMarklin.nl'."\r\n";
-		$headers .= 'Reply-To: webmaster@webshopMarklin.nl'."\r\n";
-		$headers .= 'Bcc: accountant@webshopMarklin.nl'."\r\n";
+		$headers = 'From: no-reply@webshopAutoTrader.nl'."\r\n";
+		$headers .= 'Reply-To: webmaster@webshopAutoTrader.nl'."\r\n";
+		$headers .= 'Bcc: accountant@webshopAutoTrader.nl'."\r\n";
 		//$headers .= "MIME-version: 1.0"."\r\n";
 		//$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
 		$headers .= "Content-type: text/html; charset=iso-8859-1"."\r\n";
@@ -89,7 +89,7 @@ class BalieMedewerkerClass
         global $database;
 
 
-        $query = "DELETE FROM `reservering` WHERE `idKlant` = " . $_SESSION['idKlant'] . "
+        $query = "DELETE FROM `reservering` WHERE `idUser` = " . $_SESSION['idUser'] . "
                                                     AND `idReservering` = " . $post["idReservering"] . " ";
         //echo $query;
 

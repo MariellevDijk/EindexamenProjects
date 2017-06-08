@@ -1,5 +1,5 @@
 <?php
-$userrole = array("admin", "eigenaar");
+$rol = array("klant", "eigenaar");
 require_once("./security.php");
 ?>
 
@@ -126,7 +126,7 @@ require_once("./security.php");
                                 <td>
                                         <form role=\"form\" action='' method='post'>
                                             <select name='blockSelect'>
-                                                <option value='1'>Beschikbaar ( 1 )</option>
+                                                <option value="klant">Beschikbaar ( 1 )</option>
                                                 <option value='0'>Niet beschikbaar ( 0 )</option>
                                                 </select>
                                             <input type='hidden' class=\"btn btn-info\" name='idVideo' value='" . $row['idVideo'] . "'/>

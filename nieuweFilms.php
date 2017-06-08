@@ -1,6 +1,6 @@
 <!-- <Wijzigingsopdracht> -->
 <?php
-$userrole = array("admin", "eigenaar");
+$rol = array("klant", "eigenaar");
 require_once("./security.php");
 ?>
 
@@ -34,7 +34,7 @@ require_once("./security.php");
         if (isset($_POST['updateNieuw'])) {
             include('connect_db.php');
             echo $_POST['blockSelect'];
-            if ($_POST['blockSelect'] == '1') {
+            if ($_POST['blockSelect'] == "klant") {
                 $sql2 = "UPDATE `video`
                         SET `aantalBeschikbaar` = '10'
                         WHERE `idVideo` = " . $_POST['idVideo'] . "";
@@ -152,7 +152,7 @@ require_once("./security.php");
                                 <td>
                                         <form role=\"form\" action='' method='post'>
                                             <select name='blockSelect'>
-                                                <option value='1'>Nieuw ( 1 )</option>
+                                                <option value="klant">Nieuw ( 1 )</option>
                                                 <option value='0'>Niet nieuw ( 0 )</option>
                                                 </select>
                                             <input type='hidden' class=\"btn btn-info\" name='idVideo' value='" . $row['idVideo'] . "'/>

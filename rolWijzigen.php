@@ -1,5 +1,5 @@
 <?php
-$userrole = array("admin", "eigenaar");
+$rol = array("klant", "eigenaar");
 require_once("./security.php");
 ?>
 
@@ -36,12 +36,12 @@ if (isset($_POST['create'])) {
 
 
         require_once("classes/LoginClass.php");
-        if (isset($_POST['updateUserrole'])) {
+        if (isset($_POST['updaterol'])) {
             include('connect_db.php');
 
             $sql = "UPDATE	`login` 
-                     SET 		`userrole`		=	'" . $_POST['userroleSelect'] . "'
-                     WHERE	    `idKlant`			=	 " . $_POST['idKlant'] . " ";
+                     SET 		`rol`		=	'" . $_POST['rolSelect'] . "'
+                     WHERE	    `idUser`			=	 " . $_POST['idUser'] . " ";
 
             //echo $sql;
             $database->fire_query($sql);
@@ -121,21 +121,21 @@ if (isset($_POST['create'])) {
                                         " . $row["naam"] . "
                                 </td>
                                 <td>
-                                        " . $row['email'] . "
+                                        " . $row['emailAdres'] . "
                                 </td>
                                 <td>
-                                        " . $row['userrole'] . "
+                                        " . $row['rol'] . "
                                 </td>
                                 <td>
                                         <form role=\"form\" action='' method='post'>
-                                            <select name='userroleSelect'>
+                                            <select name='rolSelect'>
                                                 <option value='klant'>Klant</option>
                                                 <option value='eigenaar'>Eigenaar</option>
                                                 <option value='baliemedewerker'>Baliemedewerker</option>
                                                 <option value='admin'>Admin</option>
                                                 <option value='bezorger'>Bezorger</option>
-                                            <input type='hidden' class=\"btn btn-info\" name='idKlant' value='" . $row['idKlant'] . "'/>
-                                            <input type='submit' class=\"btn btn-info\" name='updateUserrole' value='Update Rol'>
+                                            <input type='hidden' class=\"btn btn-info\" name='idUser' value='" . $row['idUser'] . "'/>
+                                            <input type='submit' class=\"btn btn-info\" name='updaterol' value='Update Rol'>
                                             
                                         </form>
                                 </td>

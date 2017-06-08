@@ -57,8 +57,8 @@ class ReserveClass
 
         $date = date('Y-m-d');
 
-        $query = "INSERT INTO `reservering` (`idReservering`, `idKlant`, `idVideo`, `titel`, `datumReservatie`) 
-                      VALUES (NULL, " . $_SESSION['idKlant'] . " ,'" . $post['idVideo'] . "','" . $post['titel'] . "',          '" . $date . "')";
+        $query = "INSERT INTO `reservering` (`idReservering`, `idUser`, `idVideo`, `titel`, `datumReservatie`) 
+                      VALUES (NULL, " . $_SESSION['idUser'] . " ,'" . $post['idVideo'] . "','" . $post['titel'] . "',          '" . $date . "')";
 
 //            echo $_SESSION['id'];
 //            echo $post['titel'];
@@ -76,11 +76,11 @@ class ReserveClass
 
     private static function send_email($post)
     {
-        $to = $_SESSION['email'];
-        $subject = "Bevestigingsmail Reservering Webshop Marklin";
+        $to = $_SESSION['emailAdres'];
+        $subject = "Bevestigingsmail Reservering Webshop AutoTrader";
         $message = "Geachte heer/mevrouw<br>";
 
-        $message .= "Hartelijk dank voor het reserveren bij Webshop Marklin" . "<br>";
+        $message .= "Hartelijk dank voor het reserveren bij Webshop AutoTrader" . "<br>";
 
         $message .= "Check regelmatig in uw account of de video al beschikbaar is." . "<br>";
 
@@ -88,11 +88,11 @@ class ReserveClass
 
         $message .= "Wij wensen u alvast veel kijkplezier.<br>";
         $message .= "Met vriendelijke groet," . "<br>";
-        $message .= "Dylan Griffioen" . "<br>";
+        $message .= "Marielle van Dijk" . "<br>";
 
-        $headers = 'From: no-reply@WebshopMarklin.nl' . "\r\n";
-        $headers .= 'Reply-To: webmaster@webshopMarklin.nl' . "\r\n";
-        $headers .= 'Bcc: accountant@webshopMarklin.nl' . "\r\n";
+        $headers = 'From: no-reply@WebshopAutoTrader.nl' . "\r\n";
+        $headers .= 'Reply-To: webmaster@webshopAutoTrader.nl' . "\r\n";
+        $headers .= 'Bcc: accountant@webshopAutoTrader.nl' . "\r\n";
         //$headers .= "MIME-version: 1.0"."\r\n";
         //$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
@@ -109,7 +109,7 @@ class ReserveClass
 
         $query = "SELECT * FROM `reservering`
 					  WHERE	 `idVideo` = '" . $post['idVideo'] . "'
-                      AND `idKlant` = '" . $_SESSION['idKlant'] . "'";
+                      AND `idUser` = '" . $_SESSION['idUser'] . "'";
 
         $result = $database->fire_query($query);
         // echo $query;
@@ -122,7 +122,7 @@ class ReserveClass
         global $database;
 
 
-        $query = "DELETE FROM `reservering` WHERE `idKlant` = " . $_SESSION['idKlant'] . "
+        $query = "DELETE FROM `reservering` WHERE `idUser` = " . $_SESSION['idUser'] . "
                                                     AND `idReservering` = " . $post["idReservering"] . " ";
         //echo $query;
 
@@ -139,7 +139,7 @@ class ReserveClass
 
         $row = $result->fetch_assoc();
         //var_dump($row);
-        $query = "DELETE FROM `reservering` WHERE `idKlant` = '" . $_SESSION['idKlant'] . "' AND `datumVideoBeschikbaar` != '0000-00-00'";
+        $query = "DELETE FROM `reservering` WHERE `idUser` = '" . $_SESSION['idUser'] . "' AND `datumVideoBeschikbaar` != '0000-00-00'";
         //echo $query;
         $database->fire_query($query);
 
@@ -149,7 +149,7 @@ class ReserveClass
     {
         global $database;
 
-        $query = "INSERT INTO `winkelmand`(`idWinkelmand`, `idVideo`, `titel`, `idKlant`, `prijs`) VALUES (null," . $row['idVideo'] . ",'" . $row['titel'] . "', " . $_SESSION['idKlant'] . "," . $row['prijs'] . ")";
+        $query = "INSERT INTO `winkelmand`(`idWinkelmand`, `idVideo`, `titel`, `idUser`, `prijs`) VALUES (null," . $row['idVideo'] . ",'" . $row['titel'] . "', " . $_SESSION['idUser'] . "," . $row['prijs'] . ")";
         echo $query;
         $database->fire_query($query);
         self::lower_amount_Artikelen($row);

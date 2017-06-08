@@ -1,10 +1,10 @@
 <?php
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
-    $email = $_POST['email'];
+    $email = $_POST['emailAdres'];
     $tel = $_POST['tel'];
     $comment = $_POST['comment'];
-    $from = 'From: Website_Webshop Marklin';
+    $from = 'From: Website_Webshop AutoTrader';
     $to = '[placeholder]';
     $subject = 'Nieuw bericht van ' . $_POST['name'];
 
@@ -61,7 +61,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="form-group"><label class="control-label" for="Email1">E-mail</label><span
                                 class="requiredStar">*</span>
-                            <input class="form-control" placeholder="E-mail" type="email" name="email" required></div>
+                            <input class="form-control" placeholder="E-mail" type="emailAdres" name="emailAdres" required></div>
                         <div class="form-group"><label class="control-label" for="Telefoon">Telefoon<br></label>
                             <input class="form-control" id="Telefoon" placeholder="Telefoon" type="tel" name="tel"
                                    required></div>

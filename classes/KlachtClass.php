@@ -7,7 +7,7 @@ class KlachtClass
 {
     //Fields
     private $idKlacht;
-    private $idKlant;
+    private $idUser;
     private $klacht;
 
     public function getIdKlacht()
@@ -15,9 +15,9 @@ class KlachtClass
         return $this->idKlacht;
     }
 
-    public function getIdKlant()
+    public function getidUser()
     {
-        return $this->idKlant;
+        return $this->idUser;
     }
 
     public function getKlacht()
@@ -31,7 +31,7 @@ class KlachtClass
         $this->idKlacht = $value;
     }
 
-    public function setIdKlant($value)
+    public function setidUser($value)
     {
         $this->klacht = $value;
     }
@@ -49,9 +49,9 @@ class KlachtClass
     public static function insert_klacht_into_database($klacht)
     {
         global $database;
-        $query = "INSERT INTO `klachten` (`idKlacht`, `idKlant`, `klacht`, `emailKlant`) 
-                      VALUES (NULL, '" . $_SESSION['idKlant'] . "', '" . $klacht . "', '" . $_SESSION['email'] . "')";
-        //echo $_SESSION['idKlant'];
+        $query = "INSERT INTO `klachten` (`idKlacht`, `idUser`, `klacht`, `emailKlant`) 
+                      VALUES (NULL, '" . $_SESSION['idUser'] . "', '" . $klacht . "', '" . $_SESSION['emailAdres'] . "')";
+        //echo $_SESSION['idUser'];
         //echo $klacht;
         // echo $query;
         $database->fire_query($query);
@@ -62,8 +62,8 @@ class KlachtClass
 
     private static function send_email($klacht)
     {
-        $to = $_SESSION['email'];
-        $subject = "Bevestigingsmail Klacht Webshop Marklin";
+        $to = $_SESSION['emailAdres'];
+        $subject = "Bevestigingsmail Klacht Webshop AutoTrader";
         $message = "Geachte heer/mevrouw<br>";
         $message .= "Bedankt voor het indienen van uw klacht." . "<br><br>";
 
@@ -71,11 +71,11 @@ class KlachtClass
 
         $message .= "Wij nemen spoedig contact met u op om dit probleem op te lossen.<br>";
         $message .= "Met vriendelijke groet," . "<br>";
-        $message .= "Dylan Griffioen" . "<br>";
+        $message .= "Marielle van Dijk" . "<br>";
 
-        $headers = 'From: no-reply@WebshopMarklin.nl' . "\r\n";
-        $headers .= 'Reply-To: webmaster@webshopMarklin.nl' . "\r\n";
-        $headers .= 'Bcc: accountant@webshopMarklin.nl' . "\r\n";
+        $headers = 'From: no-reply@WebshopAutoTrader.nl' . "\r\n";
+        $headers .= 'Reply-To: webmaster@webshopAutoTrader.nl' . "\r\n";
+        $headers .= 'Bcc: accountant@webshopAutoTrader.nl' . "\r\n";
         //$headers .= "MIME-version: 1.0"."\r\n";
         //$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";

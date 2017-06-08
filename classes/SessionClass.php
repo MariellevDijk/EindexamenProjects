@@ -4,15 +4,15 @@
 class SessionClass
 {
     //Fields
-    private $idKlant;
-    private $email;
-    private $userrole;
+    private $idUser;
+    private $emailAdres;
+    private $rol;
     private $geblokkeerd;
 
     //Properties
-    public function getUserrole()
+    public function getrol()
     {
-        return $this->userrole;
+        return $this->rol;
     }
 
     //Constructor
@@ -22,15 +22,15 @@ class SessionClass
 
     public function login($loginObject)
     {
-        // De velden $id, $email, $userrole een waarde geven.
+        // De velden $id, $email, $rol een waarde geven.
         //var_dump($loginObject);
-        $this->idKlant = $_SESSION['idKlant'] = $loginObject->getIdKlant();
-        $this->email = $_SESSION['email'] = $loginObject->getEmail();
-        $this->userrole = $_SESSION['userrole'] = $loginObject->getUserrole();
+        $this->idUser = $_SESSION['idUser'] = $loginObject->getidUser();
+        $this->emailAdres = $_SESSION['emailAdres'] = $loginObject->getEmailAdres();
+        $this->rol = $_SESSION['rol'] = $loginObject->getrol();
         $this->geblokkeerd = $_SESSION['geblokkeerd'] = $loginObject->getGeblokkeerd();
 
 
-        $usersObject = LoginClass::find_info_by_id($_SESSION['idKlant']);
+        $usersObject = LoginClass::find_info_by_id($_SESSION['idUser']);
         //$_SESSION['username'] = $usersObject->getFirstName()." ".
         //$usersObject->getInfix()." ".
         //$usersObject->getLastname();
@@ -39,16 +39,16 @@ class SessionClass
 
     public function logout()
     {
-        session_unset('idKlant');
-        session_unset('email');
-        session_unset('userrole');
+        session_unset('idUser');
+        session_unset('emailAdres');
+        session_unset('rol');
         session_unset('geblokkeerd');
 
 
         session_destroy();
-        unset($this->idKlant);
-        unset($this->email);
-        unset($this->userrole);
+        unset($this->idUser);
+        unset($this->emailAdres);
+        unset($this->rol);
         unset($this->geblokkeerd);
 
 

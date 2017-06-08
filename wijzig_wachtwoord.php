@@ -1,5 +1,5 @@
 <?php
-$userrole = array("klant",);
+$rol = array("admin",);
 require_once("./security.php");
 
 if (isset($_POST['submit'])) {
@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
     if (LoginClass::check_old_password($_POST['oude_wachtwoord'])) {
         //echo "Goede wachtwoord";
         if (!strcmp($_POST['nieuw_wachtwoord'], $_POST['controle_wachtwoord'])) {
-            LoginClass::update_password($_SESSION['idKlant'], $_POST['nieuw_wachtwoord']);
+            LoginClass::update_password($_SESSION['idUser'], $_POST['nieuw_wachtwoord']);
 
             echo "<h3 style='text-align: center;' >Uw wachtwoord is succesvol gewijzigd.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
             header("refresh:4;url=index.php?content=klantHomepage");

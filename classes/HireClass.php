@@ -62,8 +62,8 @@ class HireClass
     public static function insert_winkelmanditem_database($post)
     {
         global $database;
-        $query = "INSERT INTO `winkelmand` (`idWinkelmand`, `idVideo`, `titel`, `idKlant`, `prijs`) 
-                      VALUES (NULL, '" . $post['idVideo'] . "', '" . $post['titel'] . "', " . $_SESSION['idKlant'] . ", " . $post['prijs'] . ")";
+        $query = "INSERT INTO `winkelmand` (`idWinkelmand`, `idVideo`, `titel`, `idUser`, `prijs`) 
+                      VALUES (NULL, '" . $post['idVideo'] . "', '" . $post['titel'] . "', " . $_SESSION['idUser'] . ", " . $post['prijs'] . ")";
 //            echo $_SESSION['id'];
 //            echo $post['titel'];
 //            echo $post['prijs'];
@@ -75,7 +75,7 @@ class HireClass
     public static function clear_winkelmand()
     {
         global $database;
-        $query = "DELETE FROM `winkelmand` WHERE `idKlant` = " . $_SESSION['idKlant'] . " ";
+        $query = "DELETE FROM `winkelmand` WHERE `idUser` = " . $_SESSION['idUser'] . " ";
 //            echo $query;
         $database->fire_query($query);
     }
@@ -83,7 +83,7 @@ class HireClass
     public static function remove_item_winkelmand($post)
     {
         global $database;
-        $query = "DELETE FROM `winkelmand` WHERE `idKlant` = " . $_SESSION['idKlant'] . "
+        $query = "DELETE FROM `winkelmand` WHERE `idUser` = " . $_SESSION['idUser'] . "
                                                     AND `idWinkelmand` = " . $post["idWinkelmand"] . " ";
         // echo $query;
         $database->fire_query($query);
@@ -103,8 +103,8 @@ class HireClass
         $sql = "SELECT idWinkelmand, GROUP_CONCAT(titel, ', ') 
                 AS titel_list 
                 FROM winkelmand 
-                WHERE `idKlant` = " . $_SESSION['idKlant'] . "
-                GROUP BY idKlant";
+                WHERE `idUser` = " . $_SESSION['idUser'] . "
+                GROUP BY idUser";
         // echo $sql;
         $result = $database->fire_query($sql);
         $row = $result->fetch_assoc();
@@ -114,7 +114,7 @@ class HireClass
         $query = "INSERT INTO `bestelling` (`idBestelling`, 
                                             `idVideo`, 
                                             `videoTitel`, 
-                                            `idKlant`, 
+                                            `idUser`, 
                                             `afleverdatum`, 
                                             `aflevertijd`, 
                                             `ophaaldatum`, 
@@ -123,7 +123,7 @@ class HireClass
                   VALUES                    (NULL, 
                                               " . $post['idVideo'] . ", 
                                              '" . $titelList . "', 
-                                              " . $_SESSION['idKlant'] . ", 
+                                              " . $_SESSION['idUser'] . ", 
                                              '" . $post['afleverdatum'] . "', 
                                              '" . $post['aflevertijd'] . "', 
                                              '" . $ophaaldatum . "', 
@@ -170,11 +170,11 @@ class HireClass
 
     private static function send_email($post, $idBestelling, $ophaaldatum)
     {
-        $to = $_SESSION['email'];
-        $subject = "Bevestigingsmail Bestelling Webshop Marklin";
+        $to = $_SESSION['emailAdres'];
+        $subject = "Bevestigingsmail Bestelling Webshop AutoTrader";
         $message = "Geachte heer/mevrouw<br>";
 
-        $message .= "Hartelijk dank voor het bestellen bij Webshop Marklin" . "<br>";
+        $message .= "Hartelijk dank voor het bestellen bij Webshop AutoTrader" . "<br>";
 
         $message .= "Uw bestellingsnummer is: " . $idBestelling . "<br>";
         $message .= "U kunt in uw account de bestelling verlengen als u de video langer wilt huren." . "<br>";
@@ -185,11 +185,11 @@ class HireClass
 
         $message .= "Wij wensen u veel kijkplezier.<br>";
         $message .= "Met vriendelijke groet," . "<br>";
-        $message .= "Dylan Griffioen" . "<br>";
+        $message .= "Marielle van Dijk" . "<br>";
 
-        $headers = 'From: no-reply@WebshopMarklin.nl' . "\r\n";
-        $headers .= 'Reply-To: webmaster@webshopMarklin.nl' . "\r\n";
-        $headers .= 'Bcc: accountant@webshopMarklin.nl' . "\r\n";
+        $headers = 'From: no-reply@WebshopAutoTrader.nl' . "\r\n";
+        $headers .= 'Reply-To: webmaster@webshopAutoTrader.nl' . "\r\n";
+        $headers .= 'Bcc: accountant@webshopAutoTrader.nl' . "\r\n";
         //$headers .= "MIME-version: 1.0"."\r\n";
         //$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
@@ -315,12 +315,12 @@ class HireClass
     {
         global $database;
 
-        $sql = "SELECT a.email FROM login AS a INNER JOIN bestelling AS b ON a.idKlant = b.idKlant where DATEDIFF(`ophaaldatum`,CURRENT_DATE) = 1";
+        $sql = "SELECT a.emailAdres FROM login AS a INNER JOIN bestelling AS b ON a.idUser = b.idUser where DATEDIFF(`ophaaldatum`,CURRENT_DATE) = 1";
         $result = $database->fire_query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                //echo $row3['email'];
-                self::send_memory_email_day_before_mail($row['email']);
+                //echo $row3['emailAdres'];
+                self::send_memory_email_day_before_mail($row['emailAdres']);
             }
         }
     }
@@ -328,17 +328,17 @@ class HireClass
     public static function send_memory_email_day_before_mail($email)
     {
         $to = $email;
-        $subject = "Bevestigingsmail Bestelling webshop Marklin";
+        $subject = "Bevestigingsmail Bestelling webshop AutoTrader";
         $message = "Geachte heer/mevrouw<br>";
 
         $message .= "Uw bestelling word morgen opgehaald.<br>";
 
         $message .= "Met vriendelijke groet," . "<br>";
-        $message .= "Dylan Griffioen" . "<br>";
+        $message .= "Marielle van Dijk" . "<br>";
 
-        $headers = 'From: no-reply@webshopMarklin.nl' . "\r\n";
-        $headers .= 'Reply-To: webmaster@webshopMarklin.nl' . "\r\n";
-        $headers .= 'Bcc: accountant@webshopMarklin.nl' . "\r\n";
+        $headers = 'From: no-reply@webshopAutoTrader.nl' . "\r\n";
+        $headers .= 'Reply-To: webmaster@webshopAutoTrader.nl' . "\r\n";
+        $headers .= 'Bcc: accountant@webshopAutoTrader.nl' . "\r\n";
         //$headers .= "MIME-version: 1.0"."\r\n";
         //$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
@@ -352,12 +352,12 @@ class HireClass
     {
         global $database;
 
-        $sql = "SELECT a.email FROM login AS a INNER JOIN bestelling AS b ON a.idKlant = b.idKlant where DATEDIFF(`ophaaldatum`,CURRENT_DATE) = -3";
+        $sql = "SELECT a.emailAdres FROM login AS a INNER JOIN bestelling AS b ON a.idUser = b.idUser where DATEDIFF(`ophaaldatum`,CURRENT_DATE) = -3";
         $result = $database->fire_query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                //echo $row3['email'];
-                self::send_memory_email_3_days_after_mail($row['email']);
+                //echo $row3['emailAdres'];
+                self::send_memory_email_3_days_after_mail($row['emailAdres']);
             }
         }
     }
@@ -365,17 +365,17 @@ class HireClass
     public static function send_memory_email_3_days_after_mail($email)
     {
         $to = $email;
-        $subject = "Bevestigingsmail Bestelling webshop Marklin";
+        $subject = "Bevestigingsmail Bestelling webshop AutoTrader";
         $message = "Geachte heer/mevrouw<br>";
 
         $message .= "Uw bestelling is al 3 dagen verlopen.<br>";
 
         $message .= "Met vriendelijke groet," . "<br>";
-        $message .= "Dylan Griffioen" . "<br>";
+        $message .= "Marielle van Dijk" . "<br>";
 
-        $headers = 'From: no-reply@webshopMarklin.nl' . "\r\n";
-        $headers .= 'Reply-To: webmaster@webshopMarklin.nl' . "\r\n";
-        $headers .= 'Bcc: accountant@webshopMarklin.nl' . "\r\n";
+        $headers = 'From: no-reply@webshopAutoTrader.nl' . "\r\n";
+        $headers .= 'Reply-To: webmaster@webshopAutoTrader.nl' . "\r\n";
+        $headers .= 'Bcc: accountant@webshopAutoTrader.nl' . "\r\n";
         //$headers .= "MIME-version: 1.0"."\r\n";
         //$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
@@ -389,13 +389,13 @@ class HireClass
     {
         global $database;
 
-        $sql = "SELECT a.idKlant, a.email FROM login AS a INNER JOIN bestelling AS b ON a.idKlant = b.idKlant where DATEDIFF(`ophaaldatum`,CURRENT_DATE) = -21";
+        $sql = "SELECT a.idUser, a.emailAdres FROM login AS a INNER JOIN bestelling AS b ON a.idUser = b.idUser where DATEDIFF(`ophaaldatum`,CURRENT_DATE) = -21";
         $result = $database->fire_query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                //echo $row3['email'];
-                self::send_memory_email_3_weeks_after_mail($row['email']);
-                self::blokeer_user_na_3_weken($row['idKlant']);
+                //echo $row3['emailAdres'];
+                self::send_memory_email_3_weeks_after_mail($row['emailAdres']);
+                self::blokeer_user_na_3_weken($row['idUser']);
             }
         }
     }
@@ -403,17 +403,17 @@ class HireClass
     public static function send_memory_email_3_weeks_after_mail($email)
     {
         $to = $email;
-        $subject = "Bevestigingsmail Bestelling webshop Marklin";
+        $subject = "Bevestigingsmail Bestelling webshop AutoTrader";
         $message = "Geachte heer/mevrouw<br>";
 
         $message .= "Uw bestelling is al 3 weken verlopen, uw acount zal nu geblokeerd worden.<br>";
 
         $message .= "Met vriendelijke groet," . "<br>";
-        $message .= "Dylan Griffioen" . "<br>";
+        $message .= "Marielle van Dijk" . "<br>";
 
-        $headers = 'From: no-reply@webshopMarklin.nl' . "\r\n";
-        $headers .= 'Reply-To: webmaster@webshopMarklin.nl' . "\r\n";
-        $headers .= 'Bcc: accountant@webshopMarklin.nl' . "\r\n";
+        $headers = 'From: no-reply@webshopAutoTrader.nl' . "\r\n";
+        $headers .= 'Reply-To: webmaster@webshopAutoTrader.nl' . "\r\n";
+        $headers .= 'Bcc: accountant@webshopAutoTrader.nl' . "\r\n";
         //$headers .= "MIME-version: 1.0"."\r\n";
         //$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
@@ -428,7 +428,7 @@ class HireClass
         global $database;
         $sql = "UPDATE	`login` 
                      SET 		`geblokkeerd`		=	1
-                     WHERE	    `idKlant`			=	 " . $id. " ";
+                     WHERE	    `idUser`			=	 " . $id. " ";
         $database->fire_query($sql);
     }
     
