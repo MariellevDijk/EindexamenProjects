@@ -7,7 +7,7 @@ require_once("./security.php");
 if (isset($_POST['update'])) {
     echo "<h3 style='text-align: center;' >Film is beschikbaar gezet in database.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
     header("refresh:4;url=index.php?content=baliemedewerkerHomepage");
-    require_once("./Classes/BalieMedewerkerClass.php");
+    require_once("./classes/BalieMedewerkerClass.php");
     BalieMedewerkerClass::update_aantal_beschikbaar($_POST);
 } else {
 
@@ -21,7 +21,7 @@ if (isset($_POST['update'])) {
                 src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
-        <link href="../style.css" rel="stylesheet" type="text/css">
+        <link href="style.css" rel="stylesheet" type="text/css">
         <style>
             .header {
                 font-size: 24px;
@@ -39,7 +39,7 @@ if (isset($_POST['update'])) {
             <?php
 
 
-            require_once("Classes/LoginClass.php");
+            require_once("classes/LoginClass.php");
             if (isset($_POST['updateBlock'])) {
                 include('connect_db.php');
 
@@ -61,7 +61,7 @@ if (isset($_POST['update'])) {
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12"><h2>Baliemedewerker Pagina</h2></div>
-                            <a href="../index.php?content=baliemedewerkerVerwerken">
+                            <a href="index.php?content=baliemedewerkerVerwerken">
                                 <div class="col-md-12"><h4>Binnengekomen video's verwerken</h4></div>
                             </a>
                         </div>
@@ -69,15 +69,15 @@ if (isset($_POST['update'])) {
                     </row>
                     <div class="col-md-6">
                         <?php
-                        require_once("Classes/LoginClass.php");
-                        require_once("Classes/HireClass.php");
-                        require_once("Classes/SessionClass.php");
+                        require_once("classes/LoginClass.php");
+                        require_once("classes/HireClass.php");
+                        require_once("classes/SessionClass.php");
 
                         $servername = "localhost";
                         $username = "root";
                         $password = "";
                         // <Wijzigingsopdracht>
-                        $dbname = "eindexamendatabase";
+                        $dbname = "videotheek";
                         // </Wijzigingsopdracht>
 
                         // Create connection

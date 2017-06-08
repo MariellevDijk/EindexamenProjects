@@ -2,7 +2,7 @@
 $userrole = array("admin", "eigenaar");
 require_once("./security.php");
 
-require_once("./Classes/HireClass.php");
+require_once("./classes/HireClass.php");
     if (isset($_POST['mail'])) {
 
         HireClass::send_memory_email_day_before();
@@ -75,14 +75,14 @@ require_once("./Classes/HireClass.php");
         </div>
         <div class="row">
             <?php
-            require_once("Classes/LoginClass.php");
-            require_once("Classes/HireClass.php");
-            require_once("Classes/SessionClass.php");
+            require_once("classes/LoginClass.php");
+            require_once("classes/HireClass.php");
+            require_once("classes/SessionClass.php");
 
             $servername = "localhost";
             $username = "root";
             $password = "";
-            $dbname = "eindexamendatabase";
+            $dbname = "videotheek";
 
             // Create connection
             $conn = new mysqli($servername, $username, $password, $dbname);

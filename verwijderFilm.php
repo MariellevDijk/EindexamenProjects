@@ -4,11 +4,11 @@ require_once("./security.php");
 ?>
 <?php
 
-require_once("Classes/ArtikelClass.php");
+require_once("classes/VideoClass.php");
 if (isset($_POST['removeVideo'])) {
     include('connect_db.php');
 
-    ArtikelClass::delete_film($_POST);
+    VideoClass::delete_film($_POST);
 
     echo "<h3 style='text-align: center;' >Uw wijzigingen zijn verwerkt.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
 
@@ -26,7 +26,7 @@ if (isset($_POST['removeVideo'])) {
                 src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
-        <link href="../style.css" rel="stylesheet" type="text/css">
+        <link href="style.css" rel="stylesheet" type="text/css">
         <style>
             .header {
                 font-size: 24px;
@@ -47,13 +47,13 @@ if (isset($_POST['removeVideo'])) {
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="../index.php?content=adminHomepage">Homepage</a></li>
-                        <li><a href="../index.php?content=videoToevoegen">Video's Toevoegen</a></li>
-                        <li><a href="../index.php?content=videosBeheren">Video's beheren</a></li>
-                        <li><a href="../index.php?content=beschikbaarMaken">Video's beschikbaar maken</a></li>
-                        <li><a href="../index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
-                        <li><a href="../index.php?content=blokkeren">Gebruiker blokkeren</a></li>
-                        <li><a href="../index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
+                        <li><a href="index.php?content=adminHomepage">Homepage</a></li>
+                        <li><a href="index.php?content=videoToevoegen">Video's Toevoegen</a></li>
+                        <li><a href="index.php?content=videosBeheren">Video's beheren</a></li>
+                        <li><a href="index.php?content=beschikbaarMaken">Video's beschikbaar maken</a></li>
+                        <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
+                        <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
+                        <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
                     </ul>
                 </div>
             </div>
@@ -61,15 +61,15 @@ if (isset($_POST['removeVideo'])) {
             <row class="row">
                 <div class="col-md-6">
                     <?php
-                    require_once("Classes/LoginClass.php");
-                    require_once("Classes/HireClass.php");
-                    require_once("Classes/SessionClass.php");
+                    require_once("classes/LoginClass.php");
+                    require_once("classes/HireClass.php");
+                    require_once("classes/SessionClass.php");
 
                     $servername = "localhost";
                     $username = "root";
                     $password = "";
                     // <Wijzigingsopdracht>
-                    $dbname = "eindexamendatabase";
+                    $dbname = "videotheek";
                     // </Wijzigingsopdracht>
 
                     // Create connection

@@ -11,7 +11,7 @@ require_once("./security.php");
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
           type="text/css">
-    <link href="../style.css" rel="stylesheet" type="text/css">
+    <link href="style.css" rel="stylesheet" type="text/css">
     <style>
         .header {
             font-size: 24px;
@@ -29,7 +29,7 @@ require_once("./security.php");
         <?php
 
 
-        require_once("Classes/LoginClass.php");
+        require_once("classes/LoginClass.php");
         if (isset($_POST['updateBlock'])) {
             include('connect_db.php');
 
@@ -55,17 +55,17 @@ require_once("./security.php");
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li><a href="../index.php?content=adminHomepage">Homepage</a></li>
-                                <li><a href="../index.php?content=videoToevoegen">Video's Toevoegen</a></li>
-                                <li><a href="../index.php?content=videosBeheren">Video's beheren</a></li>
-                                <li><a href="../index.php?content=verwijderFilm">Video's verwijderen</a></li>
+                                <li><a href="index.php?content=adminHomepage">Homepage</a></li>
+                                <li><a href="index.php?content=videoToevoegen">Video's Toevoegen</a></li>
+                                <li><a href="index.php?content=videosBeheren">Video's beheren</a></li>
+                                <li><a href="index.php?content=verwijderFilm">Video's verwijderen</a></li>
                                 <!-- <Wijzigingsopdracht>  -->
-                                <li class="list-group-item"><a href="../index.php?content=nieuweFilms">Nieuwe video's</a>
+                                <li class="list-group-item"><a href="index.php?content=nieuweFilms">Nieuwe video's</a>
                                 </li>
                                 <!-- </Wijzigingsopdracht> -->
-                                <li><a href="../index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
-                                <li><a href="../index.php?content=blokkeren">Gebruiker blokkeren</a></li>
-                                <li><a href="../index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
+                                <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
+                                <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
+                                <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
                             </ul>
                         </div>
                     </div>
@@ -73,14 +73,14 @@ require_once("./security.php");
 
                 <div class="col-md-6">
                     <?php
-                    require_once("Classes/LoginClass.php");
-                    require_once("Classes/HireClass.php");
-                    require_once("Classes/SessionClass.php");
+                    require_once("classes/LoginClass.php");
+                    require_once("classes/HireClass.php");
+                    require_once("classes/SessionClass.php");
 
                     $servername = "localhost";
                     $username = "root";
                     $password = "";
-                    $dbname = "eindexamendatabase";
+                    $dbname = "videotheek";
 
                     // Create connection
                     $conn = new mysqli($servername, $username, $password, $dbname);

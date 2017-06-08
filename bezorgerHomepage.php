@@ -11,7 +11,7 @@ require_once("./security.php");
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
           type="text/css">
-    <link href="../style.css" rel="stylesheet" type="text/css">
+    <link href="style.css" rel="stylesheet" type="text/css">
     <style>
         .header {
             font-size: 24px;
@@ -38,7 +38,7 @@ require_once("./security.php");
                     $username = "root";
                     $password = "";
                     // <Wijzigingsopdracht>
-                    $dbname = "eindexamendatabase";
+                    $dbname = "videotheek";
                     // </Wijzigingsopdracht>
 
                     // Create connection
@@ -110,7 +110,7 @@ require_once("./security.php");
                     $servername = "localhost";
                     $username = "root";
                     $password = "";
-                    $dbname = "eindexamendatabase";
+                    $dbname = "videotheek";
 
                     // Create connection
                     $conn = new mysqli($servername, $username, $password, $dbname);

@@ -17,7 +17,7 @@
                 <ul>
 
 
-                    <li><h4><a href="../index.php?content=contact">Contact<br></a></h4></li>
+                    <li><h4><a href="index.php?content=contact">Contact<br></a></h4></li>
 
                 </ul>
                 </p></div>

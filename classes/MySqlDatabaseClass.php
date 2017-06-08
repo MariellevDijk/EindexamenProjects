@@ -1,5 +1,5 @@
 <?php
-require('Config/Config.php');
+require('config/config.php');
 
 class MySqlDatabaseClass
 {

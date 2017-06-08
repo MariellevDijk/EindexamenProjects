@@ -5,8 +5,8 @@ require_once("./security.php");
 
 <?php
 if (isset($_POST['create'])) {
-    require_once("./Classes/ArtikelClass.php");
-    ArtikelClass::insert_film_database($_POST);
+    require_once("./classes/VideoClass.php");
+    VideoClass::insert_film_database($_POST);
 }
 ?>
 <html>
@@ -17,7 +17,7 @@ if (isset($_POST['create'])) {
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
           type="text/css">
-    <link href="../style.css" rel="stylesheet" type="text/css">
+    <link href="style.css" rel="stylesheet" type="text/css">
     <style>
         .header {
             font-size: 24px;
@@ -35,7 +35,7 @@ if (isset($_POST['create'])) {
         <?php
 
 
-        require_once("Classes/LoginClass.php");
+        require_once("classes/LoginClass.php");
         if (isset($_POST['updateUserrole'])) {
             include('connect_db.php');
 
@@ -61,13 +61,13 @@ if (isset($_POST['create'])) {
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li><a href="../index.php?content=adminHomepage">Homepage</a></li>
-                                <li><a href="../index.php?content=videoToevoegen">Video's Toevoegen</a></li>
-                                <li><a href="../index.php?content=videosBeheren">Video's beheren</a></li>
-                                <li><a href="../index.php?content=verwijderFilm">Video's verwijderen</a></li>
-                                <li><a href="../index.php?content=beschikbaarMaken">Video's beschikbaar maken</a></li>
-                                <li><a href="../index.php?content=blokkeren">Gebruiker blokkeren</a></li>
-                                <li><a href="../index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
+                                <li><a href="index.php?content=adminHomepage">Homepage</a></li>
+                                <li><a href="index.php?content=videoToevoegen">Video's Toevoegen</a></li>
+                                <li><a href="index.php?content=videosBeheren">Video's beheren</a></li>
+                                <li><a href="index.php?content=verwijderFilm">Video's verwijderen</a></li>
+                                <li><a href="index.php?content=beschikbaarMaken">Video's beschikbaar maken</a></li>
+                                <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
+                                <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
                             </ul>
                         </div>
                     </div>
@@ -75,15 +75,15 @@ if (isset($_POST['create'])) {
 
                 <div class="col-md-6">
                     <?php
-                    require_once("Classes/LoginClass.php");
-                    require_once("Classes/HireClass.php");
-                    require_once("Classes/SessionClass.php");
+                    require_once("classes/LoginClass.php");
+                    require_once("classes/HireClass.php");
+                    require_once("classes/SessionClass.php");
 
                     $servername = "localhost";
                     $username = "root";
                     $password = "";
                     // <Wijzigingsopdracht>
-                    $dbname = "eindexamendatabase";
+                    $dbname = "videotheek";
                     // </Wijzigingsopdracht>
 
                     // Create connection

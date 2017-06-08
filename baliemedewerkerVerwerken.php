@@ -20,7 +20,7 @@ if (isset($_POST['update'])) {
                 src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
-        <link href="../style.css" rel="stylesheet" type="text/css">
+        <link href="style.css" rel="stylesheet" type="text/css">
         <style>
             .header {
                 font-size: 24px;
