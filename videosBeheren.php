@@ -72,7 +72,7 @@ if (isset($_POST['submit'])) {
             $servername = "localhost";
             $username = "root";
             $password = "";
-            $dbname = "videotheek";
+            $dbname = "Eindexamenopdracht";
 
             // Create connection
             $conn = new mysqli($servername, $username, $password, $dbname);

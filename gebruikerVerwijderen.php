@@ -75,7 +75,7 @@ require_once("./security.php");
                     $username = "root";
                     $password = "";
                     // <Wijzigingsopdracht>
-                    $dbname = "videotheek";
+                    $dbname = "Eindexamenopdracht";
                     // </Wijzigingsopdracht>
 
                     // Create connection

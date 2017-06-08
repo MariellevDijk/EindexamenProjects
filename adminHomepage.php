@@ -82,7 +82,7 @@ require_once("./classes/HireClass.php");
             $servername = "localhost";
             $username = "root";
             $password = "";
-            $dbname = "videotheek";
+            $dbname = "Eindexamenopdracht";
 
             // Create connection
             $conn = new mysqli($servername, $username, $password, $dbname);

@@ -77,10 +77,10 @@ class ReserveClass
     private static function send_email($post)
     {
         $to = $_SESSION['email'];
-        $subject = "Bevestigingsmail Reservering Videotheek Maurik";
+        $subject = "Bevestigingsmail Reservering Eindexamenopdracht Marielle";
         $message = "Geachte heer/mevrouw<br>";
 
-        $message .= "Hartelijk dank voor het reserveren bij Videotheek Maurik" . "<br>";
+        $message .= "Hartelijk dank voor het reserveren bij Eindexamenopdracht Marielle" . "<br>";
 
         $message .= "Check regelmatig in uw account of de video al beschikbaar is." . "<br>";
 
@@ -90,9 +90,9 @@ class ReserveClass
         $message .= "Met vriendelijke groet," . "<br>";
         $message .= "Marielle van Dijk" . "<br>";
 
-        $headers = 'From: no-reply@videotheekMaurik.nl' . "\r\n";
-        $headers .= 'Reply-To: webmaster@videotheekMaurik.nl' . "\r\n";
-        $headers .= 'Bcc: accountant@videotheekMaurik.nl' . "\r\n";
+        $headers = 'From: no-reply@EindexamenopdrachtMaurik.nl' . "\r\n";
+        $headers .= 'Reply-To: webmaster@EindexamenopdrachtMaurik.nl' . "\r\n";
+        $headers .= 'Bcc: accountant@EindexamenopdrachtMaurik.nl' . "\r\n";
         //$headers .= "MIME-version: 1.0"."\r\n";
         //$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";

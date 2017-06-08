@@ -69,7 +69,7 @@ if (isset($_POST['removeVideo'])) {
                     $username = "root";
                     $password = "";
                     // <Wijzigingsopdracht>
-                    $dbname = "videotheek";
+                    $dbname = "Eindexamenopdracht";
                     // </Wijzigingsopdracht>
 
                     // Create connection

@@ -66,7 +66,7 @@ if (isset($_POST['addAday'])) {
                     $username = "root";
                     $password = "";
                     // <Wijzigingsopdracht>
-                    $dbname = "videotheek";
+                    $dbname = "Eindexamenopdracht";
                     // </Wijzigingsopdracht>
 
                     // Create connection

@@ -13,7 +13,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 // <Wijzigingsopdracht>
-$dbname = "videotheek";
+$dbname = "Eindexamenopdracht";
 // </Wijzigingsopdracht>
 
 

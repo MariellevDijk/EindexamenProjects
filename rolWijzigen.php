@@ -83,7 +83,7 @@ if (isset($_POST['create'])) {
                     $username = "root";
                     $password = "";
                     // <Wijzigingsopdracht>
-                    $dbname = "videotheek";
+                    $dbname = "Eindexamenopdracht";
                     // </Wijzigingsopdracht>
 
                     // Create connection

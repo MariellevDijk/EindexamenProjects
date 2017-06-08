@@ -63,7 +63,7 @@ if (isset($_POST['clearCart'])) {
                         $username = "root";
                         $password = "";
                         // <Wijzigingsopdracht>
-                        $dbname = "videotheek";
+                        $dbname = "Eindexamenopdracht";
                         // </Wijzigingsopdracht>
                         // Create connection
                         $conn = new mysqli($servername, $username, $password, $dbname);

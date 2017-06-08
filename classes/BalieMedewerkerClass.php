@@ -61,7 +61,7 @@ class BalieMedewerkerClass
     private static function send_email($email)
 	{
 		$to = $email;
-		$subject = "Activatiemail Videotheek Culemborg";
+		$subject = "Activatiemail Eindexamenopdracht Culemborg";
 		$message = "Dear sir/madam <br> ";
 
 		$message .= '<style>a { color:red;}</style>';
@@ -69,11 +69,11 @@ class BalieMedewerkerClass
 		$message .= "Log in on your account to hire the video"."<br>";
 		$message .= "Your reservation ends in 7 days."."<br>";
 		$message .= "Greetings,"."<br>";
-		$message .= "Dylan Griffioen"."<br>";
+		$message .= "Webshopteam"."<br>";
 
-		$headers = 'From: no-reply@videotheekCulemborg.nl'."\r\n";
-		$headers .= 'Reply-To: webmaster@videotheekCulemborg.nl'."\r\n";
-		$headers .= 'Bcc: accountant@videotheekCulemborg.nl'."\r\n";
+		$headers = 'From: no-reply@EindexamenopdrachtCulemborg.nl'."\r\n";
+		$headers .= 'Reply-To: webmaster@EindexamenopdrachtCulemborg.nl'."\r\n";
+		$headers .= 'Bcc: accountant@EindexamenopdrachtCulemborg.nl'."\r\n";
 		//$headers .= "MIME-version: 1.0"."\r\n";
 		//$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
 		$headers .= "Content-type: text/html; charset=iso-8859-1"."\r\n";
