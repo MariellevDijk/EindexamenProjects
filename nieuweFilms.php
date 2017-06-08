@@ -83,12 +83,12 @@ require_once("./security.php");
                         <div class="col-md-12">
                             <ul class="breadcrumb">
                                 <li><a href="index.php?content=adminHomepage">Homepage</a></li>
-                                <li><a href="index.php?content=videoToevoegen">Video's Toevoegen</a></li>
-                                <li><a href="index.php?content=videosBeheren">Video's beheren</a></li>
-                                <li><a href="index.php?content=verwijderFilm">Video's verwijderen</a></li>
-                                <li class="list-group-item"><a href="index.php?content=nieuweFilms">Nieuwe video's</a>
+                                <li><a href="index.php?content=videoToevoegen">Artikelen Toevoegen</a></li>
+                                <li><a href="index.php?content=ArtikelenBeheren">Artikelen beheren</a></li>
+                                <li><a href="index.php?content=verwijderFilm">Artikelen verwijderen</a></li>
+                                <li class="list-group-item"><a href="index.php?content=nieuweFilms">Nieuwe Artikelen</a>
                                 </li>
-                                <li><a href="index.php?content=beschikbaarMaken">Video's beschikbaar maken</a></li>
+                                <li><a href="index.php?content=beschikbaarMaken">Artikelen beschikbaar maken</a></li>
                                 <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
                                 <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
                                 <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
@@ -106,7 +106,7 @@ require_once("./security.php");
                     $servername = "localhost";
                     $username = "root";
                     $password = "";
-                    $dbname = "videotheek";
+                    $dbname = "eindexamendatabase";
 
                     // Create connection
                     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -156,7 +156,7 @@ require_once("./security.php");
                                                 <option value='0'>Niet nieuw ( 0 )</option>
                                                 </select>
                                             <input type='hidden' class=\"btn btn-info\" name='idVideo' value='" . $row['idVideo'] . "'/>
-                                            <input type='submit' class=\"btn btn-info\" name='updateNieuw' value='Update Nieuwe Videos'>
+                                            <input type='submit' class=\"btn btn-info\" name='updateNieuw' value='Update Nieuwe Artikelen'>
                                             
                                         </form>
                                 </td>

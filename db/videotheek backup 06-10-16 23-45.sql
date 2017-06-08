@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `videotheek`
+-- Database: `eindexamendatabase`
 --
 
 -- --------------------------------------------------------
@@ -55,15 +55,15 @@ INSERT INTO `login` (`id`, `naam`, `email`, `password`, `userrole`, `activated`,
 (34, '', 'a@a.a', '202cb962ac59075b964b07152d234b70', 'klant', 'yes', '2016-10-06 09:51:59', '', ''),
 (35, '', '1@1.1', '202cb962ac59075b964b07152d234b70', 'klant', 'yes', '2016-10-06 15:47:29', '', ''),
 (37, 'Marielle v Dijk', 'dijk@marielle.nl', '68ef8a4dc8dd60eea1abfc21ca00d358', 'klant', 'no', '2016-10-06 23:42:22', 'marielle', 'dijk'),
-(38, 'Marielle van Dijk1', 'marielle@mar.ielel', 'e8636ea013e682faf61f56ce1cb1ab5c', 'klant', 'yes', '2016-10-06 23:43:48', 'Mar', 'Ielle');
+(38, 'Dylan Griffioen1', 'marielle@mar.ielel', 'e8636ea013e682faf61f56ce1cb1ab5c', 'klant', 'yes', '2016-10-06 23:43:48', 'Mar', 'Ielle');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `videos`
+-- Table structure for table `Artikelen`
 --
 
-CREATE TABLE IF NOT EXISTS `videos` (
+CREATE TABLE IF NOT EXISTS `Artikelen` (
   `id` tinyint(10) unsigned NOT NULL AUTO_INCREMENT,
   `titel` varchar(50) NOT NULL,
   `beschrijving` varchar(500) NOT NULL,
@@ -75,10 +75,10 @@ CREATE TABLE IF NOT EXISTS `videos` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
--- Dumping data for table `videos`
+-- Dumping data for table `Artikelen`
 --
 
-INSERT INTO `videos` (`id`, `titel`, `beschrijving`, `genres`, `acteurs`, `fotopad`, `prijs`) VALUES
+INSERT INTO `Artikelen` (`id`, `titel`, `beschrijving`, `genres`, `acteurs`, `fotopad`, `prijs`) VALUES
 (1, 'The Dark Knight', 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.', 'Action, Crime, Drama', 'Christian Bale, Heath Ledger, Aaron Eckhart', 'the_dark_knight.jpg', '7,50'),
 (2, 'Batman VS Superman: Dawn Of Justice', 'Fearing that the actions of Superman are left unchecked, Batman takes on the Man of Steel, while the world wrestles with what kind of a hero it really needs.', 'Action, Adventure, Sci-Fi', 'Ben Affleck, Henry Cavill, Amy Adams', 'batman_vs_superman.jpg', '7,50'),
 (3, 'Captain America: Civil War', 'Political interference in the Avengers'' activities causes a rift between former allies Captain America and Iron Man.', 'Action, Adventure, Sci-Fi', 'Chris Evans, Robert Downey Jr., Scarlett Johansson', 'captain_america_civil_war.jpg', '7,50'),

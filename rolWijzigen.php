@@ -62,10 +62,10 @@ if (isset($_POST['create'])) {
                         <div class="col-md-12">
                             <ul class="breadcrumb">
                                 <li><a href="index.php?content=adminHomepage">Homepage</a></li>
-                                <li><a href="index.php?content=videoToevoegen">Video's Toevoegen</a></li>
-                                <li><a href="index.php?content=videosBeheren">Video's beheren</a></li>
-                                <li><a href="index.php?content=verwijderFilm">Video's verwijderen</a></li>
-                                <li><a href="index.php?content=beschikbaarMaken">Video's beschikbaar maken</a></li>
+                                <li><a href="index.php?content=videoToevoegen">Artikelen Toevoegen</a></li>
+                                <li><a href="index.php?content=ArtikelenBeheren">Artikelen beheren</a></li>
+                                <li><a href="index.php?content=verwijderFilm">Artikelen verwijderen</a></li>
+                                <li><a href="index.php?content=beschikbaarMaken">Artikelen beschikbaar maken</a></li>
                                 <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
                                 <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
                             </ul>
@@ -83,7 +83,7 @@ if (isset($_POST['create'])) {
                     $username = "root";
                     $password = "";
                     // <Wijzigingsopdracht>
-                    $dbname = "videotheek";
+                    $dbname = "eindexamendatabase";
                     // </Wijzigingsopdracht>
 
                     // Create connection

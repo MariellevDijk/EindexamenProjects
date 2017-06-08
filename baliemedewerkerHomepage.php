@@ -62,7 +62,7 @@ if (isset($_POST['update'])) {
                         <div class="row">
                             <div class="col-md-12"><h2>Baliemedewerker Pagina</h2></div>
                             <a href="index.php?content=baliemedewerkerVerwerken">
-                                <div class="col-md-12"><h4>Binnengekomen video's verwerken</h4></div>
+                                <div class="col-md-12"><h4>Binnengekomen Artikelen verwerken</h4></div>
                             </a>
                         </div>
                     </div>
@@ -77,7 +77,7 @@ if (isset($_POST['update'])) {
                         $username = "root";
                         $password = "";
                         // <Wijzigingsopdracht>
-                        $dbname = "videotheek";
+                        $dbname = "eindexamendatabase";
                         // </Wijzigingsopdracht>
 
                         // Create connection

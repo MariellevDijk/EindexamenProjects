@@ -58,10 +58,10 @@
     <div class="container" style="height: 450px;">
         <div class="row">
             <div class="col-md-12 text-center fronttext" style="margin-top: 150px;">
-                <h1 class="text-inverse">Videotheek Maurik
+                <h1 class="text-inverse">Webshop Marklin
                     <br>
                 </h1>
-                <p class="text-inverse">Een project door Marielle van Dijk
+                <p class="text-inverse">Een project door Dylan Griffioen
                     <br>
                 </p>
                 <br>
@@ -79,7 +79,7 @@
             <div class="col-md-6">
 
                 <h1 class="text-primary">Welkom</h1>
-                <p>Welkom bij de website van videotheek Maurik. Op deze website kunt u uw favorite videos bestellen.</p>
+                <p>Welkom bij de website van Webshop Marklin. Op deze website kunt u uw favorite Artikelen bestellen.</p>
 
             </div>
         </div>

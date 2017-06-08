@@ -6,7 +6,7 @@
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
           type="text/css">
-    <link href="Videos.css" rel="stylesheet" type="text/css">
+    <link href="Artikelen.css" rel="stylesheet" type="text/css">
     <style>
         .header {
             font-size: 24px;
@@ -18,7 +18,7 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col-md-12"><h2>Nieuwe Video's!</h2><br></div>
+            <div class="col-md-12"><h2>Nieuwe Artikelen!</h2><br></div>
             <div class="section ">
                 <div class="container">
                     <div class="row">
@@ -29,7 +29,7 @@
                         $servername = "localhost";
                         $username = "root";
                         $password = "";
-                        $dbname = "videotheek";
+                        $dbname = "eindexamendatabase";
 
                         // Create connection
                         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -46,7 +46,7 @@
                                 if ($row["beschikbaar"]) {
                                     echo " <div style='height: 650px;' class=\"col-md-3\"><img style='height: 400px' src=\"images/" . $row["fotopad"] . "\" class=\"img-responsive\">
                <h3>" . $row["titel"] . "</h3>
-               <p class=\"videos\">" . $row["beschrijving"] . "</p>
+               <p class=\"Artikelen\">" . $row["beschrijving"] . "</p>
 
                <a href='index.php?content=videoPagina&idVideo=" . $row["idVideo"] . "'><button type=\"button\" class=\"btn btn-primary\">Meer Informatie</button></a>
 
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12"><h2>Video's</h2><br></div>
+            <div class="col-md-12"><h2>Artikelen</h2><br></div>
             <div class="section ">
                 <div class="container">
                     <div class="row">
@@ -76,7 +76,7 @@
                         $username = "root";
                         $password = "";
                         // <Wijzigingsopdracht>
-                        $dbname = "videotheek";
+                        $dbname = "eindexamendatabase";
                         // </Wijzigingsopdracht>
 
                         // Create connection
@@ -94,7 +94,7 @@
                                 if ($row["beschikbaar"]) {
                                     echo " <div style='height: 650px;' class=\"col-md-3\"><img style='height: 400px' src=\"images/" . $row["fotopad"] . "\" class=\"img-responsive\">
                <h3>" . $row["titel"] . "</h3>
-               <p class=\"videos\">" . $row["beschrijving"] . "</p>
+               <p class=\"Artikelen\">" . $row["beschrijving"] . "</p>
 
                <a href='index.php?content=videoPagina&idVideo=" . $row["idVideo"] . "'><button type=\"button\" class=\"btn btn-primary\">Meer Informatie</button></a>
 

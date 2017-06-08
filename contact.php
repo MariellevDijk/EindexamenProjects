@@ -4,8 +4,8 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $tel = $_POST['tel'];
     $comment = $_POST['comment'];
-    $from = 'From: Website_Videotheek_Maurik';
-    $to = 'jellevandenbroek@gmail.com';
+    $from = 'From: Website_Webshop Marklin';
+    $to = '[placeholder]';
     $subject = 'Nieuw bericht van ' . $_POST['name'];
 
     $body = "Naam: $name\nE-Mail: $email\nTelefoon: $tel\n\nBericht:\n$comment";

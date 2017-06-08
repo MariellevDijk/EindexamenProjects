@@ -136,13 +136,13 @@ class HireClass
 
         $database->fire_query($query);
         $last_id = mysqli_insert_id($database->getDb_connection());
-        self::lower_amount_videos($post);
+        self::lower_amount_Artikelen($post);
         self::send_email($post, $last_id, $ophaaldatum);
         self::increase_amount_hired($post);
         self::update_beschikbaar();
     }
 
-    public static function lower_amount_videos($post)
+    public static function lower_amount_Artikelen($post)
     {
         global $database;
         $idVideo = $_POST['idVideo'];
@@ -171,10 +171,10 @@ class HireClass
     private static function send_email($post, $idBestelling, $ophaaldatum)
     {
         $to = $_SESSION['email'];
-        $subject = "Bevestigingsmail Bestelling Videotheek Maurik";
+        $subject = "Bevestigingsmail Bestelling Webshop Marklin";
         $message = "Geachte heer/mevrouw<br>";
 
-        $message .= "Hartelijk dank voor het bestellen bij Videotheek Maurik" . "<br>";
+        $message .= "Hartelijk dank voor het bestellen bij Webshop Marklin" . "<br>";
 
         $message .= "Uw bestellingsnummer is: " . $idBestelling . "<br>";
         $message .= "U kunt in uw account de bestelling verlengen als u de video langer wilt huren." . "<br>";
@@ -185,11 +185,11 @@ class HireClass
 
         $message .= "Wij wensen u veel kijkplezier.<br>";
         $message .= "Met vriendelijke groet," . "<br>";
-        $message .= "Marielle van Dijk" . "<br>";
+        $message .= "Dylan Griffioen" . "<br>";
 
-        $headers = 'From: no-reply@videotheekMaurik.nl' . "\r\n";
-        $headers .= 'Reply-To: webmaster@videotheekMaurik.nl' . "\r\n";
-        $headers .= 'Bcc: accountant@videotheekMaurik.nl' . "\r\n";
+        $headers = 'From: no-reply@WebshopMarklin.nl' . "\r\n";
+        $headers .= 'Reply-To: webmaster@webshopMarklin.nl' . "\r\n";
+        $headers .= 'Bcc: accountant@webshopMarklin.nl' . "\r\n";
         //$headers .= "MIME-version: 1.0"."\r\n";
         //$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
@@ -328,7 +328,7 @@ class HireClass
     public static function send_memory_email_day_before_mail($email)
     {
         $to = $email;
-        $subject = "Bevestigingsmail Bestelling Videotheek Culemborg";
+        $subject = "Bevestigingsmail Bestelling webshop Marklin";
         $message = "Geachte heer/mevrouw<br>";
 
         $message .= "Uw bestelling word morgen opgehaald.<br>";
@@ -336,9 +336,9 @@ class HireClass
         $message .= "Met vriendelijke groet," . "<br>";
         $message .= "Dylan Griffioen" . "<br>";
 
-        $headers = 'From: no-reply@videotheekCulemborg.nl' . "\r\n";
-        $headers .= 'Reply-To: webmaster@videotheekCulemborg.nl' . "\r\n";
-        $headers .= 'Bcc: accountant@videotheekCulemborg.nl' . "\r\n";
+        $headers = 'From: no-reply@webshopMarklin.nl' . "\r\n";
+        $headers .= 'Reply-To: webmaster@webshopMarklin.nl' . "\r\n";
+        $headers .= 'Bcc: accountant@webshopMarklin.nl' . "\r\n";
         //$headers .= "MIME-version: 1.0"."\r\n";
         //$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
@@ -365,7 +365,7 @@ class HireClass
     public static function send_memory_email_3_days_after_mail($email)
     {
         $to = $email;
-        $subject = "Bevestigingsmail Bestelling Videotheek Culemborg";
+        $subject = "Bevestigingsmail Bestelling webshop Marklin";
         $message = "Geachte heer/mevrouw<br>";
 
         $message .= "Uw bestelling is al 3 dagen verlopen.<br>";
@@ -373,9 +373,9 @@ class HireClass
         $message .= "Met vriendelijke groet," . "<br>";
         $message .= "Dylan Griffioen" . "<br>";
 
-        $headers = 'From: no-reply@videotheekCulemborg.nl' . "\r\n";
-        $headers .= 'Reply-To: webmaster@videotheekCulemborg.nl' . "\r\n";
-        $headers .= 'Bcc: accountant@videotheekCulemborg.nl' . "\r\n";
+        $headers = 'From: no-reply@webshopMarklin.nl' . "\r\n";
+        $headers .= 'Reply-To: webmaster@webshopMarklin.nl' . "\r\n";
+        $headers .= 'Bcc: accountant@webshopMarklin.nl' . "\r\n";
         //$headers .= "MIME-version: 1.0"."\r\n";
         //$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
@@ -403,7 +403,7 @@ class HireClass
     public static function send_memory_email_3_weeks_after_mail($email)
     {
         $to = $email;
-        $subject = "Bevestigingsmail Bestelling Videotheek Culemborg";
+        $subject = "Bevestigingsmail Bestelling webshop Marklin";
         $message = "Geachte heer/mevrouw<br>";
 
         $message .= "Uw bestelling is al 3 weken verlopen, uw acount zal nu geblokeerd worden.<br>";
@@ -411,9 +411,9 @@ class HireClass
         $message .= "Met vriendelijke groet," . "<br>";
         $message .= "Dylan Griffioen" . "<br>";
 
-        $headers = 'From: no-reply@videotheekCulemborg.nl' . "\r\n";
-        $headers .= 'Reply-To: webmaster@videotheekCulemborg.nl' . "\r\n";
-        $headers .= 'Bcc: accountant@videotheekCulemborg.nl' . "\r\n";
+        $headers = 'From: no-reply@webshopMarklin.nl' . "\r\n";
+        $headers .= 'Reply-To: webmaster@webshopMarklin.nl' . "\r\n";
+        $headers .= 'Bcc: accountant@webshopMarklin.nl' . "\r\n";
         //$headers .= "MIME-version: 1.0"."\r\n";
         //$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";

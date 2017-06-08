@@ -56,7 +56,7 @@ if (!isset($_SESSION['idKlant'])) {
 
         }
     } else {
-        echo "<h3 style='text-align: center;' >U bent geblokkeerd, neem contact op met: beheer@videotheekMaurik.nl om de blokkade op te heffen</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+        echo "<h3 style='text-align: center;' >U bent geblokkeerd, neem contact op met: beheer@webshopmarklin.nl om de blokkade op te heffen</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
         header("refresh:20;url=index.php?content=logout");
         exit();
     }

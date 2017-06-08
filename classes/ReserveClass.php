@@ -77,10 +77,10 @@ class ReserveClass
     private static function send_email($post)
     {
         $to = $_SESSION['email'];
-        $subject = "Bevestigingsmail Reservering Videotheek Maurik";
+        $subject = "Bevestigingsmail Reservering Webshop Marklin";
         $message = "Geachte heer/mevrouw<br>";
 
-        $message .= "Hartelijk dank voor het reserveren bij Videotheek Maurik" . "<br>";
+        $message .= "Hartelijk dank voor het reserveren bij Webshop Marklin" . "<br>";
 
         $message .= "Check regelmatig in uw account of de video al beschikbaar is." . "<br>";
 
@@ -88,11 +88,11 @@ class ReserveClass
 
         $message .= "Wij wensen u alvast veel kijkplezier.<br>";
         $message .= "Met vriendelijke groet," . "<br>";
-        $message .= "Marielle van Dijk" . "<br>";
+        $message .= "Dylan Griffioen" . "<br>";
 
-        $headers = 'From: no-reply@videotheekMaurik.nl' . "\r\n";
-        $headers .= 'Reply-To: webmaster@videotheekMaurik.nl' . "\r\n";
-        $headers .= 'Bcc: accountant@videotheekMaurik.nl' . "\r\n";
+        $headers = 'From: no-reply@WebshopMarklin.nl' . "\r\n";
+        $headers .= 'Reply-To: webmaster@webshopMarklin.nl' . "\r\n";
+        $headers .= 'Bcc: accountant@webshopMarklin.nl' . "\r\n";
         //$headers .= "MIME-version: 1.0"."\r\n";
         //$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
         $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
@@ -152,10 +152,10 @@ class ReserveClass
         $query = "INSERT INTO `winkelmand`(`idWinkelmand`, `idVideo`, `titel`, `idKlant`, `prijs`) VALUES (null," . $row['idVideo'] . ",'" . $row['titel'] . "', " . $_SESSION['idKlant'] . "," . $row['prijs'] . ")";
         echo $query;
         $database->fire_query($query);
-        self::lower_amount_videos($row);
+        self::lower_amount_Artikelen($row);
     }
 
-    public static function lower_amount_videos($row)
+    public static function lower_amount_Artikelen($row)
     {
         global $database;
         $idVideo = $row['idVideo'];

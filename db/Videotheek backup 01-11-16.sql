@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `videotheek`
+-- Database: `eindexamendatabase`
 --
 
 -- --------------------------------------------------------
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `bestelling` (
   `ophaaltijd` time NOT NULL,
   `prijs` float NOT NULL,
   PRIMARY KEY (`idBestelling`),
-  KEY `Fk_Bestelling_Videos_idx` (`idVideo`),
+  KEY `Fk_Bestelling_Artikelen_idx` (`idVideo`),
   KEY `Fk_Bestelling_Users_idx` (`idKlant`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
@@ -148,8 +148,8 @@ INSERT INTO `klachten` (`idKlacht`, `idKlant`, `klacht`, `emailKlant`) VALUES
 (3, 11, '123', 'klant@mail.nl'),
 (5, 11, '123', 'klant@mail.nl'),
 (6, 11, '123', 'klant@mail.nl'),
-(7, 19, 'ik ben hier niet blij mee\r\n', 'jellevandenbroek@gmail.com'),
-(8, 19, 'ik ben hier niet blij mee\r\n', 'jellevandenbroek@gmail.com');
+(7, 19, 'ik ben hier niet blij mee\r\n', '[placeholder]'),
+(8, 19, 'ik ben hier niet blij mee\r\n', '[placeholder]');
 
 -- --------------------------------------------------------
 
@@ -187,8 +187,8 @@ INSERT INTO `login` (`idKlant`, `naam`, `email`, `adres`, `woonplaats`, `activat
 (16, 'Eigenaar de Eigenaar', 'eigenaar@mail.nl', 'Eigenaarstraat 1', 'Eigenaarstad', 1, 0, '2016-10-12', 'eigenaar', '202cb962ac59075b964b07152d234b70'),
 (17, 'Geblokkeerd', 'geblokkeerd@mail.nl', 'Geblokkeerdstraat 1', 'Blokkeerstad', 1, 1, '2016-10-12', 'klant', '202cb962ac59075b964b07152d234b70'),
 (18, 'TestKlant', 'testklant@mail.nl', 'Testklant straat', 'KlantTest', 1, 0, '2016-10-14', 'klant', '202cb962ac59075b964b07152d234b70'),
-(19, 'Jelle van den Broek', 'jellevandenbroek@gmail.com', 'haanwijk 4', 'harmelen', 1, 0, '2016-10-27', 'klant', '202cb962ac59075b964b07152d234b70'),
-(21, 'Marielle van Dijk', 'marielle@mail.nl', 'Marielle', 'Dijk', 1, 0, '2016-11-01', 'klant', '202cb962ac59075b964b07152d234b70');
+(19, 'Jelle van den Broek', '[placeholder]', 'haanwijk 4', 'harmelen', 1, 0, '2016-10-27', 'klant', '202cb962ac59075b964b07152d234b70'),
+(21, 'Dylan Griffioen', 'marielle@mail.nl', 'Marielle', 'Dijk', 1, 0, '2016-11-01', 'klant', '202cb962ac59075b964b07152d234b70');
 
 -- --------------------------------------------------------
 
@@ -256,7 +256,7 @@ CREATE TABLE IF NOT EXISTS `videoacteur` (
   `idVideo` int(11) NOT NULL,
   `idActeur` int(11) NOT NULL,
   PRIMARY KEY (`idVideoActeur`),
-  KEY `Fk_VideoActeur_Videos_idx` (`idVideo`),
+  KEY `Fk_VideoActeur_Artikelen_idx` (`idVideo`),
   KEY `Fk_VideoActeur_Acteur_idx` (`idActeur`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
 
@@ -312,7 +312,7 @@ CREATE TABLE IF NOT EXISTS `videogenre` (
   `idGenre` int(11) NOT NULL,
   PRIMARY KEY (`idVideoGenre`),
   KEY `Fk_VideoGenre_Genre_idx` (`idGenre`),
-  KEY `Fk_VideoGenre_Videos_idx` (`idVideo`)
+  KEY `Fk_VideoGenre_Artikelen_idx` (`idVideo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
 
 --
@@ -391,14 +391,14 @@ ALTER TABLE `reservering`
 --
 ALTER TABLE `videoacteur`
   ADD CONSTRAINT `Fk_VideoActeur_Acteur` FOREIGN KEY (`idActeur`) REFERENCES `acteur` (`idActeur`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `Fk_VideoActeur_Videos` FOREIGN KEY (`idVideo`) REFERENCES `video` (`idVideo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `Fk_VideoActeur_Artikelen` FOREIGN KEY (`idVideo`) REFERENCES `video` (`idVideo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `videogenre`
 --
 ALTER TABLE `videogenre`
   ADD CONSTRAINT `Fk_VideoGenre_Genre` FOREIGN KEY (`idGenre`) REFERENCES `genre` (`idGenre`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `Fk_VideoGenre_Videos` FOREIGN KEY (`idVideo`) REFERENCES `video` (`idVideo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `Fk_VideoGenre_Artikelen` FOREIGN KEY (`idVideo`) REFERENCES `video` (`idVideo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

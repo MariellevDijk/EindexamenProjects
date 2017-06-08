@@ -43,17 +43,17 @@ if (isset($_POST['submit'])) {
 <div class="section">
     <div class="container">
     <div class="row">
-        <div class="col-md-12"><h2>Video's beheren</h2></div>
+        <div class="col-md-12"><h2>Artikelen beheren</h2></div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <ul class="breadcrumb">
                 <li><a href="index.php?content=adminHomepage">Homepage</a></li>
-                <li><a href="index.php?content=videoToevoegen">Video's Toevoegen</a></li>
-                <li><a href="index.php?content=verwijderFilm">Video's verwijderen</a></li>
-                <li><a href="index.php?content=beschikbaarMaken">Video's beschikbaar maken</a></li>
+                <li><a href="index.php?content=videoToevoegen">Artikelen Toevoegen</a></li>
+                <li><a href="index.php?content=verwijderFilm">Artikelen verwijderen</a></li>
+                <li><a href="index.php?content=beschikbaarMaken">Artikelen beschikbaar maken</a></li>
                 <!-- <Wijzigingsopdracht>  -->
-                <li><a href="index.php?content=nieuweFilms">Nieuwe video's</a></li>
+                <li><a href="index.php?content=nieuweFilms">Nieuwe Artikelen</a></li>
                 <!-- </Wijzigingsopdracht> -->
                 <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
                 <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
@@ -72,7 +72,7 @@ if (isset($_POST['submit'])) {
             $servername = "localhost";
             $username = "root";
             $password = "";
-            $dbname = "videotheek";
+            $dbname = "eindexamendatabase";
 
             // Create connection
             $conn = new mysqli($servername, $username, $password, $dbname);
