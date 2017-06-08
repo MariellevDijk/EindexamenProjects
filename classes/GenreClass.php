@@ -8,15 +8,31 @@ class GenreClass
     //Fields
     private $idGenre;
     private $genre;
-    
-    public function getIdGenre(){ return $this->idGenre; }
-    public function getGenre(){ return $this->genre; }
+
+    public function getIdGenre()
+    {
+        return $this->idGenre;
+    }
+
+    public function getGenre()
+    {
+        return $this->genre;
+    }
 
     //setters
-    public function setIdGenre($value){ $this->idGenre = $value;}
-    public function setGenre($value){ $this->genre = $value;}
+    public function setIdGenre($value)
+    {
+        $this->idGenre = $value;
+    }
 
-    public function __construct(){  }
+    public function setGenre($value)
+    {
+        $this->genre = $value;
+    }
+
+    public function __construct()
+    {
+    }
 
     //Methods
 
@@ -32,7 +48,7 @@ class GenreClass
         }
 
         $query = "INSERT INTO `Genre` (`idGenre`, `Genre`) 
-                      VALUES ($lastGenreID, '" .$genre. "')";
+                      VALUES ($lastGenreID, '" . $genre . "')";
         //echo $query;
 
         //echo "<br>";

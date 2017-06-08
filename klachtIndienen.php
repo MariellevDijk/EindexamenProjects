@@ -5,21 +5,23 @@ require_once("./security.php");
 
 <?php
 
-    require_once("./classes/KlachtClass.php");
-    if (isset($_POST['submit-klacht'])) {
-    
-        KlachtClass::insert_klacht_into_database($_POST['klacht']);
-        echo "<h3 style='text-align: center;' >Uw klacht of opmerking is verzonden.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-        header("refresh:4;url=index.php?content=klantHomepage");
+require_once("./classes/KlachtClass.php");
+if (isset($_POST['submit-klacht'])) {
+
+    KlachtClass::insert_klacht_into_database($_POST['klacht']);
+    echo "<h3 style='text-align: center;' >Uw klacht of opmerking is verzonden.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+    header("refresh:4;url=index.php?content=klantHomepage");
 } else {
-?>
-<html>
+    ?>
+    <html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript"
+                src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
+              type="text/css">
         <link href="style.css" rel="stylesheet" type="text/css">
         <style>
             .header {
@@ -56,10 +58,12 @@ require_once("./security.php");
                         <div class="col-md-12 text-left">
                             <form role="form" action="" method="post">
 
-                                <div class="form-group"><label class="control-label" for="comment">Klacht/Opmerking</label>
-                                    <textarea class="form-control" id="klacht" placeholder="Klacht/Opmerking" type="text" name="klacht" rows="8"required></textarea></div>
+                                <div class="form-group"><label class="control-label"
+                                                               for="comment">Klacht/Opmerking</label>
+                                    <textarea class="form-control" id="klacht" placeholder="Klacht/Opmerking"
+                                              type="text" name="klacht" rows="8" required></textarea></div>
                                 <button type="submit" class="btn btn-primary" name="submit-klacht">Verzend</button>
- 
+
                             </form>
                         </div>
                     </div>
@@ -69,6 +73,6 @@ require_once("./security.php");
     </body>
     </html>
 
-<?php
-    }
+    <?php
+}
 ?>

@@ -1,13 +1,19 @@
 <?php
+
 $userrole = array("klant");
 require_once("./security.php");
 
 if (isset($_POST['addAday'])) {
-
-    echo "<h3 style='text-align: center;' >Uw bestelling is verlengd met 1 dag.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-    header("refresh:4;url=index.php?content=mijnBestellingen");
     require_once("./classes/HireClass.php");
-    HireClass::bestelling_verlengen($_POST);
+    HireClass::bestelling_verlengen_day($_POST);
+    echo "<h3 style='text-align: center;' >Uw bestelling is verlengd met 1 dag. Dit kostte 0,75</h3><br><br><br><br><br><br><br><br>         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+    header("refresh:4;url=index.php?content=mijnBestellingen");
+} else if (isset($_POST['addAWeek'])) {
+    require_once("./classes/HireClass.php");
+    HireClass::bestelling_verlengen_week($_POST);
+    echo "<h3 style='text-align: center;' >Uw bestelling is verlengd met 1 week. Dit kostte 5,25</h3><br><br><br><br><br><br><br><br>         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+    header("refresh:4;url=index.php?content=mijnBestellingen");
+
 } else {
     ?>
     <html>
@@ -15,8 +21,10 @@ if (isset($_POST['addAday'])) {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript"
+                src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
+              type="text/css">
         <link href="style.css" rel="stylesheet" type="text/css">
         <style>
             .header {
@@ -70,7 +78,7 @@ if (isset($_POST['addAday'])) {
                     $sql = "SELECT * FROM bestelling WHERE `idKlant` = " . $_SESSION['idKlant'] . " ";
 
                     $result = $conn->query($sql);
-
+                    echo "Verlengen kost 0,75 cent per dag, en 5,25 per week.";
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             echo "
@@ -109,7 +117,11 @@ if (isset($_POST['addAday'])) {
                                 <td>
                                         <form role=\"form\" action='' method='post'>
                                             <input type='hidden' class=\"btn btn-info\" name='idVanBestelling' value='" . $row['idBestelling'] . "'/>
-                                            <input type='submit' class=\"btn btn-info\" name='addAday' value='Verleng Bestelling'>
+                                            <input type='submit' class=\"btn btn-info\" name='addAday' value='Verleng Bestelling met een Dag'>
+                                        </form><BR>
+                                        <form role=\"form\" action='' method='post'>
+                                            <input type='hidden' class=\"btn btn-info\" name='idVanBestelling' value='" . $row['idBestelling'] . "'/>
+                                            <input type='submit' class=\"btn btn-info\" name='addAWeek' value='Verleng Bestelling met een Week'>
                                         </form>
                                 </td>
                             </tr>

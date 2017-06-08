@@ -10,22 +10,47 @@ class KlachtClass
     private $idKlant;
     private $klacht;
 
-    public function getIdKlacht(){ return $this->idKlacht; }
-    public function getIdKlant(){ return $this->idKlant; }
-    public function getKlacht(){ return $this->klacht; }
+    public function getIdKlacht()
+    {
+        return $this->idKlacht;
+    }
+
+    public function getIdKlant()
+    {
+        return $this->idKlant;
+    }
+
+    public function getKlacht()
+    {
+        return $this->klacht;
+    }
 
     //setters
-    public function setIdKlacht($value){ $this->idKlacht = $value;}
-    public function setIdKlant($value){ $this->klacht = $value;}
-    public function setKlacht($value){ $this->klacht = $value;}
-    public function __construct(){  }
-    
+    public function setIdKlacht($value)
+    {
+        $this->idKlacht = $value;
+    }
+
+    public function setIdKlant($value)
+    {
+        $this->klacht = $value;
+    }
+
+    public function setKlacht($value)
+    {
+        $this->klacht = $value;
+    }
+
+    public function __construct()
+    {
+    }
+
     //Methods
     public static function insert_klacht_into_database($klacht)
     {
         global $database;
         $query = "INSERT INTO `klachten` (`idKlacht`, `idKlant`, `klacht`, `emailKlant`) 
-                      VALUES (NULL, '" . $_SESSION['idKlant'] . "', '" .$klacht. "', '".$_SESSION['email']."')";
+                      VALUES (NULL, '" . $_SESSION['idKlant'] . "', '" . $klacht . "', '" . $_SESSION['email'] . "')";
         //echo $_SESSION['idKlant'];
         //echo $klacht;
         // echo $query;
@@ -34,7 +59,7 @@ class KlachtClass
         self::send_email($klacht);
     }
 
-    
+
     private static function send_email($klacht)
     {
         $to = $_SESSION['email'];

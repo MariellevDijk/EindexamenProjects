@@ -10,7 +10,8 @@ require_once("./security.php");
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css">
     <link href="style.css" rel="stylesheet" type="text/css">
     <style>
         .header {
@@ -33,35 +34,35 @@ require_once("./security.php");
         if (isset($_POST['updateNieuw'])) {
             include('connect_db.php');
             echo $_POST['blockSelect'];
-             if ( $_POST['blockSelect'] == '1' ){
-               $sql2 = "UPDATE `video`
+            if ($_POST['blockSelect'] == '1') {
+                $sql2 = "UPDATE `video`
                         SET `aantalBeschikbaar` = '10'
-                        WHERE `idVideo` = ".$_POST['idVideo']."";
+                        WHERE `idVideo` = " . $_POST['idVideo'] . "";
                 // echo $sql2;
                 $database->fire_query($sql2);
                 $result = mysqli_query($connection, $sql2);
-                
+
                 $sql3 = "UPDATE `video`
                         SET `prijs` = '7.50'
-                        WHERE `idVideo` = ".$_POST['idVideo']."";
+                        WHERE `idVideo` = " . $_POST['idVideo'] . "";
                 echo $sql3;
                 $database->fire_query($sql3);
                 $result = mysqli_query($connection, $sql3);
-             } 
+            }
             if ($_POST['blockSelect'] == '0') {
-                 
-               $sql4 = "UPDATE `video`
+
+                $sql4 = "UPDATE `video`
                         SET `prijs` = '8.00'
-                        WHERE `idVideo` = ".$_POST['idVideo']."";
+                        WHERE `idVideo` = " . $_POST['idVideo'] . "";
                 echo $sql4;
                 $database->fire_query($sql4);
-                $result = mysqli_query($connection, $sql4);       
-     
-             }
+                $result = mysqli_query($connection, $sql4);
+
+            }
             $sql = "UPDATE	`video` 
                      SET 		`nieuw`		=	'" . $_POST['blockSelect'] . "'
-                     WHERE	    `idvideo`			=	 " . $_POST['idVideo']. " ";
-                
+                     WHERE	    `idvideo`			=	 " . $_POST['idVideo'] . " ";
+
 
             //echo $sql;
             $database->fire_query($sql);
@@ -85,8 +86,9 @@ require_once("./security.php");
                                 <li><a href="index.php?content=videoToevoegen">Video's Toevoegen</a></li>
                                 <li><a href="index.php?content=videosBeheren">Video's beheren</a></li>
                                 <li><a href="index.php?content=verwijderFilm">Video's verwijderen</a></li>
-                                <li class="list-group-item"><a href="index.php?content=nieuweFilms">Nieuwe video's</a>                                   </li>
-                                <li><a href="index.php?content=beschikbaarMaken">Video's                                         beschikbaar maken</a></li>
+                                <li class="list-group-item"><a href="index.php?content=nieuweFilms">Nieuwe video's</a>
+                                </li>
+                                <li><a href="index.php?content=beschikbaarMaken">Video's beschikbaar maken</a></li>
                                 <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
                                 <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
                                 <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>

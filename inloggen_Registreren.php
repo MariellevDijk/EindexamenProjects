@@ -19,9 +19,11 @@ if (isset($_POST['submitRegister'])) {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript"
+                src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
+              type="text/css">
+        <!-- <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css"> -->
         <style>
             .header {
                 font-size: 24px;
@@ -39,26 +41,31 @@ if (isset($_POST['submitRegister'])) {
             <div class="row">
                 <div class="col-md-6">
                     <form role="form" action='index.php?content=inloggen_Registreren' method='post'>
-                        <div class="form-group"><label class="control-label" for="InputNnaam">Volledige naam<br></label><input class="form-control"
-                                                                                                                            id="InputNaam"
-                                                                                                                            name="naam"
-                                                                                                                            placeholder="Naam"
-                                                                                                                            type="text"></div>
-                        <div class="form-group"><label class="control-label" for="InputAdres">Adres<br></label><input class="form-control"
-                                                                                                                      id="InputAdres"
-                                                                                                                      name="adres"
-                                                                                                                      placeholder="Adres"
-                                                                                                                      type="text"></div>
-                        <div class="form-group"><label class="control-label" for="InputWoonplaats">Woonplaats<br></label><input class="form-control"
-                                                                                                                                id="InputWoonplaats"
-                                                                                                                                name="woonplaats"
-                                                                                                                                placeholder="Woonplaats"
-                                                                                                                                type="text"></div>
-                        <div class="form-group"><label class="control-label" for="InputEmail1">E-mail<br></label><input class="form-control"
-                                                                                                                        id="InputEmail1"
-                                                                                                                        name="email"
-                                                                                                                        placeholder="E-mail"
-                                                                                                                        type="email"></div>
+                        <div class="form-group"><label class="control-label" for="InputNnaam">Volledige naam<br></label><input
+                                class="form-control"
+                                id="InputNaam"
+                                name="naam"
+                                placeholder="Naam"
+                                type="text"></div>
+                        <div class="form-group"><label class="control-label" for="InputAdres">Adres<br></label><input
+                                class="form-control"
+                                id="InputAdres"
+                                name="adres"
+                                placeholder="Adres"
+                                type="text"></div>
+                        <div class="form-group"><label class="control-label"
+                                                       for="InputWoonplaats">Woonplaats<br></label><input
+                                class="form-control"
+                                id="InputWoonplaats"
+                                name="woonplaats"
+                                placeholder="Woonplaats"
+                                type="text"></div>
+                        <div class="form-group"><label class="control-label" for="InputEmail1">E-mail<br></label><input
+                                class="form-control"
+                                id="InputEmail1"
+                                name="email"
+                                placeholder="E-mail"
+                                type="email"></div>
 
                         <button type="submit" name="submitRegister" class="btn btn-primary">Verstuur<br></button>
 
@@ -66,11 +73,14 @@ if (isset($_POST['submitRegister'])) {
                 </div>
                 <div class="col-md-6">
                     <form role="form" action='index.php?content=checklogin' method='post'>
-                        <div class="form-group"><label class="control-label" for="InputEmail1">E-mail<br></label><input class="form-control" id="InputEmail1"
-                                                                                                                        name="email" placeholder="E-mail" type="email"></div>
-                        <div class="form-group"><label class="control-label" for="InputPassword1">Wachtwoord</label><input class="form-control" id="InputPassword1"
-                                                                                                                           name="password" placeholder="Wachtwoord"
-                                                                                                                           type="password"></div>
+                        <div class="form-group"><label class="control-label" for="InputEmail1">E-mail<br></label><input
+                                class="form-control" id="InputEmail1"
+                                name="email" placeholder="E-mail" type="email"></div>
+                        <div class="form-group"><label class="control-label"
+                                                       for="InputPassword1">Wachtwoord</label><input
+                                class="form-control" id="InputPassword1"
+                                name="password" placeholder="Wachtwoord"
+                                type="password"></div>
 
                         <button type="submit" name="submitLogin" class="btn btn-primary">Verstuur</button>
 

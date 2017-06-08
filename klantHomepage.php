@@ -13,13 +13,13 @@ require_once("./security.php");
 
 if (isset($_POST['refreshwinkelmandje'])) {
     echo "<h3 style='text-align: center;' >Uw winkelmandje wordt vernieuwd.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-    header("refresh:20;url=index.php?content=klantHomepage");
+    header("refresh:4;url=index.php?content=klantHomepage");
     require_once("./classes/ReserveClass.php");
     // <Wijzigingsopdracht>
     $servername = "localhost";
-    $username   = "root";
-    $password   = "";
-    $dbname     = "videotheek";
+    $username = "root";
+    $password = "";
+    $dbname = "videotheek";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -28,12 +28,12 @@ if (isset($_POST['refreshwinkelmandje'])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql    = "SELECT * FROM `reservering`";
-    $result  = $conn->query($sql);
-    var_dump($result);
+    $sql = "SELECT * FROM `reservering` WHERE `idKlant` = '" . $_SESSION['idKlant'] . "'";
+    $result = $conn->query($sql);
+    // var_dump($result);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            if ($row["datumVideoBeschikbaar"] != "0000-00-00" ) {
+            if ($row["datumVideoBeschikbaar"] != "0000-00-00") {
                 ReserveClass::add_reserved_film_to_order($row);
                 //echo "hoi";
             }
@@ -80,7 +80,8 @@ if (isset($_POST['refreshwinkelmandje'])) {
                     <div class="row">
                         <div class="col-md-12"><h2>Winkelmand</h2></div>
                         <!-- <Wijzigingsopdracht> -->
-                        <div class="col-md-12"><h3>Druk altijd op refresh winkelmandje voor u verder gaat met bestllen.</h3></div>
+                        <div class="col-md-12"><h3>Druk altijd op refresh winkelmandje voor u verder gaat met
+                                bestllen.</h3></div>
                         <!-- </Wijzigingsopdracht> -->
                     </div>
                     <div class="row">
@@ -96,17 +97,17 @@ if (isset($_POST['refreshwinkelmandje'])) {
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        
+
                         <?php
                         require_once("classes/LoginClass.php");
                         require_once("classes/HireClass.php");
                         require_once("classes/SessionClass.php");
 
                         $servername = "localhost";
-                        $username   = "root";
-                        $password   = "";
+                        $username = "root";
+                        $password = "";
                         // <Wijzigingsopdracht>
-                        $dbname     = "videotheek";
+                        $dbname = "videotheek";
                         // </Wijzigingsopdracht>
 
                         // Create connection
@@ -115,15 +116,15 @@ if (isset($_POST['refreshwinkelmandje'])) {
                         if ($conn->connect_error) {
                             die("Connection failed: " . $conn->connect_error);
                         }
-                        $sql     = "SELECT * FROM winkelmand WHERE `idKlant` = " . $_SESSION['idKlant'] . " ";
+                        $sql = "SELECT * FROM winkelmand WHERE `idKlant` = " . $_SESSION['idKlant'] . " ";
                         // <Wijzigingsopdracht>
-                        $sql2    = "SELECT * FROM `reservering` WHERE `idKlant` = ".$_SESSION['idKlant']."";
+                        $sql2 = "SELECT * FROM `reservering` WHERE `idKlant` = " . $_SESSION['idKlant'] . "";
                         // </Wijzigingsopdracht>
-                        $result  = $conn->query($sql);
+                        $result = $conn->query($sql);
                         // <Wijzigingsopdracht>
                         $result2 = $conn->query($sql2);
                         // </Wijzigingsopdracht>
-                        
+
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                                 echo "
@@ -159,7 +160,7 @@ if (isset($_POST['refreshwinkelmandje'])) {
                             ";
                             }
 
-                                    echo "
+                            echo "
                         <table class=\"table table - responsive\">
                             <thead>
                             <tr>
@@ -172,7 +173,7 @@ if (isset($_POST['refreshwinkelmandje'])) {
                         <input type='submit' class='btn btn - info' name='refreshwinkelmandje' value='Refresh winkelmandje'>
                         </form>
                                 
-                                        <form role=\"form\" action='' method='post'>
+                                        <form role=\"form\" action='index.php?content=betalen' method='post'>
                                <input type='hidden' name='klantid' value='" . $_SESSION['idKlant'] . "'/>
                                 <input type='hidden' name='idVideo' value='" . $row['idVideo'] . "'/>
                                 <input type='hidden' name='titel' value='" . $row['titel'] . "'/>
@@ -184,26 +185,19 @@ if (isset($_POST['refreshwinkelmandje'])) {
                         </table>
                             ";
 
-                            }else {
+                        } else {
 
 
-                                echo "
+                            echo "
                                 <form role=\"form\" action='' method='post'>
                                 <input type='hidden' name='klantid' value='" . $_SESSION['idKlant'] . "'/>
-                                <input type='hidden' name='idVideo' value='" . $row['idVideo'] . "'/>
-                                <input type='hidden' name='titel' value='" . $row['titel'] . "'/>
-                                <input type='hidden' name='prijs' value='" . $row['prijs'] . "'/>
                         <input type='submit' class='btn btn - info' name='refreshwinkelmandje' value='Refresh winkelmandje'>
-                        </form>
-                            <form role='form' action='index.php?content=betalen' method='post'>
-                                <input type='hidden' name='id' value='" . $row['id'] . "'/>
-                               <input type='hidden' name='klantid' value='" . $_SESSION['idKlant'] . "'/>
-                                <input type='hidden' name='idVideo' value='" . $row['idVideo'] . "'/>
-                                <input type='hidden' name='titel' value='" . $row['titel'] . "'/>
-                                <input type='hidden' name='prijs' value='" . $row['prijs'] . "'/>
-                                <input type='submit' class='btn btn - info' name='betalen' value='Betalen'>";
-                            }
-                    
+                        </form>";
+                            // <input type='hidden' name='idVideo' value='" . $row['idVideo'] . "'/>
+                            //   <input type='hidden' name='titel' value='" . $row['titel'] . "'/>
+                            //<input type='hidden' name='prijs' value='" . $row['prijs'] . "'/>
+                        }
+
                         $conn->close();
                         ?>
                         <br><br><br><br><br><br>

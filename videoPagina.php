@@ -7,18 +7,16 @@ require_once("./security.php");
 if (isset($_POST['reserveer'])) {
 
     require_once("./classes/ReserveClass.php");
-    if (!ReserveClass::check_if_reservering_exists($_POST))
-    {
+    if (!ReserveClass::check_if_reservering_exists($_POST)) {
         echo "<h3 style='text-align: center;' >Item toegevoegd aan reserveringen.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
         header("refresh:4;url=index.php?content=reserveringen");
-        
+
         ReserveClass::insert_reserveringitem_database($_POST);
-    }
-    else {
+    } else {
         echo "<h3 style='text-align: center;' >U heeft deze video al gereserveerd.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
         header("refresh:4;url=index.php?content=reserveringen");
     }
- 
+
 } else {
     if (isset($_POST['submit'])) {
 
@@ -79,7 +77,6 @@ if (isset($_POST['reserveer'])) {
                         die("Connection failed: " . $conn3->connect_error);
                     }
 
- 
 
                     $idVideo = $_GET['idVideo'];
                     $sql = "SELECT * FROM `video` 

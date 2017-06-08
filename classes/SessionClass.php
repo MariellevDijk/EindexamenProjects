@@ -29,7 +29,6 @@ class SessionClass
         $this->userrole = $_SESSION['userrole'] = $loginObject->getUserrole();
         $this->geblokkeerd = $_SESSION['geblokkeerd'] = $loginObject->getGeblokkeerd();
 
- 
 
         $usersObject = LoginClass::find_info_by_id($_SESSION['idKlant']);
         //$_SESSION['username'] = $usersObject->getFirstName()." ".
@@ -45,14 +44,14 @@ class SessionClass
         session_unset('userrole');
         session_unset('geblokkeerd');
 
- 
+
         session_destroy();
         unset($this->idKlant);
         unset($this->email);
         unset($this->userrole);
         unset($this->geblokkeerd);
 
- 
+
     }
 }
 

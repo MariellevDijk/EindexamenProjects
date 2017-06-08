@@ -10,15 +10,31 @@ class ActeurClass
     private $Acteur;
 
 
-    public function getIdActeur(){ return $this->idKlacht; }
-    public function getActeur(){ return $this->idKlant; }
+    public function getIdActeur()
+    {
+        return $this->idKlacht;
+    }
+
+    public function getActeur()
+    {
+        return $this->idKlant;
+    }
 
 
     //setters
-    public function setIdActeur($value){ $this->idKlacht = $value;}
-    public function setActeur($value){ $this->klacht = $value;}
+    public function setIdActeur($value)
+    {
+        $this->idKlacht = $value;
+    }
 
-    public function __construct(){  }
+    public function setActeur($value)
+    {
+        $this->klacht = $value;
+    }
+
+    public function __construct()
+    {
+    }
 
     //Methods
 
@@ -34,7 +50,7 @@ class ActeurClass
         }
 
         $query = "INSERT INTO `Acteur` (`idActeur`, `naam`) 
-                      VALUES ($lastActeurID, '" .$naam. "')";
+                      VALUES ($lastActeurID, '" . $naam . "')";
         //echo $query;
 
         //echo "<br>";

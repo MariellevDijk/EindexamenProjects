@@ -5,8 +5,8 @@ require_once("./security.php");
 
 <?php
 if (isset($_POST['create'])) {
-    require_once("./classes/VideoClass.php");
-    VideoClass::insert_film_database($_POST);
+    require_once("./Classes/ArtikelClass.php");
+    ArtikelClass::insert_film_database($_POST);
 }
 ?>
 <html>
@@ -15,8 +15,9 @@ if (isset($_POST['create'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css">
+    <link href="../style.css" rel="stylesheet" type="text/css">
     <style>
         .header {
             font-size: 24px;
@@ -31,75 +32,75 @@ if (isset($_POST['create'])) {
 <body>
 <div class="section">
     <div class="container">
-<?php
+        <?php
 
 
-require_once("classes/LoginClass.php");
-if (isset($_POST['updateUserrole'])) {
-    include('connect_db.php');
+        require_once("Classes/LoginClass.php");
+        if (isset($_POST['updateUserrole'])) {
+            include('connect_db.php');
 
-    $sql = "UPDATE	`login` 
+            $sql = "UPDATE	`login` 
                      SET 		`userrole`		=	'" . $_POST['userroleSelect'] . "'
-                     WHERE	    `idKlant`			=	 " . $_POST['idKlant']. " ";
+                     WHERE	    `idKlant`			=	 " . $_POST['idKlant'] . " ";
 
-    //echo $sql;
-    $database->fire_query($sql);
-    //$result = mysqli_query($connection, $sql);
+            //echo $sql;
+            $database->fire_query($sql);
+            //$result = mysqli_query($connection, $sql);
 
-    echo "<h3 style='text-align: center;' >Uw wijzigingen zijn verwerkt.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-    header("refresh:4;url=index.php?content=adminHomepage");
+            echo "<h3 style='text-align: center;' >Uw wijzigingen zijn verwerkt.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+            header("refresh:4;url=index.php?content=adminHomepage");
 
-} else {
-    ?>
-    <div class="row">
-        <div class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12"><h2>Gebruikerrol Wijzigen</h2></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <ul class="breadcrumb">
-                            <li><a href="index.php?content=adminHomepage">Homepage</a></li>
-                            <li><a href="index.php?content=videoToevoegen">Video's Toevoegen</a></li>
-                            <li><a href="index.php?content=videosBeheren">Video's beheren</a></li>
-                            <li><a href="index.php?content=verwijderFilm">Video's verwijderen</a></li>
-                            <li><a href="index.php?content=beschikbaarMaken">Video's beschikbaar maken</a></li>
-                            <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
-                            <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
-                        </ul>
+        } else {
+        ?>
+        <div class="row">
+            <div class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12"><h2>Gebruikerrol Wijzigen</h2></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="breadcrumb">
+                                <li><a href="../index.php?content=adminHomepage">Homepage</a></li>
+                                <li><a href="../index.php?content=videoToevoegen">Video's Toevoegen</a></li>
+                                <li><a href="../index.php?content=videosBeheren">Video's beheren</a></li>
+                                <li><a href="../index.php?content=verwijderFilm">Video's verwijderen</a></li>
+                                <li><a href="../index.php?content=beschikbaarMaken">Video's beschikbaar maken</a></li>
+                                <li><a href="../index.php?content=blokkeren">Gebruiker blokkeren</a></li>
+                                <li><a href="../index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        <div class="col-md-6">
-            <?php
-            require_once("classes/LoginClass.php");
-            require_once("classes/HireClass.php");
-            require_once("classes/SessionClass.php");
+                <div class="col-md-6">
+                    <?php
+                    require_once("Classes/LoginClass.php");
+                    require_once("Classes/HireClass.php");
+                    require_once("Classes/SessionClass.php");
 
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            // <Wijzigingsopdracht>
-            $dbname = "videotheek";
-            // </Wijzigingsopdracht>
+                    $servername = "localhost";
+                    $username = "root";
+                    $password = "";
+                    // <Wijzigingsopdracht>
+                    $dbname = "eindexamendatabase";
+                    // </Wijzigingsopdracht>
 
-            // Create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
+                    // Create connection
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+                    // Check connection
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
 
 
-            $sql = "SELECT * FROM `login`";
-            $result = $conn->query($sql);
+                    $sql = "SELECT * FROM `login`";
+                    $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
 
-                    echo "
+                            echo "
                         <table class=\"table table - responsive\">
                             <thead>
                             <tr>
@@ -142,23 +143,23 @@ if (isset($_POST['updateUserrole'])) {
                             </tbody>
                         </table>
                             ";
-                }
-            } else {
-                echo "Geen resultaten<br><br><br><br><br><br><br>";
-            }
-            $conn->close();
-            ?>
+                        }
+                    } else {
+                        echo "Geen resultaten<br><br><br><br><br><br><br>";
+                    }
+                    $conn->close();
+                    ?>
 
-            <br><br>
+                    <br><br>
+                </div>
+            </div>
+            <?php
+
+            }
+            ?>
+            </row>
         </div>
     </div>
-    <?php
-
-}
-        ?>
-        </row>
-    </div>
-</div>
 
 </body>
 </html>

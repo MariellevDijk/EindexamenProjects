@@ -1,5 +1,5 @@
 <?php
-//	require('config/config.php');
+//	require('Config/Config.php');
 //
 //	class MySqlDatabaseClass
 //	{

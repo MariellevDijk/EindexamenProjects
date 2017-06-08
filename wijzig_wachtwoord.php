@@ -40,12 +40,18 @@ if (isset($_POST['submit'])) {
             <div class="row">
                 <div class="col-md-12">
                     <form role="form" action="index.php?content=wijzig_wachtwoord" method="post">
-                        <div class="form-group"><label class="control-label" for="oude_wachtwoord">Voer het oude wachtwoord in<br></label>
-                            <input class="form-control" id="oude_wachtwoord" placeholder="Oude wachtwoord" type="password" name="oude_wachtwoord" required></div>
-                        <div class="form-group"><label class="control-label" for="nieuw_wachtwoord">Voer het nieuwe wachtwoord in<br></label>
-                            <input class="form-control" id="nieuw_wachtwoord" placeholder="Nieuw wachtwoord" type="password" name="nieuw_wachtwoord"></div>
-                        <div class="form-group"><label class="control-label" for="controle_wachtwoord">Voer nogmaals het nieuwe wachtwoord<br></label>
-                            <input class="form-control" id="controle_wachtwoord" placeholder="Controle wachtwoord" type="password" name="controle_wachtwoord"></div>
+                        <div class="form-group"><label class="control-label" for="oude_wachtwoord">Voer het oude
+                                wachtwoord in<br></label>
+                            <input class="form-control" id="oude_wachtwoord" placeholder="Oude wachtwoord"
+                                   type="password" name="oude_wachtwoord" required></div>
+                        <div class="form-group"><label class="control-label" for="nieuw_wachtwoord">Voer het nieuwe
+                                wachtwoord in<br></label>
+                            <input class="form-control" id="nieuw_wachtwoord" placeholder="Nieuw wachtwoord"
+                                   type="password" name="nieuw_wachtwoord"></div>
+                        <div class="form-group"><label class="control-label" for="controle_wachtwoord">Voer nogmaals het
+                                nieuwe wachtwoord<br></label>
+                            <input class="form-control" id="controle_wachtwoord" placeholder="Controle wachtwoord"
+                                   type="password" name="controle_wachtwoord"></div>
 
                         <button type="submit" class="btn btn-primary" name="submit">Verzend</button>
 

@@ -3,49 +3,38 @@
 //session_start();
 require_once("./classes/LoginClass.php");
 require_once("./classes/SessionClass.php");
-    // Wijzigingsopdracht
-    global $database;
-        date_default_timezone_set("Europe/Amsterdam");
-        $today = date('Y-m-d');
-        $sql = "SELECT * FROM video";
-        $result = $database->fire_query($sql);
-
-        $row = $result->fetch_assoc();
-        while ($row = $result->fetch_assoc()) {
-        if ($row['datumNietNieuw'] == $today) 
-            {
-                $sql2 = "UPDATE video SET `nieuw` = '0' WHERE `idVideo` = '".$row['idVideo']."'";
-                // echo $sql2;
-                $database->fire_query($sql2);
-            }
-            else {
-                // echo $row['titel'];
-            }
-        }
-        $sql2 = "SELECT * FROM reservering";
-        $result2 = $database->fire_query($sql2);
-
-        if ($result2->num_rows > 0) {
-        while ($row2 = $result2->fetch_assoc()) {
-            $today2 = date('Y-m-d');
-            if ($row2['reactieDatumKlant'] == $today2) 
-            {
-                $sql2 = "DELETE FROM reservering where `idVideo` = '".$row2['idVideo']."' AND `idKlant` = '".$_SESSION['idKlant']."'";
-                //echo $sql2;
-                // $database->fire_query($sql2);
-            }
-            else {
-                // echo $row['titel'];
-                // echo "321";
-            }
-        }
-        }
 // Wijzigingsopdracht
- 
 
-        
+$sql2 = "SELECT * FROM reservering";
+$result2 = $database->fire_query($sql2);
+
+if ($result2->num_rows > 0) {
+    while ($row2 = $result2->fetch_assoc()) {
+        $today2 = date('Y-m-d');
+        if ($row2['reactieDatumKlant'] == $today2) {
+            $sql2 = "DELETE FROM reservering where `idVideo` = '" . $row2['idVideo'] . "' AND `idKlant` = '" . $_SESSION['idKlant'] . "'";
+            //echo $sql2;
+            $database->fire_query($sql2);
+        } else {
+            // echo $row['titel'];
+            // echo "321";
+        }
+    }
+}
+$sql3 = "SELECT a.email FROM login AS a INNER JOIN bestelling AS b ON a.idKlant = b.idKlant where b.ophaaldatum         = CURRENT_DATE + 1";
+$result3 = $database->fire_query($sql3);
+$today3 = date('d-m-Y');
+if ($result3->num_rows > 0) {
+    while ($row3 = $result3->fetch_assoc()) {
+        //echo $row3['email'];
+        Hireclass::send_memory_email_day_before($row3['email']);
+    }
+}
+// Wijzigingsopdracht
+
+
 if (!isset($_SESSION['idKlant'])) {
-    echo "<h3 style='text-align: center;' >U bent niet ingelogd en daarom niet bevoegd om deze pagina te bekijken. U wordt teruggestuurd naar de loginpagina.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+    echo "<head><style>body{overflow-y: hidden; overflow-x: hidden;}</style></head><h3 style='text-align: center;' >U bent niet ingelogd en daarom niet bevoegd om deze pagina te bekijken. U wordt teruggestuurd naar de loginpagina.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
     header("refresh:5;url=index.php?content=inloggen_Registreren");
 } else {
 
@@ -53,7 +42,7 @@ if (!isset($_SESSION['idKlant'])) {
         if (!isset($_SESSION['idKlant'])) {
 
             //var_dump($_SESSION);
-            echo "<h3 style='text-align: center;' >U bent niet ingelogd en daarom niet bevoegd om deze pagina te bekijken. U wordt teruggestuurd naar de loginpagina.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+            echo "<head><style>body{overflow-y: hidden;}</style></head><h3 style='text-align: center;' >U bent niet ingelogd en daarom niet bevoegd om deze pagina te bekijken. U wordt teruggestuurd naar de loginpagina.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
             header("refresh:5;url=index.php?content=inloggen_Registreren");
             exit();
 
@@ -71,6 +60,6 @@ if (!isset($_SESSION['idKlant'])) {
         header("refresh:20;url=index.php?content=logout");
         exit();
     }
- 
+
 }
 ?>

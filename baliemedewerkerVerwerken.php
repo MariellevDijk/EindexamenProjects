@@ -20,12 +20,13 @@ if (isset($_POST['update'])) {
                 src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
               type="text/css">
-        <link href="style.css" rel="stylesheet" type="text/css">
+        <link href="../style.css" rel="stylesheet" type="text/css">
         <style>
             .header {
                 font-size: 24px;
                 padding: 20px;
             }
+
             th {
                 min-width: 300px;
             }
@@ -33,22 +34,22 @@ if (isset($_POST['update'])) {
     </head>
     <body>
     <div class="section">
-    <div class="container">
-    <div class="row">
-        <div class="col-md-12"><h2>Baliemedewerker Pagina</h2></div>
-    </div>
-    <row class="row">
-        <h3>Video</h3>
-        <form role="form" action='' method='post'>
-            <div class="form-group">
-                <label for="id">VideoId</label>
-                <input type="text" class="form-control" name="idVideo" placeholder="Voer videoid in.">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"><h2>Baliemedewerker Pagina</h2></div>
             </div>
+            <row class="row">
+                <h3>Video</h3>
+                <form role="form" action='' method='post'>
+                    <div class="form-group">
+                        <label for="id">VideoId</label>
+                        <input type="text" class="form-control" name="idVideo" placeholder="Voer videoid in.">
+                    </div>
 
-            <button type="submit" name="update" class="btn btn-primary">Update</button>
-            
-        </form>
-        <br>
-    </row>
+                    <button type="submit" name="update" class="btn btn-primary">Update</button>
+
+                </form>
+                <br>
+            </row>
     <?php
 }

@@ -57,7 +57,7 @@ class HireClass
     public function __construct()
     {
     }
-    
+
     //Methods
     public static function insert_winkelmanditem_database($post)
     {
@@ -131,9 +131,9 @@ class HireClass
                                              '" . $post['prijs'] . "')";
 
         // echo $query . "<br>";
-        
+
         $ophaaldatum = date('Y-m-d', strtotime($date . ' + 7 days'));
- 
+
         $database->fire_query($query);
         $last_id = mysqli_insert_id($database->getDb_connection());
         self::lower_amount_videos($post);
@@ -222,7 +222,7 @@ class HireClass
 
         $database->fire_query($query);
     }
-    
+
     public static function check_if_deleveryDate_deleveryTime_exists($post)
     {
         global $database;
@@ -230,7 +230,7 @@ class HireClass
         $query = "SELECT `afleverdatum`,`aflevertijd`
 					  FROM	 `bestelling`
 					  WHERE	 `afleverdatum` = '" . $post['afleverdatum'] . "'
-					  AND    `aflevertijd` = '".$post['aflevertijd']."'";
+					  AND    `aflevertijd` = '" . $post['aflevertijd'] . "'";
 
         $result = $database->fire_query($query);
         //echo $query;
@@ -256,7 +256,7 @@ class HireClass
         return (mysqli_num_rows($result) > 0) ? true : false;
     }
 
-    public static function bestelling_verlengen($post)
+    public static function bestelling_verlengen_day($post)
     {
         global $database;
 
@@ -272,6 +272,33 @@ class HireClass
         }
 
         $verlengdeDatum = date('Y-m-d', strtotime($ophaaldatum . ' + 1 day'));
+        $verhoogdePrijs = ($prijs . ' + ' . round(($prijs * 0.10), 2));
+
+        $query = "UPDATE `bestelling` 
+                  SET `ophaaldatum` = '" . $verlengdeDatum . "',
+                      `prijs` = " . $verhoogdePrijs . " 
+                  WHERE `idBestelling` = " . $_POST['idVanBestelling'] . " ";
+
+        $result = $database->fire_query($query);
+        //echo $query;
+    }
+
+    public static function bestelling_verlengen_week($post)
+    {
+        global $database;
+
+        $ophaaldatum = null;
+        $prijs = null;
+
+        $sql = "SELECT * FROM bestelling WHERE `idBestelling` = " . $_POST['idVanBestelling'] . " ";
+
+        $result = $database->fire_query($sql);
+        if ($row = $result->fetch_assoc()) {
+            $ophaaldatum = $row['ophaaldatum'];
+            $prijs = $row['prijs'];
+        }
+
+        $verlengdeDatum = date('Y-m-d', strtotime($ophaaldatum . ' + 7 day'));
         $verhoogdePrijs = ($prijs . ' + ' . round(($prijs * 0.70), 2));
 
         $query = "UPDATE `bestelling` 
@@ -284,7 +311,146 @@ class HireClass
 
     }
 
+    public static function send_memory_email_day_before()
+    {
+        global $database;
 
+        $sql = "SELECT a.email FROM login AS a INNER JOIN bestelling AS b ON a.idKlant = b.idKlant where DATEDIFF(`ophaaldatum`,CURRENT_DATE) = 1";
+        $result = $database->fire_query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                //echo $row3['email'];
+                self::send_memory_email_day_before_mail($row['email']);
+            }
+        }
+    }
+
+    public static function send_memory_email_day_before_mail($email)
+    {
+        $to = $email;
+        $subject = "Bevestigingsmail Bestelling Videotheek Culemborg";
+        $message = "Geachte heer/mevrouw<br>";
+
+        $message .= "Uw bestelling word morgen opgehaald.<br>";
+
+        $message .= "Met vriendelijke groet," . "<br>";
+        $message .= "Dylan Griffioen" . "<br>";
+
+        $headers = 'From: no-reply@videotheekCulemborg.nl' . "\r\n";
+        $headers .= 'Reply-To: webmaster@videotheekCulemborg.nl' . "\r\n";
+        $headers .= 'Bcc: accountant@videotheekCulemborg.nl' . "\r\n";
+        //$headers .= "MIME-version: 1.0"."\r\n";
+        //$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
+        $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
+        $headers .= 'X-Mailer: PHP/' . phpversion();
+
+
+        mail($to, $subject, $message, $headers);
+    }
+
+    public static function send_memory_email_3_days_after()
+    {
+        global $database;
+
+        $sql = "SELECT a.email FROM login AS a INNER JOIN bestelling AS b ON a.idKlant = b.idKlant where DATEDIFF(`ophaaldatum`,CURRENT_DATE) = -3";
+        $result = $database->fire_query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                //echo $row3['email'];
+                self::send_memory_email_3_days_after_mail($row['email']);
+            }
+        }
+    }
+
+    public static function send_memory_email_3_days_after_mail($email)
+    {
+        $to = $email;
+        $subject = "Bevestigingsmail Bestelling Videotheek Culemborg";
+        $message = "Geachte heer/mevrouw<br>";
+
+        $message .= "Uw bestelling is al 3 dagen verlopen.<br>";
+
+        $message .= "Met vriendelijke groet," . "<br>";
+        $message .= "Dylan Griffioen" . "<br>";
+
+        $headers = 'From: no-reply@videotheekCulemborg.nl' . "\r\n";
+        $headers .= 'Reply-To: webmaster@videotheekCulemborg.nl' . "\r\n";
+        $headers .= 'Bcc: accountant@videotheekCulemborg.nl' . "\r\n";
+        //$headers .= "MIME-version: 1.0"."\r\n";
+        //$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
+        $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
+        $headers .= 'X-Mailer: PHP/' . phpversion();
+
+
+        mail($to, $subject, $message, $headers);
+    }
+
+    public static function send_memory_email_3_weeks_after()
+    {
+        global $database;
+
+        $sql = "SELECT a.idKlant, a.email FROM login AS a INNER JOIN bestelling AS b ON a.idKlant = b.idKlant where DATEDIFF(`ophaaldatum`,CURRENT_DATE) = -21";
+        $result = $database->fire_query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                //echo $row3['email'];
+                self::send_memory_email_3_weeks_after_mail($row['email']);
+                self::blokeer_user_na_3_weken($row['idKlant']);
+            }
+        }
+    }
+
+    public static function send_memory_email_3_weeks_after_mail($email)
+    {
+        $to = $email;
+        $subject = "Bevestigingsmail Bestelling Videotheek Culemborg";
+        $message = "Geachte heer/mevrouw<br>";
+
+        $message .= "Uw bestelling is al 3 weken verlopen, uw acount zal nu geblokeerd worden.<br>";
+
+        $message .= "Met vriendelijke groet," . "<br>";
+        $message .= "Dylan Griffioen" . "<br>";
+
+        $headers = 'From: no-reply@videotheekCulemborg.nl' . "\r\n";
+        $headers .= 'Reply-To: webmaster@videotheekCulemborg.nl' . "\r\n";
+        $headers .= 'Bcc: accountant@videotheekCulemborg.nl' . "\r\n";
+        //$headers .= "MIME-version: 1.0"."\r\n";
+        //$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
+        $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
+        $headers .= 'X-Mailer: PHP/' . phpversion();
+
+
+        mail($to, $subject, $message, $headers);
+    }
+
+    public static function blokeer_user_na_3_weken($id)
+    {
+        global $database;
+        $sql = "UPDATE	`login` 
+                     SET 		`geblokkeerd`		=	1
+                     WHERE	    `idKlant`			=	 " . $id. " ";
+        $database->fire_query($sql);
+    }
+    
+    public static function set_video_not_new()
+    {
+        global $database;
+        date_default_timezone_set("Europe/Amsterdam");
+        $today = date('Y-m-d');
+        $sql = "SELECT * FROM video";
+        $result = $database->fire_query($sql);
+
+        $row = $result->fetch_assoc();
+        while ($row = $result->fetch_assoc()) {
+            if ($row['datumNietNieuw'] == $today) {
+                $sql2 = "UPDATE video SET `nieuw` = '0' WHERE `idVideo` = '" . $row['idVideo'] . "'";
+                // echo $sql2;
+                $database->fire_query($sql2);
+            } else {
+                // echo $row['titel'];
+            }
+        }
+    }
 }
 
 ?>

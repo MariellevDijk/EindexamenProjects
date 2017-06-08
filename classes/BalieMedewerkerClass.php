@@ -18,27 +18,29 @@ class BalieMedewerkerClass
 
     public static function update_aantal_beschikbaar($post)
     {
-        // </Wijzigingsopdracht>
+
         date_default_timezone_set("Europe/Amsterdam");
 
 		$date = date('Y-m-d'); 
-        $datumreactie = date('Y-m-d', strtotime("+2 days"));
+        $datumreactie = date('Y-m-d', strtotime("+7 days"));
         global $database;
-        // <Wijzigingsopdracht>
+
         
         //echo "123";
         
         $query = "UPDATE `video`
 					  SET	 `aantalBeschikbaar` = `aantalBeschikbaar` + 1 
 					  WHERE	 `idVideo`		=	'" . $_POST['idVideo'] . "'";
-        // <Wijzigingsopdracht>
+
+
         $query2 = "UPDATE `reservering`
                     SET `datumVideoBeschikbaar` = '".$date."'
                     WHERE `idVideo` = '".$_POST['idVideo']."'";
         $query3 = "UPDATE `reservering`
                     SET `reactieDatumKlant` = '".$datumreactie."'
                     WHERE `idVideo` = '".$_POST['idVideo']."'";
-        //  </Wijzigingsopdracht>
+
+
         // echo $query;
         // echo $query2;
         $database->fire_query($query);
@@ -46,35 +48,32 @@ class BalieMedewerkerClass
         $database->fire_query($query2);
         $database->fire_query($query3);
                 
-        $sql1 = "Select * from video";
+        $sql1 = "SELECT a.email FROM login AS a INNER JOIN reservering AS b ON a.idKlant = b.idKlant where idVideo =             '".$_POST['idVideo']."'";
         $result = $database->fire_query($sql1);
 
-        $row = $result->fetch_assoc();
-        if ($row['aantalBeschikbaar'] >= 1){
-            // </Wijzigingsopdracht>
-            self::send_email();
-            // <Wijzigingsopdracht>
+        if ($result->num_rows > 0){
+            while ($row = $result->fetch_assoc()) {
+                self::send_email($row['email']);
+            }
         }
-        // </Wijzigingsopdracht>
-        
-
     }
-    private static function send_email()
+    
+    private static function send_email($email)
 	{
-		$to = "klant@mail.com";
-		$subject = "Activatiemail Videotheek Maurik";
+		$to = $email;
+		$subject = "Activatiemail Videotheek Culemborg";
 		$message = "Dear sir/madam <br> ";
 
 		$message .= '<style>a { color:red;}</style>';
 		$message .= "Your reserved video is available<br>";
 		$message .= "Log in on your account to hire the video"."<br>";
-		$message .= "Your reservation ends in 2 days."."<br>";
+		$message .= "Your reservation ends in 7 days."."<br>";
 		$message .= "Greetings,"."<br>";
-		$message .= "Marielle van Dijk"."<br>";
+		$message .= "Dylan Griffioen"."<br>";
 
-		$headers = 'From: no-reply@videotheekMaurik.nl'."\r\n";
-		$headers .= 'Reply-To: webmaster@videotheekMaurik.nl'."\r\n";
-		$headers .= 'Bcc: accountant@videotheekMaurik.nl'."\r\n";
+		$headers = 'From: no-reply@videotheekCulemborg.nl'."\r\n";
+		$headers .= 'Reply-To: webmaster@videotheekCulemborg.nl'."\r\n";
+		$headers .= 'Bcc: accountant@videotheekCulemborg.nl'."\r\n";
 		//$headers .= "MIME-version: 1.0"."\r\n";
 		//$headers .= "Content-type: text/plain; charset=iso-8859-1"."\r\n";
 		$headers .= "Content-type: text/html; charset=iso-8859-1"."\r\n";
@@ -84,14 +83,14 @@ class BalieMedewerkerClass
 
 		mail( $to, $subject, $message, $headers);
 	}
-        
+
     public static function remove_item_reservering($post)
     {
         global $database;
 
 
-        $query =    "DELETE FROM `reservering` WHERE `idKlant` = " . $_SESSION['idKlant'] . "
-                                                    AND `idReservering` = " . $post["idReservering"]. " ";
+        $query = "DELETE FROM `reservering` WHERE `idKlant` = " . $_SESSION['idKlant'] . "
+                                                    AND `idReservering` = " . $post["idReservering"] . " ";
         //echo $query;
 
 
