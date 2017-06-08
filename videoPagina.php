@@ -58,7 +58,7 @@ if (isset($_POST['reserveer'])) {
                     $username = "root";
                     $password = "";
                     // <Wijzigingsopdracht>
-                    $dbname = "eindexamendatabase";
+                    $dbname = "examendatabase";
                     // </Wijzigingsopdracht>
 
                     // Create connection

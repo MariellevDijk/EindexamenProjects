@@ -8,7 +8,7 @@ require_once("./security.php");
 require_once("classes/LoginClass.php");
 if (isset($_POST['submit'])) {
 
-    VideoClass::wijzig_gegevens_film($_POST);
+    ArtikelClass::wijzig_gegevens_film($_POST);
 
     echo "<h3 style='text-align: center;' >Uw wijzigingen zijn verwerkt.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
     header("refresh:4;url=index.php?content=adminHomepage");
@@ -72,7 +72,7 @@ if (isset($_POST['submit'])) {
             $servername = "localhost";
             $username = "root";
             $password = "";
-            $dbname = "eindexamendatabase";
+            $dbname = "examendatabase";
 
             // Create connection
             $conn = new mysqli($servername, $username, $password, $dbname);

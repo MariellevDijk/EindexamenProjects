@@ -77,7 +77,7 @@ if (isset($_POST['update'])) {
                         $username = "root";
                         $password = "";
                         // <Wijzigingsopdracht>
-                        $dbname = "eindexamendatabase";
+                        $dbname = "examendatabase";
                         // </Wijzigingsopdracht>
 
                         // Create connection

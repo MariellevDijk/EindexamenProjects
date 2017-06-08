@@ -5,8 +5,8 @@ require_once("./security.php");
 
 <?php
 if (isset($_POST['create'])) {
-    require_once("./classes/VideoClass.php");
-    VideoClass::insert_film_database($_POST);
+    require_once("./classes/ArtikelClass.php");
+    ArtikelClass::insert_film_database($_POST);
 }
 ?>
 <html>
@@ -83,7 +83,7 @@ if (isset($_POST['create'])) {
                     $username = "root";
                     $password = "";
                     // <Wijzigingsopdracht>
-                    $dbname = "eindexamendatabase";
+                    $dbname = "examendatabase";
                     // </Wijzigingsopdracht>
 
                     // Create connection

@@ -116,7 +116,7 @@ class LoginClass
     public static function insert_into_database($post)
     {
         global $database;
-
+        echo"test3";
         date_default_timezone_set("Europe/Amsterdam");
 
         $datum = date('Y-m-d');
@@ -125,7 +125,7 @@ class LoginClass
 
         $wachtwoord = MD5($post['emailAdres'] . date('Y-m-d H:i:s'));
 
-        $query = "INSERT INTO `users` (`idKlant`,
+        $query = "INSERT INTO `users` (`idUser`,
 									   `naam`,
 									   `emailAdres`,
 									   `wachtwoord`,
@@ -147,12 +147,12 @@ class LoginClass
 									   '" . '0' . "',
 									   '" . $date . "',
 									   '" . '0' . "')";
-        // echo $query;
+        echo $query;
         $database->fire_query($query);
 
         $last_id = mysqli_insert_id($database->getDb_connection());
 
-        self::send_email($last_id, $post, $wachtwoord);
+        //self::send_email($last_id, $post, $wachtwoord);
     }
 
     public static function check_if_email_exists($emailAdres)

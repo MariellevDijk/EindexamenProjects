@@ -4,11 +4,11 @@ require_once("./security.php");
 ?>
 <?php
 
-require_once("classes/VideoClass.php");
+require_once("classes/ArtikelClass.php");
 if (isset($_POST['removeVideo'])) {
     include('connect_db.php');
 
-    VideoClass::delete_film($_POST);
+    ArtikelClass::delete_film($_POST);
 
     echo "<h3 style='text-align: center;' >Uw wijzigingen zijn verwerkt.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
 
@@ -69,7 +69,7 @@ if (isset($_POST['removeVideo'])) {
                     $username = "root";
                     $password = "";
                     // <Wijzigingsopdracht>
-                    $dbname = "eindexamendatabase";
+                    $dbname = "examendatabase";
                     // </Wijzigingsopdracht>
 
                     // Create connection

@@ -80,7 +80,7 @@ require_once("./security.php");
                     $servername = "localhost";
                     $username = "root";
                     $password = "";
-                    $dbname = "eindexamendatabase";
+                    $dbname = "examendatabase";
 
                     // Create connection
                     $conn = new mysqli($servername, $username, $password, $dbname);

@@ -38,7 +38,7 @@ require_once("./security.php");
                     $username = "root";
                     $password = "";
                     // <Wijzigingsopdracht>
-                    $dbname = "eindexamendatabase";
+                    $dbname = "examendatabase";
                     // </Wijzigingsopdracht>
 
                     // Create connection
@@ -110,7 +110,7 @@ require_once("./security.php");
                     $servername = "localhost";
                     $username = "root";
                     $password = "";
-                    $dbname = "eindexamendatabase";
+                    $dbname = "examendatabase";
 
                     // Create connection
                     $conn = new mysqli($servername, $username, $password, $dbname);

@@ -67,7 +67,7 @@ if (isset($_POST['removeItemReserve'])) {
             $username = "root";
             $password = "";
             // <Wijzigingsopdracht>
-            $dbname = "eindexamendatabase";
+            $dbname = "examendatabase";
             // </Wijzigingsopdracht>
 
             // Create connection

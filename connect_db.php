@@ -4,7 +4,7 @@ $servername = 'localhost';
 $username = 'root';
 $password = '';
 // <Wijzigingsopdracht>
-$databasename = 'eindexamendatabase';
+$databasename = 'examendatabase';
 // </Wijzigingsopdracht>
 
 // Maak contact met de server waarop de database draait.

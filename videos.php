@@ -29,7 +29,7 @@
                         $servername = "localhost";
                         $username = "root";
                         $password = "";
-                        $dbname = "eindexamendatabase";
+                        $dbname = "examendatabase";
 
                         // Create connection
                         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -76,7 +76,7 @@
                         $username = "root";
                         $password = "";
                         // <Wijzigingsopdracht>
-                        $dbname = "eindexamendatabase";
+                        $dbname = "examendatabase";
                         // </Wijzigingsopdracht>
 
                         // Create connection

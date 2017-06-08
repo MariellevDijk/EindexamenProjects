@@ -7,9 +7,9 @@ switch ($witch_server) {
         define('SERVERNAME', 'localhost');
         define('USERNAME', 'root');
         define('PASSWORD', '');
-        define('DATABASENAME', 'eidnexamendatabase');
+        define('DATABASENAME', 'examendatabase');
         // <Wijzigingsopdracht>
-        define('MAIL_PATH', 'http://localhost/VidoeProject/');
+        define('MAIL_PATH', 'http://localhost/eindexamenproject/');
         // </Wijzingopdracht>
         break;
 }

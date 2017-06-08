@@ -2,7 +2,7 @@
 require_once('MySqlDatabaseClass.php');
 
 
-class VideoClass
+class ArtikelClass
 {
     //Fields
     private $idVideo;
@@ -88,15 +88,15 @@ class VideoClass
 
         // Vuur de query af op de database
         $result = $database->fire_query($query);
-        // Maak een array aan waarin je VideoClass-objecten instopt
+        // Maak een array aan waarin je ArtikelClass-objecten instopt
         $object_array = array();
 
         // Doorloop alle gevonden records uit de database
         while ($row = mysqli_fetch_array($result)) {
-            // Een object aan van de VideoClass (De class waarin we ons bevinden)
-            $object = new VideoClass();
+            // Een object aan van de ArtikelClass (De class waarin we ons bevinden)
+            $object = new ArtikelClass();
 
-            // Stop de gevonden recordwaarden uit de database in de fields van een VideoClass-object
+            // Stop de gevonden recordwaarden uit de database in de fields van een ArtikelClass-object
             $object->id = $row['idVideo'];
             $object->titel = $row['titel'];
             $object->beschrijving = $row['beschrijving'];

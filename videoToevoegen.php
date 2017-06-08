@@ -13,7 +13,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 // <Wijzigingsopdracht>
-$dbname = "eindexamendatabase";
+$dbname = "examendatabase";
 // </Wijzigingsopdracht>
 
 
@@ -29,8 +29,8 @@ if ($conn->connect_error) {
 if (isset($_POST['create'])) {
     echo "<h3 style='text-align: center;' >Film is toegevoegd aan database.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
     header("refresh:4;url=index.php?content=adminHomepage");
-    require_once("./classes/VideoClass.php");
-    VideoClass::insert_film_database($_POST);
+    require_once("./classes/ArtikelClass.php");
+    ArtikelClass::insert_film_database($_POST);
 
     $OptionGenre = $_POST['genreSelect'];
     $OptionGenre2 = $_POST['genreSelect2'];
@@ -43,36 +43,36 @@ if (isset($_POST['create'])) {
 
     if (!($OptionGenre == "")) {
         $_POST['genreSelect'] = $_POST['genreSelect'];
-        VideoClass::insert_genre_film($_POST);
+        ArtikelClass::insert_genre_film($_POST);
     }
     if (!($OptionGenre2 == "")) {
         $_POST['genreSelect'] = $_POST['genreSelect2'];
-        VideoClass::insert_genre_film($_POST);
+        ArtikelClass::insert_genre_film($_POST);
     }
     if (!($OptionGenre3 == "")) {
         $_POST['genreSelect'] = $_POST['genreSelect3'];
-        VideoClass::insert_genre_film($_POST);
+        ArtikelClass::insert_genre_film($_POST);
     }
 
     if (!($OptionActeur == "")) {
         $_POST['acteurSelect'] = $_POST['acteurSelect'];
-        VideoClass::insert_acteur_film($_POST);
+        ArtikelClass::insert_acteur_film($_POST);
     }
     if (!($OptionActeur2 == "")) {
         $_POST['acteurSelect'] = $_POST['acteurSelect2'];
-        VideoClass::insert_acteur_film($_POST);
+        ArtikelClass::insert_acteur_film($_POST);
     }
     if (!($OptionActeur3 == "")) {
         $_POST['acteurSelect'] = $_POST['acteurSelect3'];
-        VideoClass::insert_acteur_film($_POST);
+        ArtikelClass::insert_acteur_film($_POST);
     }
     if (!($OptionActeur4 == "")) {
         $_POST['acteurSelect'] = $_POST['acteurSelect4'];
-        VideoClass::insert_acteur_film($_POST);
+        ArtikelClass::insert_acteur_film($_POST);
     }
     if (!($OptionActeur5 == "")) {
         $_POST['acteurSelect'] = $_POST['acteurSelect5'];
-        VideoClass::insert_acteur_film($_POST);
+        ArtikelClass::insert_acteur_film($_POST);
     }
 
 

@@ -5,11 +5,13 @@ if (isset($_POST['submitRegister'])) {
     if (LoginClass::check_if_email_exists($_POST['email'])) {
         //Zo ja, geef een melding dat het emailadres bestaat en stuur
         //door naar register_form.php
+        echo "test1";
         echo "<h3 style='text-align: center;' >Het door u gebruikte emailadres is al in gebruik. Gebruik een ander emailadres. <br>U wordt doorgestuurd naar het registratieformulier</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-        header("refresh:5;url=index.php?content=inloggen_Registreren");
+//        header("refresh:5;url=index.php?content=inloggen_Registreren");
     } else {
         echo "<h3 style='text-align: center;' >Uw gegevens zijn verwerkt.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-        header("refresh:3;url=index.php?content=inloggen_Registreren");
+//        header("refresh:3;url=index.php?content=inloggen_Registreren");
+        echo "test2";
         LoginClass::insert_into_database($_POST);
     }
 } else {
