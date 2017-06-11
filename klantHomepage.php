@@ -11,8 +11,8 @@ require_once("./security.php");
 if (isset($_POST['removeItemCart'])) {
     echo "<h3 style='text-align: center;' >Item is uit de winkelmand verwijderd.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
     header("refresh:4;url=index.php?content=klantHomepage");
-    require_once("./classes/HireClass.php");
-    HireClass::remove_item_winkelmand($_POST);
+    require_once("./classes/VerkoopClass.php");
+    VerkoopClass::remove_item_winkelmand($_POST);
 
 } else {
     ?>
@@ -66,13 +66,14 @@ if (isset($_POST['removeItemCart'])) {
 
                     <?php
                     require_once("classes/LoginClass.php");
-                    require_once("classes/HireClass.php");
+                    require_once("classes/VerkoopClass.php");
                     require_once("classes/SessionClass.php");
 
                     $artikelen = ProductClass::selecteer_alle_winkelmand_items($_SESSION['idUser']);
 
                     if ($artikelen->num_rows > 0) {
                         while ($row = $artikelen->fetch_assoc()) {
+                            print_r($row);
                             echo "
 
                         
