@@ -27,7 +27,7 @@ if (isset($_GET['idUser']) && isset($_GET['emailAdres']) && isset($_GET['wachtwo
             if (isset($_POST['submit'])) {
                 // 1. Check of de twee ingevoerde passwords correct zijn.
                 if (!strcmp($_POST['wachtwoord_1'], $_POST['wachtwoord_2'])) {
-                    // 2. Activeer het account en update het oude wachtwoord naar het nieuwe password.
+                    // 2. Activeer het account en update het oude wachtwoord naar het nieuwe wachtwoord.
                     LoginClass::activate_account_by_id($_GET['idUser']);
 
                     echo "<h3 style='text-align: center;' >Uw wachtwoord is succesvol gewijzigd.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
@@ -46,7 +46,7 @@ if (isset($_GET['idUser']) && isset($_GET['emailAdres']) && isset($_GET['wachtwo
                         <form action="<?php echo $action; ?>" method='post' style="width: 50%;">
                             <div class="form-group"><label class="control-label" for="wachtwoord_1">Typ hier uw nieuwe
                                     wachtwoord</label>
-                                <input class="form-control" id="password_1" placeholder="Wachtwoord" type="password"
+                                <input class="form-control" id="wachtwoord_1" placeholder="Wachtwoord" type="password"
                                        name="wachtwoord_1" required></div>
 
                             <div class="form-group"><label class="control-label" for="wachtwoord_2">Typ nogmaals uw
@@ -64,16 +64,16 @@ if (isset($_GET['idUser']) && isset($_GET['emailAdres']) && isset($_GET['wachtwo
                 <?php
             }
         } else {
-            echo "<h3 style='text-align: center;' >U heeft geen rechten op deze pagina. Uw emailAdres/password combi is niet correct of uw account is al geactiveerd. U wordt doorgestuurd naar de registratiepagina</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-            // header("refresh:4;url=index.php?content=inloggen_Registreren");
+            echo "<h3 style='text-align: center;' >U heeft geen rechten op deze pagina. Uw emailAdres/wachtwoord combi is niet correct of uw account is al geactiveerd. U wordt doorgestuurd naar de registratiepagina</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+            header("refresh:4;url=index.php?content=inloggen_Registreren");
         }
     } else {
-        echo "<h3 style='text-align: center;' >Uw account is all geactiveerd of uw emailAdres/password combi is niet correct u heeft daarom geen rechten op deze pagina. U wordt doorgestuurd naar de registratiepagina</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-        // header("refresh:4;url=index.php?content=inloggen_Registreren");
+        echo "<h3 style='text-align: center;' >Uw account is all geactiveerd of uw emailAdres/wachtwoord combi is niet correct u heeft daarom geen rechten op deze pagina. U wordt doorgestuurd naar de registratiepagina</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+        header("refresh:4;url=index.php?content=inloggen_Registreren");
     }
 } else {
     echo "<h3 style='text-align: center;' >Uw url is niet correct en daarom heeft u geen rechten op deze pagina. U wordt doorgestuurd naar de registratiepagina</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-    // header("refresh:4;url=index.php?content=inloggen_Registreren");
+    header("refresh:4;url=index.php?content=inloggen_Registreren");
 }
 ?>
 </body>

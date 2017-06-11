@@ -1,5 +1,5 @@
 <?php
-$rol = array("admin", "bezorger", "klant", "baliemedewerker", "eigenaar");
+$rollen = array("admin");
 require_once("./security.php");
 ?>
 
@@ -46,7 +46,7 @@ if (isset($_POST['submit-acteur'])) {
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li><a href="index.php?content=adminHomepage">Artikelen beheren</a></li>
+                                <li><a href="index.php?content=adminHomepage">Video's beheren</a></li>
                                 <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
                                 <li><a href="index.php?content=blokkeren">Gebruiker Blokkeren</a></li>
                                 <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>

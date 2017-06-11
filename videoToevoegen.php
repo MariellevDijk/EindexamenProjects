@@ -1,5 +1,5 @@
 <?php
-$rol = array("klant", "eigenaar");
+$rollen = array("admin", "eigenaar");
 require_once("./security.php");
 ?>
 
@@ -29,8 +29,8 @@ if ($conn->connect_error) {
 if (isset($_POST['create'])) {
     echo "<h3 style='text-align: center;' >Film is toegevoegd aan database.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
     header("refresh:4;url=index.php?content=adminHomepage");
-    require_once("./classes/ArtikelClass.php");
-    ArtikelClass::insert_film_database($_POST);
+    require_once("./classes/VideoClass.php");
+    VideoClass::insert_film_database($_POST);
 
     $OptionGenre = $_POST['genreSelect'];
     $OptionGenre2 = $_POST['genreSelect2'];
@@ -43,36 +43,36 @@ if (isset($_POST['create'])) {
 
     if (!($OptionGenre == "")) {
         $_POST['genreSelect'] = $_POST['genreSelect'];
-        ArtikelClass::insert_genre_film($_POST);
+        VideoClass::insert_genre_film($_POST);
     }
     if (!($OptionGenre2 == "")) {
         $_POST['genreSelect'] = $_POST['genreSelect2'];
-        ArtikelClass::insert_genre_film($_POST);
+        VideoClass::insert_genre_film($_POST);
     }
     if (!($OptionGenre3 == "")) {
         $_POST['genreSelect'] = $_POST['genreSelect3'];
-        ArtikelClass::insert_genre_film($_POST);
+        VideoClass::insert_genre_film($_POST);
     }
 
     if (!($OptionActeur == "")) {
         $_POST['acteurSelect'] = $_POST['acteurSelect'];
-        ArtikelClass::insert_acteur_film($_POST);
+        VideoClass::insert_acteur_film($_POST);
     }
     if (!($OptionActeur2 == "")) {
         $_POST['acteurSelect'] = $_POST['acteurSelect2'];
-        ArtikelClass::insert_acteur_film($_POST);
+        VideoClass::insert_acteur_film($_POST);
     }
     if (!($OptionActeur3 == "")) {
         $_POST['acteurSelect'] = $_POST['acteurSelect3'];
-        ArtikelClass::insert_acteur_film($_POST);
+        VideoClass::insert_acteur_film($_POST);
     }
     if (!($OptionActeur4 == "")) {
         $_POST['acteurSelect'] = $_POST['acteurSelect4'];
-        ArtikelClass::insert_acteur_film($_POST);
+        VideoClass::insert_acteur_film($_POST);
     }
     if (!($OptionActeur5 == "")) {
         $_POST['acteurSelect'] = $_POST['acteurSelect5'];
-        ArtikelClass::insert_acteur_film($_POST);
+        VideoClass::insert_acteur_film($_POST);
     }
 
 
@@ -110,11 +110,11 @@ if (isset($_POST['create'])) {
         <div class="col-md-12">
             <ul class="breadcrumb">
                 <li><a href="index.php?content=adminHomepage">Homepage</a></li>
-                <li><a href="index.php?content=ArtikelenBeheren">Artikelen beheren</a></li>
-                <li><a href="index.php?content=verwijderFilm">Artikelen verwijderen</a></li>
-                <li><a href="index.php?content=beschikbaarMaken">Artikelen beschikbaar maken</a></li>
+                <li><a href="index.php?content=videosBeheren">Video's beheren</a></li>
+                <li><a href="index.php?content=verwijderFilm">Video's verwijderen</a></li>
+                <li><a href="index.php?content=beschikbaarMaken">Video's beschikbaar maken</a></li>
                 <!-- <Wijzigingsopdracht>  -->
-                <li><a href="index.php?content=nieuweFilms">Nieuwe Artikelen</a></li>
+                <li><a href="index.php?content=nieuweFilms">Nieuwe video's</a></li>
                 <!-- </Wijzigingsopdracht> -->
                 <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
                 <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>

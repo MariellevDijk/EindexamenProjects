@@ -1,6 +1,6 @@
 <!-- <Wijzigingsopdracht> -->
 <?php
-$rol = array("klant", "eigenaar");
+$rollen = array("admin", "eigenaar");
 require_once("./security.php");
 ?>
 
@@ -34,7 +34,7 @@ require_once("./security.php");
         if (isset($_POST['updateNieuw'])) {
             include('connect_db.php');
             echo $_POST['blockSelect'];
-            if ($_POST['blockSelect'] == "klant") {
+            if ($_POST['blockSelect'] == '1') {
                 $sql2 = "UPDATE `video`
                         SET `aantalBeschikbaar` = '10'
                         WHERE `idVideo` = " . $_POST['idVideo'] . "";
@@ -83,12 +83,12 @@ require_once("./security.php");
                         <div class="col-md-12">
                             <ul class="breadcrumb">
                                 <li><a href="index.php?content=adminHomepage">Homepage</a></li>
-                                <li><a href="index.php?content=videoToevoegen">Artikelen Toevoegen</a></li>
-                                <li><a href="index.php?content=ArtikelenBeheren">Artikelen beheren</a></li>
-                                <li><a href="index.php?content=verwijderFilm">Artikelen verwijderen</a></li>
-                                <li class="list-group-item"><a href="index.php?content=nieuweFilms">Nieuwe Artikelen</a>
+                                <li><a href="index.php?content=videoToevoegen">Video's Toevoegen</a></li>
+                                <li><a href="index.php?content=videosBeheren">Video's beheren</a></li>
+                                <li><a href="index.php?content=verwijderFilm">Video's verwijderen</a></li>
+                                <li class="list-group-item"><a href="index.php?content=nieuweFilms">Nieuwe video's</a>
                                 </li>
-                                <li><a href="index.php?content=beschikbaarMaken">Artikelen beschikbaar maken</a></li>
+                                <li><a href="index.php?content=beschikbaarMaken">Video's beschikbaar maken</a></li>
                                 <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
                                 <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
                                 <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
@@ -152,11 +152,11 @@ require_once("./security.php");
                                 <td>
                                         <form role=\"form\" action='' method='post'>
                                             <select name='blockSelect'>
-                                                <option value="klant">Nieuw ( 1 )</option>
+                                                <option value='1'>Nieuw ( 1 )</option>
                                                 <option value='0'>Niet nieuw ( 0 )</option>
                                                 </select>
                                             <input type='hidden' class=\"btn btn-info\" name='idVideo' value='" . $row['idVideo'] . "'/>
-                                            <input type='submit' class=\"btn btn-info\" name='updateNieuw' value='Update Nieuwe Artikelen'>
+                                            <input type='submit' class=\"btn btn-info\" name='updateNieuw' value='Update Nieuwe Videos'>
                                             
                                         </form>
                                 </td>

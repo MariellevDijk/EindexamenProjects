@@ -13,43 +13,11 @@ class ReserveClass
 
     //Properties
     //getters
-    public function getIdReservering()
-    {
-        return $this->idReservering;
-    }
 
-    public function getKlantId()
-    {
-        return $this->klantid;
-    }
-
-    public function getTitel()
-    {
-        return $this->titel;
-    }
-
-    //setters
-    public function setIdReservering($value)
-    {
-        $this->idReservering = $value;
-    }
-
-    public function setKlantId($value)
-    {
-        $this->klantid = $value;
-    }
-
-    public function setTitel($value)
-    {
-        $this->titel = $value;
-    }
-
-    //Constuctor
     public function __construct()
     {
     }
 
-    //Methods
     public static function insert_reserveringitem_database($post)
     {
         global $database;
@@ -102,6 +70,7 @@ class ReserveClass
         mail($to, $subject, $message, $headers);
     }
 
+    //setters
 
     public static function check_if_reservering_exists($post)
     {
@@ -116,7 +85,6 @@ class ReserveClass
         return (mysqli_num_rows($result) == 1) ? true : false;
     }
 
-
     public static function remove_item_reservering($post)
     {
         global $database;
@@ -130,7 +98,6 @@ class ReserveClass
         $database->fire_query($query);
     }
 
-    // <Wijzigingsopdracht>
     public static function remove_reserved_film($post)
     {
         global $database;
@@ -145,6 +112,8 @@ class ReserveClass
 
     }
 
+    //Constuctor
+
     public static function add_reserved_film_to_order($row)
     {
         global $database;
@@ -154,6 +123,8 @@ class ReserveClass
         $database->fire_query($query);
         self::lower_amount_Artikelen($row);
     }
+
+    //Methods
 
     public static function lower_amount_Artikelen($row)
     {
@@ -166,6 +137,38 @@ class ReserveClass
         //echo $query;
         $database->fire_query($query);
 
+    }
+
+    public function getIdReservering()
+    {
+        return $this->idReservering;
+    }
+
+    public function setIdReservering($value)
+    {
+        $this->idReservering = $value;
+    }
+
+    public function getKlantId()
+    {
+        return $this->klantid;
+    }
+
+    // <Wijzigingsopdracht>
+
+    public function setKlantId($value)
+    {
+        $this->klantid = $value;
+    }
+
+    public function getTitel()
+    {
+        return $this->titel;
+    }
+
+    public function setTitel($value)
+    {
+        $this->titel = $value;
     }
     // </Wijzigingsopdracht>
 }

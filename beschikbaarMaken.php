@@ -1,5 +1,5 @@
 <?php
-$rol = array("klant", "eigenaar");
+$rollen = array("admin");
 require_once("./security.php");
 ?>
 
@@ -56,11 +56,11 @@ require_once("./security.php");
                         <div class="col-md-12">
                             <ul class="breadcrumb">
                                 <li><a href="index.php?content=adminHomepage">Homepage</a></li>
-                                <li><a href="index.php?content=videoToevoegen">Artikelen Toevoegen</a></li>
-                                <li><a href="index.php?content=ArtikelenBeheren">Artikelen beheren</a></li>
-                                <li><a href="index.php?content=verwijderFilm">Artikelen verwijderen</a></li>
+                                <li><a href="index.php?content=videoToevoegen">Video's Toevoegen</a></li>
+                                <li><a href="index.php?content=videosBeheren">Video's beheren</a></li>
+                                <li><a href="index.php?content=verwijderFilm">Video's verwijderen</a></li>
                                 <!-- <Wijzigingsopdracht>  -->
-                                <li class="list-group-item"><a href="index.php?content=nieuweFilms">Nieuwe Artikelen</a>
+                                <li class="list-group-item"><a href="index.php?content=nieuweFilms">Nieuwe video's</a>
                                 </li>
                                 <!-- </Wijzigingsopdracht> -->
                                 <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
@@ -126,7 +126,7 @@ require_once("./security.php");
                                 <td>
                                         <form role=\"form\" action='' method='post'>
                                             <select name='blockSelect'>
-                                                <option value="klant">Beschikbaar ( 1 )</option>
+                                                <option value='1'>Beschikbaar ( 1 )</option>
                                                 <option value='0'>Niet beschikbaar ( 0 )</option>
                                                 </select>
                                             <input type='hidden' class=\"btn btn-info\" name='idVideo' value='" . $row['idVideo'] . "'/>

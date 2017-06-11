@@ -26,7 +26,7 @@ class SessionClass
         //var_dump($loginObject);
         $this->idUser = $_SESSION['idUser'] = $loginObject->getidUser();
         $this->emailAdres = $_SESSION['emailAdres'] = $loginObject->getEmailAdres();
-        $this->rol = $_SESSION['rol'] = $loginObject->getrol();
+        $this->rol = $_SESSION['rol'] = $loginObject->getRol();
         $this->geblokkeerd = $_SESSION['geblokkeerd'] = $loginObject->getGeblokkeerd();
 
 

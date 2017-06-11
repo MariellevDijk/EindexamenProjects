@@ -1,16 +1,16 @@
 <?php
-$rol = array("klant", "eigenaar");
+$rollen = array("admin");
 require_once("./security.php");
 
 require_once("./classes/HireClass.php");
     if (isset($_POST['mail'])) {
 
-        HireClass::send_memory_email_day_before();
-        HireClass::send_memory_email_3_days_after();
-        HireClass::send_memory_email_3_weeks_after();
-        HireClass::set_video_not_new();
-        echo "<h3 style='text-align: center;' >Herinnering mails worden verstuurd.</h3><br><br><br><br><br><br><br><br>         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-        header("refresh:4;url=index.php?content=adminHomepage");
+//        HireClass::send_memory_email_day_before();
+//        HireClass::send_memory_email_3_days_after();
+//        HireClass::send_memory_email_3_weeks_after();
+//        HireClass::set_video_not_new();
+//        echo "<h3 style='text-align: center;' >Herinnering mails worden verstuurd.</h3><br><br><br><br><br><br><br><br>         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+//        header("refresh:4;url=index.php?content=adminHomepage");
     } else {
 ?>
 
@@ -44,13 +44,13 @@ require_once("./classes/HireClass.php");
             <div class="col-md-12">
                 <ul class="list-group">
                     <li class="list-group-item"><a href="index.php?content=adminHomepage">Admin Homepage</a></li>
-                    <li class="list-group-item"><a href="index.php?content=videoToevoegen">Artikelen Toevoegen</a></li>
-                    <li class="list-group-item"><a href="index.php?content=ArtikelenBeheren">Artikelen beheren</a></li>
-                    <li class="list-group-item"><a href="index.php?content=verwijderFilm">Artikelen verwijderen</a></li>
+                    <li class="list-group-item"><a href="index.php?content=videoToevoegen">Video's Toevoegen</a></li>
+                    <li class="list-group-item"><a href="index.php?content=videosBeheren">Video's beheren</a></li>
+                    <li class="list-group-item"><a href="index.php?content=verwijderFilm">Video's verwijderen</a></li>
                     <!-- <Wijzigingsopdracht>  -->
-                    <li class="list-group-item"><a href="index.php?content=nieuweFilms">Nieuwe Artikelen</a></li>
+                    <li class="list-group-item"><a href="index.php?content=nieuweFilms">Nieuwe video's</a></li>
                     <!-- </Wijzigingsopdracht> -->
-                    <li class="list-group-item"><a href="index.php?content=beschikbaarMaken">Artikelen beschikbaar
+                    <li class="list-group-item"><a href="index.php?content=beschikbaarMaken">Video's beschikbaar
                             maken</a></li>
                     <li class="list-group-item"><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
                     <li class="list-group-item"><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
@@ -71,7 +71,7 @@ require_once("./classes/HireClass.php");
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12"><h3>Meest gewilde Artikelen</h3></div>
+            <div class="col-md-12"><h3>Meest gewilde video's</h3></div>
         </div>
         <div class="row">
             <?php
@@ -99,10 +99,10 @@ require_once("./classes/HireClass.php");
                 while ($row = $result->fetch_assoc()) {
                     if ($row["beschikbaar"]) {
                         echo " <div style='height: 650px;' class=\"col-md-3\">
-               <h4 class=\"Artikelen\"> Aantal keer verhuurd: " . $row["aantalverhuurd"] . "</h4>
+               <h4 class=\"videos\"> Aantal keer verhuurd: " . $row["aantalverhuurd"] . "</h4>
                <img style='height: 400px' src=\"images/" . $row["fotopad"] . "\" class=\"img-responsive\">
                <h3>" . $row["titel"] . "</h3>
-               <p class=\"Artikelen\">" . $row["beschrijving"] . "</p>
+               <p class=\"videos\">" . $row["beschrijving"] . "</p>
 
                <a href='index.php?content=videoPagina&idVideo=" . $row["idVideo"] . "'><button type=\"button\" class=\"btn btn-primary\">Meer Informatie</button></a>
 

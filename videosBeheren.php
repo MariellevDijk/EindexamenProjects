@@ -1,5 +1,5 @@
 <?php
-$rol = array("klant", "eigenaar");
+$rollen = array("admin", "eigenaar");
 require_once("./security.php");
 ?>
 
@@ -8,7 +8,7 @@ require_once("./security.php");
 require_once("classes/LoginClass.php");
 if (isset($_POST['submit'])) {
 
-    ArtikelClass::wijzig_gegevens_film($_POST);
+    VideoClass::wijzig_gegevens_film($_POST);
 
     echo "<h3 style='text-align: center;' >Uw wijzigingen zijn verwerkt.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
     header("refresh:4;url=index.php?content=adminHomepage");
@@ -43,17 +43,17 @@ if (isset($_POST['submit'])) {
 <div class="section">
     <div class="container">
     <div class="row">
-        <div class="col-md-12"><h2>Artikelen beheren</h2></div>
+        <div class="col-md-12"><h2>Video's beheren</h2></div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <ul class="breadcrumb">
                 <li><a href="index.php?content=adminHomepage">Homepage</a></li>
-                <li><a href="index.php?content=videoToevoegen">Artikelen Toevoegen</a></li>
-                <li><a href="index.php?content=verwijderFilm">Artikelen verwijderen</a></li>
-                <li><a href="index.php?content=beschikbaarMaken">Artikelen beschikbaar maken</a></li>
+                <li><a href="index.php?content=videoToevoegen">Video's Toevoegen</a></li>
+                <li><a href="index.php?content=verwijderFilm">Video's verwijderen</a></li>
+                <li><a href="index.php?content=beschikbaarMaken">Video's beschikbaar maken</a></li>
                 <!-- <Wijzigingsopdracht>  -->
-                <li><a href="index.php?content=nieuweFilms">Nieuwe Artikelen</a></li>
+                <li><a href="index.php?content=nieuweFilms">Nieuwe video's</a></li>
                 <!-- </Wijzigingsopdracht> -->
                 <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
                 <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>

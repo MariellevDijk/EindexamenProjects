@@ -1,6 +1,6 @@
 <?php
 
-$rol = array("admin");
+$rollen = array("klant");
 require_once("./security.php");
 
 if (isset($_POST['addAday'])) {

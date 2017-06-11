@@ -1,11 +1,11 @@
 <?php
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
-    $email = $_POST['emailAdres'];
+    $email = $_POST['email'];
     $tel = $_POST['tel'];
     $comment = $_POST['comment'];
-    $from = 'From: Website_Webshop AutoTrader';
-    $to = '[placeholder]';
+    $from = 'From: Website_Videotheek_Maurik';
+    $to = 'jellevandenbroek@gmail.com';
     $subject = 'Nieuw bericht van ' . $_POST['name'];
 
     $body = "Naam: $name\nE-Mail: $email\nTelefoon: $tel\n\nBericht:\n$comment";
@@ -61,7 +61,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <div class="form-group"><label class="control-label" for="Email1">E-mail</label><span
                                 class="requiredStar">*</span>
-                            <input class="form-control" placeholder="E-mail" type="emailAdres" name="emailAdres" required></div>
+                            <input class="form-control" placeholder="E-mail" type="email" name="email" required></div>
                         <div class="form-group"><label class="control-label" for="Telefoon">Telefoon<br></label>
                             <input class="form-control" id="Telefoon" placeholder="Telefoon" type="tel" name="tel"
                                    required></div>

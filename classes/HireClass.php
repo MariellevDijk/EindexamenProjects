@@ -1,4 +1,4 @@
-<?php
++<?php
 require_once('MySqlDatabaseClass.php');
 require_once("LoginClass.php");
 require_once("SessionClass.php");
@@ -7,52 +7,22 @@ class HireClass
 {
     //Fields
     private $idWinkelmand;
-    private $klantid;
-    private $titel;
-    private $prijs;
+    private $idUser;
+    private $idProduct;
+    private $winkelmandAantal;
     //Properties
     //getters
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function getKlantId()
-    {
-        return $this->klantid;
-    }
+    public function getIdWinkelmand(){ return $this->idWinkelmand; }
+    public function getIdUser(){ return $this->idUser; }
+    public function getIdProduct(){ return $this->idProduct; }
+    public function getWinkelmandAantal(){ return $this->idProduct; }
 
     //setters
-    public function setKlantId($value)
-    {
-        $this->klantid = $value;
-    }
-
-    public function getTitel()
-    {
-        return $this->titel;
-    }
-
-    public function setTitel($value)
-    {
-        $this->titel = $value;
-    }
-
-    public function getPrijs()
-    {
-        return $this->prijs;
-    }
-
-    public function setPrijs($value)
-    {
-        $this->prijs = $value;
-    }
-
-    public function setId($value)
-    {
-        $this->id = $value;
-    }
+    public function setIdWinkelmand($value){ $this->idWinkelmand = $value; }
+    public function setIdUser($value){ $this->idUser = $value; }
+    public function setIdProduct($value){ $this->idProduct = $value; }
+    public function setWinkelmandAantal($value){ $this->winkelmandAantal = $value; }
 
     public function __construct()
     {

@@ -15,7 +15,7 @@
 <?php
 require_once("MySqlDatabaseClass.php");
 require_once("UsersClass.php");
-require_once("ArtikelClass.php");
+require_once("ProductClass.php");
 
 class LoginClass
 {
@@ -31,7 +31,6 @@ class LoginClass
     private $geactiveerd;
     private $activatiedatum;
     private $geblokkeerd;
-
 
     //Properties
     public function getidUser()                { return $this->idUser; }
@@ -140,12 +139,12 @@ class LoginClass
 									   '" . $wachtwoord . "',
 									   '" . $post['adres'] . "',
 									   '" . $post['woonplaats'] . "',
-									   '" . 'iDeal' . "',
-									   '" . 'klant'. "',
+									   '" . $post['betaalwijze'] . "',
+									   '" . '2'. "',
 									   '" . '0' . "',
 									   '" . $datum . "',
 									   '" . '0' . "')";
-        // echo $query;
+        echo $query;
         $database->fire_query($query);
 
         $last_id = mysqli_insert_id($database->getDb_connection());
@@ -160,10 +159,10 @@ class LoginClass
         $query = "SELECT `emailAdres`
 					  FROM	 `users`
 					  WHERE	 `emailAdres` = '" . $emailAdres . "'";
-
+        // echo $query;
         $result = $database->fire_query($query);
 
-        echo $query;
+        // echo $query;
         //ternary operator
         return (mysqli_num_rows($result) > 0) ? true : false;
     }
@@ -216,6 +215,7 @@ class LoginClass
 
     private static function send_email($idUser, $post, $wachtwoord)
     {
+        print_r($_POST);
         $to = $post['emailAdres'];
         $subject = "Activatiemail Webshop";
         $message = "Geachte heer/mevrouw " . $post['naam'] . " <br> ";
@@ -292,6 +292,7 @@ class LoginClass
 
     public static function find_info_by_id($idUser)
     {
+        global $database;
         $query = "SELECT 	*
 					  FROM 		`users`
 					  WHERE		`idUser`	=	" . $idUser;
@@ -299,6 +300,26 @@ class LoginClass
         $usersclassObject = array_shift($object_array);
         //var_dump($usersclassObject); exit();
         return $usersclassObject;
+    }
+
+    public static function check_Rol($post)
+    {
+        global $database;
+
+        $query = "SELECT `rol`
+					  FROM	 `users`
+					  WHERE	 `rol` = '" . $_SESSION['rol'] . "'
+					  AND    `idUser` = '" . $_SESSION['idUser'] . "'";
+        // echo $query;
+        $result = $database->fire_query($query);
+        $record = mysqli_fetch_array($result);
+
+        if ($_SESSION['rol'] == '1' && $record['rol'] == '1') { // Admin
+            $sessieRol = "admin";
+        } elseif ($_SESSION['rol'] == '2' && $record['rol'] == '2') { // Klant
+            $sessieRol = "klant";
+        }
+        return $sessieRol;
     }
 }
 

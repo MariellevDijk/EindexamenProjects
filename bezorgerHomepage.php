@@ -1,5 +1,5 @@
 <?php
-$rol = array("klant");
+$rollen = array("admin");
 require_once("./security.php");
 ?>
 
