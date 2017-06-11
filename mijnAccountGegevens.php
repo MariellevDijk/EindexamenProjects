@@ -45,16 +45,20 @@ if (isset($_POST['submit'])) {
     </head>
     <body>
     <div class="section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12"><h1>Wijzig gegevens</h1></div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="breadcrumb">
-                        <li><a href="index.php?content=mijnAccountGegevens">Gegevens Aanpassen</a></li>
-                        <li><a href="index.php?content=wijzig_wachtwoord">Wachtwoord Veranderen</a></li>
-                    </ul>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12"><h1>Wijzig gegevens</h1></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="breadcrumb">
+                                <li><a href="index.php?content=mijnAccountGegevens">Gegevens Aanpassen</a></li>
+                                <li><a href="index.php?content=wijzig_wachtwoord">Wachtwoord Veranderen</a></li>
+                                <li><a href="index.php?content=mijnBestellingen">Mijn bestellingen</a></li>
+                                <li><a href="index.php?content=klachtIndienen">Klacht indienen</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

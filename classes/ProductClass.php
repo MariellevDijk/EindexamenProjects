@@ -153,10 +153,10 @@ class ProductClass
         return $result;
     }
 
-    public static function selecteer_alle_winkelmand_items($idUser)
+    public static function selecteer_alle_winkelmand_items()
     {
         global $database;
-        $sql = "select `idWinkelmand`, `idProductWm`, `aantalWm`,`aantalWm` * `prijs` as prijs, `naam`  from `winkelmand`
+        $sql = "select `idWinkelmand`, `idProductWm`, `prijs`, `aantalWm`,`aantalWm` * `prijs` as totaalPrijs, `naam`  from `winkelmand`
                 INNER JOIN `producten` on winkelmand.idProductWm = producten.idProduct
                 where `idUserWm` = " . $_SESSION['idUser'] . " ";
 
@@ -164,9 +164,6 @@ class ProductClass
 
         return $result;
     }
-
-    //$database->fire_query($sql);
-    //$result = mysqli_query($connection, $sql);
 
 }
 

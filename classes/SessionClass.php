@@ -6,6 +6,7 @@ class SessionClass
     //Fields
     private $idUser;
     private $emailAdres;
+    private $betaalwijze;
     private $rol;
     private $geblokkeerd;
 
@@ -28,6 +29,7 @@ class SessionClass
         $this->emailAdres = $_SESSION['emailAdres'] = $loginObject->getEmailAdres();
         $this->rol = $_SESSION['rol'] = $loginObject->getRol();
         $this->geblokkeerd = $_SESSION['geblokkeerd'] = $loginObject->getGeblokkeerd();
+        $this->betaalwijze = $_SESSION['betaalwijze'] = $loginObject->getBetaalwijze();
 
 
         $usersObject = LoginClass::find_info_by_id($_SESSION['idUser']);
@@ -43,6 +45,7 @@ class SessionClass
         session_unset('emailAdres');
         session_unset('rol');
         session_unset('geblokkeerd');
+        session_unset('betaalwijze');
 
 
         session_destroy();
@@ -50,6 +53,7 @@ class SessionClass
         unset($this->emailAdres);
         unset($this->rol);
         unset($this->geblokkeerd);
+        unset($this->betaalwijze);
 
 
     }

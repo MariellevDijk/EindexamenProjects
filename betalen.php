@@ -1,25 +1,36 @@
 <?php
 $rollen = array("klant", "admin");
+
 require_once("./security.php");
+require_once("classes/LoginClass.php");
+require_once("classes/VerkoopClass.php");
+require_once("classes/SessionClass.php");
+require_once("classes/ProductClass.php");
+$allItemsInBasket = ProductClass::selecteer_alle_winkelmand_items();
+
+$totalePrijs = VerkoopClass::selecteer_totaal_prijs_winkelmand_items();
+if ($totalePrijs["totaalPrijs"] > '50') {
+    $priceTotal = $totalePrijs["totaalPrijs"];
+} else {
+    $priceTotal = ($totalePrijs["totaalPrijs"] + 2);
+}
+
 ?>
 
 <?php
-if (isset($_POST['clearCart'])) {
-
-    header("refresh:4;url=index.php?content=klantHomepage");
+if (isset($_POST['pay'])) {
     require_once("./classes/VerkoopClass.php");
-    if (!VerkoopClass::check_if_deleveryDate_deleveryTime_exists($_POST)) {
-        if (!VerkoopClass::check_if_collectDate_collectTime_exists($_POST)) {
-            echo "<h3 style='text-align: center;' >Uw gegevens zijn verwerkt. Bedankt voor uw bestelling</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-            VerkoopClass::clear_winkelmand($_POST);
-            VerkoopClass::insert_bestelling_database($_POST);
-        } else {
-            echo "<h3 style='text-align: center;' >De ophaaltijd is niet beschikbaar, kies een andere tijd.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-        }
-    } else {
-        echo "<h3 style='text-align: center;' >Deze dag is niet beschikbaar, kies een andere dag.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-    }
+    echo "<h3 style='text-align: center;' >Uw gegevens zijn verwerkt. Bedankt voor uw bestelling</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+    // VerkoopClass::clear_winkelmand($_POST);
+    VerkoopClass::insert_bestelling_database($_POST, $priceTotal);
 
+    if ($allItemsInBasket->num_rows > 0) {
+        while ($row = $allItemsInBasket->fetch_assoc()) {
+            VerkoopClass::insert_order_in_orderregel($row, $priceTotal);
+             // print_r($row);
+//            echo "<br>";
+        }
+    }
 } else {
     ?>
 
@@ -39,9 +50,12 @@ if (isset($_POST['clearCart'])) {
                 font-size: 24px;
                 padding: 20px;
             }
-
-            th {
-                min-width: 500px;
+            body {
+                width: 100%;
+            }
+            th td {
+                min-width: 80%;
+                max-width: 100%;
             }
         </style>
     </head>
@@ -51,31 +65,14 @@ if (isset($_POST['clearCart'])) {
             <h2>Betalen</h2>
             <br><br>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <h3>Uw bestelling</h3>
                     <form role=\"form\" action='' method='post'>
                         <?php
-                        require_once("classes/LoginClass.php");
-                        require_once("classes/VerkoopClass.php");
-                        require_once("classes/SessionClass.php");
-
-                        $servername = "localhost";
-                        $username = "root";
-                        $password = "";
-                        // <Wijzigingsopdracht>
-                        $dbname = "examendatabase";
-                        // </Wijzigingsopdracht>
-                        // Create connection
-                        $conn = new mysqli($servername, $username, $password, $dbname);
-                        // Check connection
-                        if ($conn->connect_error) {
-                            die("Connection failed: " . $conn->connect_error);
-                        }
-                        $sql = "SELECT * FROM winkelmand WHERE `idUser` = " . $_SESSION['idUser'] . " ";
-                        $result = $conn->query($sql);
-
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
+                        if ($allItemsInBasket->num_rows > 0) {
+                            while ($row = $allItemsInBasket->fetch_assoc()) {
+                                // print_r($row);
+                                // echo $allItemsInBasket;
                                 echo "
                         <table class=\"table table - responsive\">
                             <thead>
@@ -84,17 +81,29 @@ if (isset($_POST['clearCart'])) {
                                         Titel:
                                 </th>
                                 <th>
-                                        Prijs:
+                                        Prijs per stuk:
+                                </th>
+                                <th>
+                                        Aantal:
+                                </th>
+                                <th>
+                                        Totaalprijs:
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td>
-                                        " . $row["titel"] . "
+                                        " . $row["naam"] . "
                                 </td>
                                 <td>
                                         &euro; " . $row["prijs"] . "
+                                </td>
+                                <td>
+                                        " . $row["aantalWm"] . "
+                                </td>
+                                <td>
+                                        &euro; " . $row["totaalPrijs"] . "
                                 </td>                                
                             </tr>
                             </tbody>
@@ -103,39 +112,23 @@ if (isset($_POST['clearCart'])) {
                         } else {
                             echo "Geen resultaten<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
                         }
-                        $date = date('Y-m-d');
-                        echo "<br>
-                            <table class=\"table table - responsive\">
-                             <thead>
-                             <tr>
-                                 <th>
-                                         Kies de gewenste datum waarop u uw bestelling wilt ontvangen:
-                                 </th>
-                                 <th>
-                                         <input type='date' class='form-control' name='afleverdatum' min='" . date('Y-m-d') . "' max='" . date('Y-m-d', strtotime($date . ' + 21 days')) . "' required>
-                                         <input type='time' class='form-control' name='aflevertijd' min='09:00' max='17:00' step='900' required>
-                                         
-                                 </th>
-                             </tr>
-                             <tr>
-                                 <th>
-                                         Kies hoelaat u uw bestelling wilt laten ophalen:
-                                 </th>
-                                 <th>
-                                        <input type='time' class='form-control' name='ophaaltijd' min='09:00' max='17:00' step='900' required>
-                                 </th>
-                             </tr>
-                             </thead>
-                         </table>
-                         De video wordt een week later opgehaald, u kunt deze datum verzetten door in uw account een verlenging aan te vragen.<br>
-                                                    <br>";
+                        echo "<br><br>Tijdens het registratieproces heeft u de betaalmethode geselecteerd, deze kan altijd veranderd worden in 'Mijn account'";
 
-                        $sql = "SELECT sum(prijs) AS value FROM `winkelmand` WHERE `idUser` = " . $_SESSION['idUser'] . " ";
-                        $result = $conn->query($sql);
-                        //echo $result2;
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                if ($row["value"] < 50) {
+                                switch($_SESSION['betaalwijze']) {
+                                    case '1': // iDeal
+                                        $betaalWijzeKlant = "iDeal";
+                                        break;
+                                    case '2': // Mastercard
+                                        $betaalWijzeKlant = "MasterCard";
+                                        break;
+                                    case '3': // Paypal
+                                        $betaalWijzeKlant = "Paypal";
+                                        break;
+                                    case '4': // Overboeking
+                                        $betaalWijzeKlant = "Overboeking";
+                                        break;
+                                }
+                                if ($totalePrijs["totaalPrijs"] < 50) {
                                     echo "    <table class=\"table table - responsive\">
                                             <thead>
                                             <tr>
@@ -148,37 +141,33 @@ if (isset($_POST['clearCart'])) {
                                             </tr>
                                             </thead>
                                         </table>";
-                                    $row["value"] = ($row["value"] + 2);
+                                    $totalePrijs['totaalPrijs'] = ($totalePrijs['totaalPrijs'] + 2);
                                 }
-                                echo "<table class=\"table table - responsive\">
+                                echo "<br><br> U heeft deze betaalmethode geselecteerd: " . $betaalWijzeKlant;
+                                echo "
+<table class=\"table table - responsive\">
                             <thead>
                             <tr>
                                 <th>
                                         Totaal:
                                 </th>
                                 <th>
-                                         &euro; " . $row["value"] . "
+                                         &euro; " . $totalePrijs['totaalPrijs'] . "
                                 </th>
                             </tr>
                             </thead>
                         </table>
                         
-                        <input type='hidden' name='prijs' value='" . $row['value'] . "'/>
+                        <input type='hidden' name='prijs' value='" . $row['totaalPrijs'] . "'/>
                         ";
 
                             }
-                        }
 
-
-                        $sql = "SELECT * FROM `winkelmand` WHERE `idUser` = " . $_SESSION['idUser'] . " ";
-
-                        $result = $conn->query($sql);
-
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
+                        if ($allItemsInBasket->num_rows > 0) {
+                            while ($row = $allItemsInBasket->fetch_assoc()) {
                                 echo "
                                 <input type='hidden' name='idUser' value='" . $_SESSION['idUser'] . "'/>
-                                <input type='hidden' name='idVideo' value='" . $row['idVideo'] . "'/>
+                                <input type='hidden' name='idProduct' value='" . $row['idProduct'] . "'/>
                         ";
 
                             }
@@ -186,8 +175,7 @@ if (isset($_POST['clearCart'])) {
 
                         echo "
 
-                        <input type='submit' class='btn btn-info' name='clearCart' value='Betalen'>";
-                        $conn->close();
+                        <input type='submit' class='btn btn-info' name='pay' value='Betalen'>";
                         ?>
 
                     </form>
@@ -200,6 +188,3 @@ if (isset($_POST['clearCart'])) {
 
     </body>
     </html>
-    <?php
-}
-?>

@@ -14,7 +14,6 @@
 
 <?php
 require_once("MySqlDatabaseClass.php");
-require_once("UsersClass.php");
 require_once("ProductClass.php");
 
 class LoginClass

@@ -10,7 +10,7 @@ require_once("./security.php");
 
 if (isset($_POST['removeItemCart'])) {
     echo "<h3 style='text-align: center;' >Item is uit de winkelmand verwijderd.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-    header("refresh:4;url=index.php?content=klantHomepage");
+    header("refresh:4;url=index.php?content=winkelmand");
     require_once("./classes/VerkoopClass.php");
     VerkoopClass::remove_item_winkelmand($_POST);
 
@@ -33,10 +33,6 @@ if (isset($_POST['removeItemCart'])) {
                 font-size: 24px;
                 padding: 20px;
             }
-
-            th {
-                min-width: 500px;
-            }
         </style>
     </head>
     <body>
@@ -49,16 +45,6 @@ if (isset($_POST['removeItemCart'])) {
                     <div class="col-md-12"><h3>Druk altijd op refresh winkelmandje voor u verder gaat met
                             bestllen.</h3></div>
                     <!-- </Wijzigingsopdracht> -->
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <ul class="breadcrumb">
-                            <li><a href="index.php?content=klantHomepage">Winkelmand</a></li>
-                            <li><a href="index.php?content=mijnBestellingen">Mijn bestellingen</a></li>
-                            <li><a href="index.php?content=reserveringen">Reserveringen</a></li>
-                            <li><a href="index.php?content=klachtIndienen">Klacht indienen</a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
             <div class="row">
@@ -73,7 +59,7 @@ if (isset($_POST['removeItemCart'])) {
 
                     if ($artikelen->num_rows > 0) {
                         while ($row = $artikelen->fetch_assoc()) {
-                            print_r($row);
+                            // print_r($row);
                             echo "
 
                         
@@ -83,6 +69,9 @@ if (isset($_POST['removeItemCart'])) {
                             <tr>
                                 <th>
                                         Naam:
+                                </th>
+                                <th>
+                                        Aantal
                                 </th>
                                 <th>
                                         Prijs:
@@ -95,7 +84,10 @@ if (isset($_POST['removeItemCart'])) {
                                         " . $row["naam"] . "
                                 </td>
                                 <td>
-                                        " . $row["prijs"] . "
+                                        " . $row["aantalWm"] . "
+                                </td>
+                                <td>
+                                        " . $row["totaalPrijs"] . "
                                 </td>
                                 <td>
                                         <form role=\"form\" action='' method='post'>

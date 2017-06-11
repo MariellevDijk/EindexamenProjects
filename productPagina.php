@@ -21,7 +21,7 @@ if (isset($_POST['reserveer'])) {
     if (isset($_POST['submit'])) {
 
         echo "<h3 style='text-align: center;' >Item toegevoegd aan winkelmand.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-        header("refresh:4;url=index.php?content=klantHomepage");
+        header("refresh:4;url=index.php?content=producten");
         require_once("./classes/VerkoopClass.php");
         VerkoopClass::insert_winkelmanditem_database($_POST);
     } else {
@@ -69,6 +69,7 @@ if (isset($_POST['reserveer'])) {
                                         
                                                             </p><br><b>Beschrijving: </b>
                                                             " . $row["beschrijving"] . "<br><br>";
+
                             if ($row["aantal"] > 0) {
                                 echo "<b>Aantal beschikbaar: </b>" . $row["aantal"] . "<br><br>";
                             } else {
@@ -80,10 +81,10 @@ if (isset($_POST['reserveer'])) {
                                 " </p >
                                            
                                         <p ><form role = \"form\" action='' method='post'>
+                                        <b>Aantal:     </b><input type='number' name='amount' max='" . $row["aantal"] . "'/><br><br><br>
                                         <input type='hidden' name='idProduct' value='" . $row['idProduct'] . "'/>
                                         <input type='hidden' name='idUser' value='" . $_SESSION['idUser'] . "'/>
                                         <input type='hidden' name='naam' value='" . $row['naam'] . "'/>
-                                        <input type='hidden' name='aantal' value='" . $row['aantal'] . "'/>
                                         <input type='hidden' name='prijs' value='" . $row['prijs'] . "'/>
                                         
                                         

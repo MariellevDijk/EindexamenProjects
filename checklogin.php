@@ -12,7 +12,7 @@ if (!empty($_POST['emailAdres']) && !empty($_POST['wachtwoord'])) {
 
         switch ($_SESSION['rol']) {
             case '2':
-                header("location:index.php?content=klantHomepage");
+                header("location:index.php?content=algemeneHomepage");
                 break;
             case '1':
                 header("location:index.php?content=adminHomepage");
