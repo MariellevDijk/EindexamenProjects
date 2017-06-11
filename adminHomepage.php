@@ -2,13 +2,13 @@
 $rollen = array("admin");
 require_once("./security.php");
 
-require_once("./classes/HireClass.php");
+require_once("./classes/VerkoopClass.php");
     if (isset($_POST['mail'])) {
 
-//        HireClass::send_memory_email_day_before();
-//        HireClass::send_memory_email_3_days_after();
-//        HireClass::send_memory_email_3_weeks_after();
-//        HireClass::set_video_not_new();
+//        VerkoopClass::send_memory_email_day_before();
+//        VerkoopClass::send_memory_email_3_days_after();
+//        VerkoopClass::send_memory_email_3_weeks_after();
+//        VerkoopClass::set_video_not_new();
 //        echo "<h3 style='text-align: center;' >Herinnering mails worden verstuurd.</h3><br><br><br><br><br><br><br><br>         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
 //        header("refresh:4;url=index.php?content=adminHomepage");
     } else {
@@ -76,7 +76,7 @@ require_once("./classes/HireClass.php");
         <div class="row">
             <?php
             require_once("classes/LoginClass.php");
-            require_once("classes/HireClass.php");
+            require_once("classes/VerkoopClass.php");
             require_once("classes/SessionClass.php");
 
             $servername = "localhost";

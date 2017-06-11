@@ -7,12 +7,12 @@ require_once("./security.php");
 if (isset($_POST['clearCart'])) {
 
     header("refresh:4;url=index.php?content=klantHomepage");
-    require_once("./classes/HireClass.php");
-    if (!HireClass::check_if_deleveryDate_deleveryTime_exists($_POST)) {
-        if (!HireClass::check_if_collectDate_collectTime_exists($_POST)) {
+    require_once("./classes/VerkoopClass.php");
+    if (!VerkoopClass::check_if_deleveryDate_deleveryTime_exists($_POST)) {
+        if (!VerkoopClass::check_if_collectDate_collectTime_exists($_POST)) {
             echo "<h3 style='text-align: center;' >Uw gegevens zijn verwerkt. Bedankt voor uw bestelling</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-            HireClass::clear_winkelmand($_POST);
-            HireClass::insert_bestelling_database($_POST);
+            VerkoopClass::clear_winkelmand($_POST);
+            VerkoopClass::insert_bestelling_database($_POST);
         } else {
             echo "<h3 style='text-align: center;' >De ophaaltijd is niet beschikbaar, kies een andere tijd.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
         }
@@ -56,7 +56,7 @@ if (isset($_POST['clearCart'])) {
                     <form role=\"form\" action='' method='post'>
                         <?php
                         require_once("classes/LoginClass.php");
-                        require_once("classes/HireClass.php");
+                        require_once("classes/VerkoopClass.php");
                         require_once("classes/SessionClass.php");
 
                         $servername = "localhost";

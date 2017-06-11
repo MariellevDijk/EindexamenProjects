@@ -5,7 +5,7 @@ require_once("./security.php");
 
 <?php
 require_once("classes/LoginClass.php");
-require_once("classes/HireClass.php");
+require_once("classes/VerkoopClass.php");
 require_once("classes/SessionClass.php");
 
 

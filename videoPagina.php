@@ -22,8 +22,8 @@ if (isset($_POST['reserveer'])) {
 
         echo "<h3 style='text-align: center;' >Item toegevoegd aan winkelmand.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
         header("refresh:4;url=index.php?content=klantHomepage");
-        require_once("./classes/HireClass.php");
-        HireClass::insert_winkelmanditem_database($_POST);
+        require_once("./classes/VerkoopClass.php");
+        VerkoopClass::insert_winkelmanditem_database($_POST);
     } else {
         ?>
         <html>
