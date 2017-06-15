@@ -23,12 +23,12 @@ if (isset($_SESSION['rol'])) {
         <div class=\"navbar-header\">
             <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\"><span class=\"sr-only\">Toggle navigation</span><span>
                     class=\"icon-bar\"></span><span class=\"icon-bar\"></span><span class=\"icon-bar\"></span></button>
-            <a class=\"navbar-brand headertext\" href=\"index.php?content=algemeneHomepage\"><span class=\"header\" style='font-size: 24px;'>examendatabase Maurik</span><br></a></div>
+            <a class=\"navbar-brand headertext\" href=\"index.php?content=algemeneHomepage\"><span class=\"header\" style='font-size: 24px;'>AutoTrader</span><br></a></div>
         <div class=\"collapse navbar-collapse navbar-ex1-collapse\">
             <ul class=\"nav navbar-nav navbar-right\">
                 <li><a href=\"index.php?content=algemeneHomepage\">Home</a></li>
                 <li><a href=\"index.php?content=winkelmand\">Winkelmand</a></li>
-                <li><a href=\"index.php?content=producten\">Producten</a></li>
+                <li><a href=\"index.php?content=producten\">>Auto's</a></li>
                 <li><a href=\"index.php?content=mijnAccountGegevens\">Mijn Account</a></li>
                 <li><a href=\"index.php?content=logout\">Uitloggen</a></li>
             </ul>
@@ -61,11 +61,11 @@ if (isset($_SESSION['rol'])) {
         <div class=\"navbar-header\">
             <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\"><span class=\"sr-only\">Toggle navigation</span><span>
                     class=\"icon-bar\"></span><span class=\"icon-bar\"></span><span class=\"icon-bar\"></span></button>
-            <a class=\"navbar-brand headertext\" href=\"index.php?content=algemeneHomepage\"><span class=\"header\" style='font-size: 24px;'>examendatabase Maurik</span><br></a></div>
+            <a class=\"navbar-brand headertext\" href=\"index.php?content=algemeneHomepage\"><span class=\"header\" style='font-size: 24px;'>AutoTrader</span><br></a></div>
         <div class=\"collapse navbar-collapse navbar-ex1-collapse\">
             <ul class=\"nav navbar-nav navbar-right\">
                 <li><a href=\"index.php?content=adminHomepage\">Home</a></li>
-                <li><a href=\"index.php?content=producten\">Producten</a></li>
+                <li><a href=\"index.php?content=producten\">Auto's</a></li>
                 <li><a href=\"index.php?content=logout\">Uitloggen</a></li>
             </ul>
         </div>
@@ -97,11 +97,11 @@ if (isset($_SESSION['rol'])) {
         <div class=\"navbar-header\">
             <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\"><span class=\"sr-only\">Toggle navigation</span><span>
                     class=\"icon-bar\"></span><span class=\"icon-bar\"></span><span class=\"icon-bar\"></span></button>
-            <a class=\"navbar-brand headertext\" href=\"index.php?content=algemeneHomepage\"><span class=\"header\" style='font-size: 24px;'>examendatabase Maurik</span><br></a></div>
+            <a class=\"navbar-brand headertext\" href=\"index.php?content=algemeneHomepage\"><span class=\"header\" style='font-size: 24px;'>AutoTrader</span><br></a></div>
         <div class=\"collapse navbar-collapse navbar-ex1-collapse\">
             <ul class=\"nav navbar-nav navbar-right\" style='font-size: 24px;'>
                 <li><a href=\"index.php?content=geblokkeerdHomepage\">Home</a></li>
-                <li><a href=\"index.php?content=producten\">Producten</a></li>
+                <li><a href=\"index.php?content=producten\">Auto's</a></li>
                 <li><a href=\"index.php?content=logout\">Uitloggen</a></li>
             </ul>
         </div>
@@ -133,12 +133,12 @@ if (isset($_SESSION['rol'])) {
         <div class=\"navbar-header\">
             <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\"><span class=\"sr-only\">Toggle navigation</span><span>
                     class=\"icon-bar\"></span><span class=\"icon-bar\"></span><span class=\"icon-bar\"></span></button>
-            <a class=\"navbar-brand headertext\" href=\"index.php?content=algemeneHomepage\"><span class=\"header\">examendatabase Maurik</span><br></a></div>
+            <a class=\"navbar-brand headertext\" href=\"index.php?content=algemeneHomepage\"><span class=\"header\">AutoTrader</span><br></a></div>
         <div class=\"collapse navbar-collapse navbar-ex1-collapse\">
             <ul class=\"nav navbar-nav navbar-right\">
                 <li><a href=\"index.php?content=algemeneHomepage\">Home</a></li>
-                <li><a href=\"index.php?content=producten\">Producten</a></li>
-                <li><a href=\"index.php?content=inloggen_registreren\">Inloggen/Registreren</a></li>
+                <li><a href=\"index.php?content=producten\">Auto's</a></li>
+                <li><a href=\"index.php?content=inloggen_registreren\">Inloggen</a></li>
                 <li><a href=\"index.php?content=contact\">Contact<br></a></li>
             </ul>
         </div>

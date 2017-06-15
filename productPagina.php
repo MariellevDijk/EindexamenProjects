@@ -70,8 +70,8 @@ if (isset($_POST['reserveer'])) {
                                                             </p><br><b>Beschrijving: </b>
                                                             " . $row["beschrijving"] . "<br><br>";
 
-                            if ($row["aantal"] > 0) {
-                                echo "<b>Aantal beschikbaar: </b>" . $row["aantal"] . "<br><br>";
+                            if ($row["aantalBeschikbaar"] > 0) {
+                                echo "<b>Aantal beschikbaar: </b>" . $row["aantalBeschikbaar"] . "<br><br>";
                             } else {
                                 echo "<b>Deze video is helaas uitverkocht. Plaats een reservering om de video te kunnen huren als die weer beschikbaar is.<br><br></b>";
                             }
@@ -81,7 +81,7 @@ if (isset($_POST['reserveer'])) {
                                 " </p >
                                            
                                         <p ><form role = \"form\" action='' method='post'>
-                                        <b>Aantal:     </b><input type='number' name='amount' max='" . $row["aantal"] . "'/><br><br><br>
+                                        <b>Aantal:     </b><input type='number' name='amount' max='" . $row["aantalBeschikbaar"] . "'/><br><br><br>
                                         <input type='hidden' name='idProduct' value='" . $row['idProduct'] . "'/>
                                         <input type='hidden' name='idUser' value='" . $_SESSION['idUser'] . "'/>
                                         <input type='hidden' name='naam' value='" . $row['naam'] . "'/>
@@ -89,7 +89,7 @@ if (isset($_POST['reserveer'])) {
                                         
                                         
                                     ";
-                            if ($row["aantal"] > 0) {
+                            if ($row["aantalBeschikbaar"] > 0) {
 
                                 echo "
                                 <button type='submit' name='submit' class='btn btn - info'>Toevoegen aan winkelmand<br></button>

@@ -11,7 +11,8 @@ class ProductClass
     private $prijs;
     private $foto;
     private $beschikbaar;
-    private $aantal;
+    private $aantalBeschikbaar;
+    private $isAccessoire;
 
     //Properties
     //getters
@@ -21,7 +22,8 @@ class ProductClass
     public function getPrijs(){ return $this->prijs; }
     public function getFoto(){ return $this->foto; }
     public function getBeschikbaar(){ return $this->beschikbaar; }
-    public function getAantal(){ return $this->aantal; }
+    public function getAantalBeschikbaar(){ return $this->aantalBeschikbaar; }
+    public function getisAccessoire(){ return $this->isAccessoire; }
 
 
     //setters
@@ -31,7 +33,8 @@ class ProductClass
     public function setPrijs($value){ $this->prijs = $value; }
     public function setFoto($value){ $this->foto = $value; }
     public function setBeschikbaar($value){ $this->beschikbaar = $value; }
-    public function setAantal($value){ $this->aantal = $value; }
+    public function setAantalBeschikbaar($value){ $this->aantalBeschikbaar = $value; }
+    public function setisAccessoire($value){ $this->isAccessoire = $value; }
 
     //Constuctor
     public function __construct() {}
@@ -59,7 +62,8 @@ class ProductClass
             $object->prijs = $row['prijs'];
             $object->foto = $row['foto'];
             $object->beschikbaar = $row['beschikbaar'];
-            $object->aantal = $row['aantal'];
+            $object->aantal = $row['aantalBeschikbaar'];
+            $object->isAccessoire = $row['isAccessoire'];
 
             $object_array[] = $object;
         }
@@ -87,14 +91,16 @@ class ProductClass
 										   `prijs`,
                                            `foto`,
                                            `beschikbaar`,
-                                           `aantal`)
+                                           `aantalBeschikbaar`,
+                                           `isAccessoire`)
 					  VALUES			  (NULL,
 										   '" . $post['naam'] . "',
 										   '" . $post['beschrijving'] . "',
 										   '" . $post['prijs'] . "',
                                            '" . $post['foto'] . "',
                                            '" . '1' . "',
-                                           '" . $post['aantal'] . "')";
+                                           '" . $post['aantalBeschikbaar'] . "'
+                                           '" . $post['isAccessoire'] ."')";
 
         echo $query;
 
@@ -122,7 +128,7 @@ class ProductClass
 											`prijs`	= 	'" . $_POST['prijs'] . "',
 											`foto`	= 	'" . $_POST['foto'] . "',
 											`beschikbaar`	= 	'" . $_POST['beschikbaar'] . "',
-											`aantal`	= 	'" . $_POST['aantal'] . "'
+											`aantalBeschikbaar`	= 	'" . $_POST['aantalBeschikbaar'] . "'
 									WHERE	`idProduct`			=	'" . $_POST['idProduct'] . "'";
 
 //			echo $sql;
@@ -135,7 +141,7 @@ class ProductClass
     public static function get_available_products () {
         global $database;
 
-        $query = "SELECT * FROM producten where `beschikbaar` = '1'";
+        $query = "SELECT * FROM producten where `beschikbaar` = '1' and `isAccessoire` = '0'";
         $result = $database->fire_query($query);
 
         // echo $query;
@@ -161,6 +167,17 @@ class ProductClass
                 where `idUserWm` = " . $_SESSION['idUser'] . " ";
 
         $result = $database->fire_query($sql);
+
+        return $result;
+    }
+
+    public static function selecteer_accessoires()
+    {
+        global $database;
+
+        $query = "SELECT * FROM `producten` 
+                                 WHERE `isAccessoire` = '1'";
+        $result = $database->fire_query($query);
 
         return $result;
     }

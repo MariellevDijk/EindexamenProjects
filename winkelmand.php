@@ -33,6 +33,9 @@ if (isset($_POST['removeItemCart'])) {
                 font-size: 24px;
                 padding: 20px;
             }
+            .emptyBasket {
+                margin-left: 20px;
+            }
         </style>
     </head>
     <body>
@@ -41,10 +44,6 @@ if (isset($_POST['removeItemCart'])) {
             <div class="container">
                 <div class="row">
                     <div class="col-md-12"><h2>Winkelmand</h2></div>
-                    <!-- <Wijzigingsopdracht> -->
-                    <div class="col-md-12"><h3>Druk altijd op refresh winkelmandje voor u verder gaat met
-                            bestllen.</h3></div>
-                    <!-- </Wijzigingsopdracht> -->
                 </div>
             </div>
             <div class="row">
@@ -107,12 +106,7 @@ if (isset($_POST['removeItemCart'])) {
                             <tr>
                                 
                                 <th>
-                                <form role=\"form\" action='' method='post'>
-                                <input type='hidden' name='klantid' value='" . $_SESSION['idUser'] . "'/>
-                                <input type='hidden' name='idProduct' value='" . $row['idProduct'] . "'/>
-                                <input type='hidden' name='titel' value='" . $row['naam'] . "'/>
-                        <input type='submit' class='btn btn - info' name='refreshwinkelmandje' value='Refresh winkelmandje'>
-                        </form>
+                             
                                 
                                         <form role=\"form\" action='index.php?content=betalen' method='post'>
                                <input type='hidden' name='klantid' value='" . $_SESSION['idUser'] . "'/>
@@ -127,17 +121,132 @@ if (isset($_POST['removeItemCart'])) {
                             ";
 
                     } else {
-
-
-                        echo "
-                                <form role=\"form\" action='' method='post'>
-                                <input type='hidden' name='klantid' value='" . $_SESSION['idUser'] . "'/>
-                        <input type='submit' class='btn btn - info' name='refreshwinkelmandje' value='Refresh winkelmandje'>
-                        </form>";
-                        // <input type='hidden' name='idProduct' value='" . $row['idProduct'] . "'/>
-                        //   <input type='hidden' name='titel' value='" . $row['titel'] . "'/>
-                        //<input type='hidden' name='prijs' value='" . $row['prijs'] . "'/>
+                         echo "<div class='emptyBasket'>Uw winkelmandje is leeg.</div>";
                     }
+                    echo "<h1>Alle eerdere bestellingen</h1>";
+                        $result = VerkoopClass::get_all_orders();
+                                foreach ($result as $opgehaaldeOrders) {
+                                    $result2 = VerkoopClass::get_regels_by_order($opgehaaldeOrders);
+                                    echo "
+                            <table class=\"table table-responsive\">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Bestellingsnummer:
+                                                </th>
+                                                <th>
+                                                    Datum
+                                                </th>
+                                                <th>
+                                                    Totaalprijs:
+                                                </th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                        " . $opgehaaldeOrders["idOrder"] . "
+                                                </td>
+                                                <td>
+                                                        " . $opgehaaldeOrders["orderdatum"] . "
+                                                </td>
+                                                <td>
+                                                        " . $opgehaaldeOrders["totaalPrijs"] . "
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        
+                            </table>
+                                ";
+                                    foreach ($result2 as $opgehaaldeOrderregels) {
+                                        echo "<table class=\"table table-responsive\" style='margin-left: 25px;'>
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Productnummer:
+                                                </th>
+                                                <th>
+                                                    Productnaam:
+                                                </th>
+                                                <th>
+                                                    Prijs per stuk
+                                                </th>
+                                                <th>
+                                                    Aantal
+                                                </th>
+                                                <th>
+                                                    Totaalprijs:
+                                                </th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                        " . $opgehaaldeOrderregels["idProduct"] . "
+                                                </td>
+                                                <td>
+                                                        " . $opgehaaldeOrderregels["naam"] . "
+                                                </td>
+                                                <td>
+                                                        " . $opgehaaldeOrderregels["prijs"] . "
+                                                </td>
+                                                <td>
+                                                        " . $opgehaaldeOrderregels["aantal"] . "
+                                                </td>
+                                                <td>
+                                                        " . $opgehaaldeOrderregels["prijsOr"] . "
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        
+                            </table>";
+                                    }
+                                    echo "<hr style='border-bottom: 1px solid black; width: 100%;'>";
+                                }
+
+////                        if ($result->num_rows > 0) {
+////                            while ($row = $result->fetch_assoc()) {
+//                                print_r($row);
+//                                echo $row2['idOrder'];
+//                                echo "
+//                                    <h1>Alle eerdere bestellingen</h1>
+//                            <table class=\"table table - responsive\">
+//                                <thead>
+//                                <tr>
+//                                    <th>
+//                                        Bestelling:
+//                                    </th>
+//                                    <th>
+//                                        Prijs per stuk:
+//                                    </th>
+//                                    <th>
+//                                        Prijs per stuk:
+//                                    </th>
+//                                    <th>
+//                                        Prijs per stuk:
+//                                    </th>
+//
+//
+//                                </tr>
+//                                </thead>
+//                                <tbody>
+//                                <tr>
+//                                    <td>
+//                                            " . $row["idVideo"] . "
+//                                    </td>
+//                                    <td>
+//                                            " . $row["prijs"] . "
+//                                    </td>
+//                                </tr>
+//                                </tbody>
+//                            </table>
+//                                ";
+////                            }
+////                        } else {
+////                            echo "Geen resultaten<br><br><br><br><br><br><br><br><br><br><br>";
+////                        }
 
                     ?>
                     <br><br><br><br><br><br>

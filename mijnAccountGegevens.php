@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
                             <ul class="breadcrumb">
                                 <li><a href="index.php?content=mijnAccountGegevens">Gegevens Aanpassen</a></li>
                                 <li><a href="index.php?content=wijzig_wachtwoord">Wachtwoord Veranderen</a></li>
-                                <li><a href="index.php?content=mijnBestellingen">Mijn bestellingen</a></li>
+                                <li><a href="index.php?content=wijzig_betaalmethode">Wijzig betaalmethode</a></li>
                                 <li><a href="index.php?content=klachtIndienen">Klacht indienen</a></li>
                             </ul>
                         </div>
@@ -70,21 +70,7 @@ if (isset($_POST['submit'])) {
                     require_once("classes/VerkoopClass.php");
                     require_once("classes/SessionClass.php");
 
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    // <Wijzigingsopdracht>
-                    $dbname = "examendatabase";
-                    // </Wijzigingsopdracht>
-
-                    // Create connection
-                    $conn = new mysqli($servername, $username, $password, $dbname);
-                    // Check connection
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
-                    $sql2 = "SELECT `naam`, `adres`, `woonplaats` FROM `login` WHERE `idUser` = " . $_SESSION['idUser'] . " ";
-                    $result = $conn->query($sql2);
+                    $result = LoginClass::get_account_info();
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -107,7 +93,6 @@ if (isset($_POST['submit'])) {
                     } else {
                         echo "Geen resultaten<br><br><br><br><br><br><br><br><br><br><br>";
                     }
-                    $conn->close();
                     ?>
                 </div>
             </div>

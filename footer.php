@@ -5,6 +5,18 @@
         footer ul li a {
             color: white;
         }
+        section-primary {
+            height: 160px;
+            padding-top: 160px;
+            border: 1px solid #000000;
+        }
+        container {
+            position: absolute;
+            right: 20;
+            bottom: 0;
+            left: 0;
+            padding: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -23,18 +35,10 @@
                 </p></div>
             <div class="col-sm-6"><p class="text-info text-right"><br><br></p>
                 <div class="row">
-                    <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left"><a href="#"><i
-                                class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a> <a href="#"><i
-                                class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a> <a href="#"><i
-                                class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a> <a href="#"><i
-                                class="fa fa-3x fa-fw fa-github text-inverse"></i></a></div>
+                    <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left"><a href="#">
                 </div>
                 <div class="row">
-                    <div class="col-md-12 hidden-xs text-right"><a href="#"><i
-                                class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a> <a href="#"><i
-                                class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a> <a href="#"><i
-                                class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a> <a href="#"><i
-                                class="fa fa-3x fa-fw fa-github text-inverse"></i></a></div>
+                    <div class="col-md-12 hidden-xs text-right"><a href="#">
                 </div>
             </div>
         </div>

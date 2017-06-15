@@ -143,7 +143,7 @@ class LoginClass
 									   '" . '0' . "',
 									   '" . $datum . "',
 									   '" . '0' . "')";
-        echo $query;
+        // echo $query;
         $database->fire_query($query);
 
         $last_id = mysqli_insert_id($database->getDb_connection());
@@ -319,6 +319,17 @@ class LoginClass
             $sessieRol = "klant";
         }
         return $sessieRol;
+    }
+
+    public static function get_account_info()
+    {
+        global $database;
+
+        $query = "SELECT * FROM `users` where `idUser` = '" . $_SESSION['idUser'] . "'";
+
+        $result = $database->fire_query($query);
+
+        return $result;
     }
 }
 

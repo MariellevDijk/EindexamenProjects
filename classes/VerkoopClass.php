@@ -61,12 +61,16 @@ class VerkoopClass
     {
         global $database;
 
+        $datetime = date('Y-m-d');
+
         $query = "INSERT INTO `order` (`idOrder`, 
                                             `idUser`, 
-                                            `totaalPrijs`) 
+                                            `totaalPrijs`,
+                                            `orderdatum`) 
                   VALUES                    (NULL, 
                                             '" . $_SESSION['idUser'] . "', 
-                                            '" . $priceTotal . "')";
+                                            '" . $priceTotal . "',
+                                            '" . $datetime . "')";
 
         // echo $query . "<br>";
 
@@ -93,7 +97,7 @@ class VerkoopClass
         $query = "INSERT INTO `orderregel` (`idOrderregel`, 
                                     `idProduct`,
                                      `idOrder`,
-                                    `prijs`,
+                                    `prijsOr`,
                                     `aantal`) 
           VALUES                    (NULL, 
                                     '" . $row['idProductWm'] . "',
@@ -112,7 +116,7 @@ class VerkoopClass
         global $database;
 
         $query = "UPDATE `producten`
-					  SET `aantal` = `aantal` - '" . $row['aantalWm'] . "'
+					  SET `aantalBeschikbaar` = `aantalBeschikbaar` - '" . $row['aantalWm'] . "'
 					  WHERE `idProduct` = '" . $row['idProductWm'] . "'";
         //echo $query;
         $database->fire_query($query);
@@ -160,8 +164,26 @@ class VerkoopClass
 
         $sql = "SELECT * FROM `order` WHERE `idUser` = " . $_SESSION['idUser'] . " ";
 
-        $database->fire_query($sql);
+        $result = $database->fire_query($sql);
+
+        return $result;
     }
+
+    public static function get_regels_by_order($opgehaaldeOrders)
+    {
+        global $database;
+
+        $sql = "SELECT * FROM `orderregel` INNER JOIN `producten` on orderregel.idProduct = producten.idProduct WHERE `idOrder` = " . $opgehaaldeOrders["idOrder"] . " ";
+
+        // echo $sql;
+        $result2 = $database->fire_query($sql);
+
+        foreach ($result2 as $opgehaaldeOrders2) {
+            return $result2;
+            echo 1;
+        }
+    }
+
 
     public static function get_total_price_with_shipping()
     {
