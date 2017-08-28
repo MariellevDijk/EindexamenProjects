@@ -29,13 +29,13 @@ require_once("./security.php");
         <?php
 
 
-        require_once("classes/LoginClass.php");
+        require_once("classes/VerkoopClass.php");
         if (isset($_POST['updateBlock'])) {
             include('connect_db.php');
 
-            $sql = "UPDATE	`video` 
+            $sql = "UPDATE	`producten` 
                      SET 		`beschikbaar`		=	'" . $_POST['blockSelect'] . "'
-                     WHERE	    `idvideo`			=	 " . $_POST['idVideo'] . " ";
+                     WHERE	    `idProduct`			=	 " . $_POST['idProduct'] . " ";
 
             // echo $sql;
             $database->fire_query($sql);
@@ -50,19 +50,16 @@ require_once("./security.php");
             <div class="section">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12"><h2>Film Beschikbaar Maken</h2></div>
+                        <div class="col-md-12"><h2>Product Beschikbaar Maken</h2></div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li><a href="index.php?content=adminHomepage">Homepage</a></li>
-                                <li><a href="index.php?content=videoToevoegen">Video's Toevoegen</a></li>
-                                <li><a href="index.php?content=videosBeheren">Video's beheren</a></li>
-                                <li><a href="index.php?content=verwijderFilm">Video's verwijderen</a></li>
-                                <!-- <Wijzigingsopdracht>  -->
-                                <li class="list-group-item"><a href="index.php?content=nieuweFilms">Nieuwe video's</a>
-                                </li>
-                                <!-- </Wijzigingsopdracht> -->
+                                <li><a href="index.php?content=adminHomepage">Admin Homepage</a></li>
+                                <li><a href="index.php?content=productenToevoegen">Producten Toevoegen</a></li>
+                                <li><a href="index.php?content=productenBeheren">Producten beheren</a></li>
+                                <li><a href="index.php?content=verwijderProduct">Producten verwijderen</a></li>
+                                <li><a href="index.php?content=beschikbaarMaken">Producten beschikbaar maken</a></li>
                                 <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
                                 <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
                                 <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
@@ -76,22 +73,9 @@ require_once("./security.php");
                     require_once("classes/LoginClass.php");
                     require_once("classes/VerkoopClass.php");
                     require_once("classes/SessionClass.php");
+                    require_once("classes/ProductClass.php");
 
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    $dbname = "examendatabase";
-
-                    // Create connection
-                    $conn = new mysqli($servername, $username, $password, $dbname);
-                    // Check connection
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
-
-
-                    $sql = "SELECT * FROM `video`";
-                    $result = $conn->query($sql);
+                    $result = ProductClass::get_available_products();
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -114,7 +98,7 @@ require_once("./security.php");
                             <tbody>
                             <tr>
                                 <td>
-                                        " . $row['titel'] . "
+                                        " . $row['naam'] . "
                                 </td>
 
                                 <td>
@@ -129,7 +113,7 @@ require_once("./security.php");
                                                 <option value='1'>Beschikbaar ( 1 )</option>
                                                 <option value='0'>Niet beschikbaar ( 0 )</option>
                                                 </select>
-                                            <input type='hidden' class=\"btn btn-info\" name='idVideo' value='" . $row['idVideo'] . "'/>
+                                            <input type='hidden' class=\"btn btn-info\" name='idProduct' value='" . $row['idProduct'] . "'/>
                                             <input type='submit' class=\"btn btn-info\" name='updateBlock' value='Update Beschikbaarheid'>
                                             
                                         </form>
@@ -142,7 +126,6 @@ require_once("./security.php");
                     } else {
                         echo "Geen resultaten<br><br><br><br><br><br><br>";
                     }
-                    $conn->close();
                     ?>
 
                     <br><br>

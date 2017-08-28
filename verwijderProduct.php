@@ -4,11 +4,10 @@ require_once("./security.php");
 ?>
 <?php
 
-require_once("classes/VideoClass.php");
-if (isset($_POST['removeVideo'])) {
-    include('connect_db.php');
+require_once("classes/ProductClass.php");
+if (isset($_POST['removeProduct'])) {
 
-    VideoClass::delete_film($_POST);
+    ProductClass::delete_product($_POST);
 
     echo "<h3 style='text-align: center;' >Uw wijzigingen zijn verwerkt.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
 
@@ -42,15 +41,16 @@ if (isset($_POST['removeVideo'])) {
     <div class="section">
         <div class="container">
             <div class="row">
-                <div class="col-md-12"><h2>Film Verwijderen</h2></div>
+                <div class="col-md-12"><h2>Producten Verwijderen</h2></div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="index.php?content=adminHomepage">Homepage</a></li>
-                        <li><a href="index.php?content=videoToevoegen">Video's Toevoegen</a></li>
-                        <li><a href="index.php?content=videosBeheren">Video's beheren</a></li>
-                        <li><a href="index.php?content=beschikbaarMaken">Video's beschikbaar maken</a></li>
+                        <li><a href="index.php?content=adminHomepage">Admin Homepage</a></li>
+                        <li><a href="index.php?content=productenToevoegen">Producten Toevoegen</a></li>
+                        <li><a href="index.php?content=productenBeheren">Producten beheren</a></li>
+                        <li><a href="index.php?content=verwijderProduct">Producten verwijderen</a></li>
+                        <li><a href="index.php?content=beschikbaarMaken">Producten beschikbaar maken</a></li>
                         <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
                         <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
                         <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
@@ -64,24 +64,9 @@ if (isset($_POST['removeVideo'])) {
                     require_once("classes/LoginClass.php");
                     require_once("classes/VerkoopClass.php");
                     require_once("classes/SessionClass.php");
+                    require_once("classes/ProductClass.php");
 
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    // <Wijzigingsopdracht>
-                    $dbname = "examendatabase";
-                    // </Wijzigingsopdracht>
-
-                    // Create connection
-                    $conn = new mysqli($servername, $username, $password, $dbname);
-                    // Check connection
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
-
-
-                    $sql = "SELECT * FROM `video`";
-                    $result = $conn->query($sql);
+                    $result = ProductClass::get_available_products();
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -98,12 +83,12 @@ if (isset($_POST['removeVideo'])) {
                             <tbody>
                             <tr>
                                 <td>
-                                        " . $row["titel"] . "
+                                        " . $row["naam"] . "
                                 </td>
                                 <td>
                                         <form role=\"form\" action='' method='post'>
-                                            <input type='submit' class=\"btn btn-info\" name='removeVideo' value='Verwijder Film'>
-                                            <input type='hidden' class=\"btn btn-info\" name='idVideo' value='" . $row['idVideo'] . "'/>
+                                            <input type='submit' class=\"btn btn-info\" name='removeProduct' value='Verwijder Product'>
+                                            <input type='hidden' class=\"btn btn-info\" name='idProduct' value='" . $row['idProduct'] . "'/>
                                         </form>
                                 </td>
                             </tr>
@@ -114,7 +99,6 @@ if (isset($_POST['removeVideo'])) {
                     } else {
                         echo "Geen resultaten<br><br><br><br><br><br><br>";
                     }
-                    $conn->close();
                     ?>
 
                     <br><br>

@@ -48,13 +48,11 @@ if (isset($_POST['submit'])) {
     <div class="row">
         <div class="col-md-12">
             <ul class="breadcrumb">
-                <li><a href="index.php?content=adminHomepage">Homepage</a></li>
-                <li><a href="index.php?content=videoToevoegen">Video's Toevoegen</a></li>
-                <li><a href="index.php?content=verwijderFilm">Video's verwijderen</a></li>
-                <li><a href="index.php?content=beschikbaarMaken">Video's beschikbaar maken</a></li>
-                <!-- <Wijzigingsopdracht>  -->
-                <li><a href="index.php?content=nieuweFilms">Nieuwe video's</a></li>
-                <!-- </Wijzigingsopdracht> -->
+                <li><a href="index.php?content=adminHomepage">Admin Homepage</a></li>
+                <li><a href="index.php?content=productenToevoegen">Producten Toevoegen</a></li>
+                <li><a href="index.php?content=productenBeheren">Producten beheren</a></li>
+                <li><a href="index.php?content=verwijderProduct">Producten verwijderen</a></li>
+                <li><a href="index.php?content=beschikbaarMaken">Producten beschikbaar maken</a></li>
                 <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
                 <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
                 <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
@@ -68,35 +66,20 @@ if (isset($_POST['submit'])) {
             require_once("classes/LoginClass.php");
             require_once("classes/VerkoopClass.php");
             require_once("classes/SessionClass.php");
+            require_once("classes/ProductClass.php");
 
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "examendatabase";
-
-            // Create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            $conn2 = new mysqli($servername, $username, $password, $dbname);
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-            if ($conn2->connect_error) {
-                die("Connection failed: " . $conn2->connect_error);
-            }
-            $sql = "SELECT * FROM video";
-            $result = $conn->query($sql);
+            $result = ProductClass::get_available_products();
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "
                         <form role=\"form\" action=\"\" method=\"post\">
-                        <div class=\"form-group\"><label class=\"control-label\" for=\"titel\">Titel<br></label>
-                            <input class=\"form-control\" id=\"titel\" placeholder=\"Titel\" type=\"text\" name=\"titel\" value='" . $row['titel'] . "' required></div>
+                        <div class=\"form-group\"><label class=\"control-label\" for=\"titel\">Naam<br></label>
+                            <input class=\"form-control\" id=\"titel\" placeholder=\"Titel\" type=\"text\" name=\"titel\" value='" . $row['naam'] . "' required></div>
                         <div class=\"form-group\"><label class=\"control-label\" for=\"beschrijving\">Beschrijving<br></label>
                             <input class=\"form-control\" id=\"beschrijving\" placeholder=\"Beschrijving\" type=\"text\" name=\"beschrijving\" value='" . $row['beschrijving'] . "' required></div>
-                        <div class=\"form-group\"><label class=\"control-label\" for=\"fotopad\">Fotopad<br></label>
-                            <input class=\"form-control\" id=\"fotopad\" placeholder=\"Fotopad\" type=\"text\" name=\"fotopad\" value='" . $row['fotopad'] . "' required></div>
+                        <div class=\"form-group\"><label class=\"control-label\" for=\"fotopad\">Foto<br></label>
+                            <input class=\"form-control\" id=\"fotopad\" placeholder=\"Fotopad\" type=\"text\" name=\"foto\" value='" . $row['foto'] . "' required></div>
                         <div class=\"form-group\"><label class=\"control-label\" for=\"prijs\">Prijs<br></label>
                             <input class=\"form-control\" id=\"prijs\" placeholder=\"Prijs\" type=\"text\" name=\"prijs\" value='" . $row['prijs'] . "' required></div>
                         <div class=\"form-group\"><label class=\"control-label\" for=\"aantalBeschikbaar\">Aantal Beschikbaar</label>
@@ -109,7 +92,7 @@ if (isset($_POST['submit'])) {
 //                            }
                     echo "
                            <!-- </select> -->
-                        <input type='hidden' name='idvanvid' value='" . $row['idVideo'] . "'/>
+                        <input type='hidden' name='idvanProduct' value='" . $row['idProduct'] . "'/>
                         <button type=\"submit\" class=\"btn btn-danger\" name=\"submit\">Verzend</button>
                     </form><br><hr>";
 
@@ -123,7 +106,6 @@ if (isset($_POST['submit'])) {
             } else {
                 echo "Geen resultaten<br><br><br><br><br><br><br><br><br><br><br>";
             }
-            $conn->close();
             ?>
         </div>
     </div>

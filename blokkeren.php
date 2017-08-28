@@ -61,12 +61,13 @@ if (isset($_POST['create'])) {
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li><a href="index.php?content=adminHomepage">Homepage</a></li>
-                                <li><a href="index.php?content=videoToevoegen">Video's Toevoegen</a></li>
-                                <li><a href="index.php?content=videosBeheren">Video's beheren</a></li>
-                                <li><a href="index.php?content=verwijderFilm">Video's verwijderen</a></li>
-                                <li><a href="index.php?content=beschikbaarMaken">Video's beschikbaar maken</a></li>
+                                <li><a href="index.php?content=adminHomepage">Admin Homepage</a></li>
+                                <li><a href="index.php?content=productenToevoegen">Producten Toevoegen</a></li>
+                                <li><a href="index.php?content=productenBeheren">Producten beheren</a></li>
+                                <li><a href="index.php?content=verwijderProduct">Producten verwijderen</a></li>
+                                <li><a href="index.php?content=beschikbaarMaken">Producten beschikbaar maken</a></li>
                                 <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
+                                <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
                                 <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
                             </ul>
                         </div>
@@ -79,23 +80,7 @@ if (isset($_POST['create'])) {
                     require_once("classes/VerkoopClass.php");
                     require_once("classes/SessionClass.php");
 
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    // <Wijzigingsopdracht>
-                    $dbname = "examendatabase";
-                    // </Wijzigingsopdracht>
-
-                    // Create connection
-                    $conn = new mysqli($servername, $username, $password, $dbname);
-                    // Check connection
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
-
-
-                    $sql = "SELECT * FROM `login`";
-                    $result = $conn->query($sql);
+                    $result = LoginClass::get_all_users();
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -124,7 +109,7 @@ if (isset($_POST['create'])) {
                                         " . $row["naam"] . "
                                 </td>
                                 <td>
-                                        " . $row['email'] . "
+                                        " . $row['emailAdres'] . "
                                 </td>
                                 <td>
                                         " . $row['rol'] . "
@@ -151,7 +136,6 @@ if (isset($_POST['create'])) {
                     } else {
                         echo "Geen resultaten<br><br><br><br><br><br><br>";
                     }
-                    $conn->close();
                     ?>
 
                     <br><br>

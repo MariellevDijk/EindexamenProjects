@@ -10,8 +10,8 @@ if (isset($_POST['submit'])) {
         if (!strcmp($_POST['nieuw_wachtwoord'], $_POST['controle_wachtwoord'])) {
             LoginClass::update_password($_SESSION['idUser'], $_POST['nieuw_wachtwoord']);
 
-            echo "<h3 style='text-align: center;' >Uw wachtwoord is succesvol gewijzigd.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-            header("refresh:4;url=index.php?content=klantHomepage");
+            echo "<h3 style='text-align: center;' >Uw wachtwoord is succesvol gewijzigd. U wordt uitgelogd.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+            header("refresh:6;url=index.php?content=logout");
         } else {
             echo "<h3 style='text-align: center;' >U heeft uw nieuwe wachtwoord de tweede keer verkeerd ingevoerd. Probeer het nog een keer.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
             header("refresh:5;url=index.php?content=wijzig_wachtwoord");

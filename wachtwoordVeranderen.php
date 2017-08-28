@@ -35,9 +35,9 @@
             <div class="col-md-12">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <div class="col-sm-2"><label for="inputPassword3" class="control-label">Oud
+                        <div class="col-sm-2"><label for="inputWachtwoord3" class="control-label">Oud
                                 Wachtwoord<br></label></div>
-                        <div class="col-sm-10"><input type="password" class="form-control" id="inputPassword3"
+                        <div class="col-sm-10"><input type="password" class="form-control" id="inputWachtwoord3"
                                                       disabled="disabled"></div>
                     </div>
                     <div class="form-group has-feedback">
@@ -46,31 +46,21 @@
                                 for="inputEmail3" class="control-label"><br></label><label for="inputEmail3"
                                                                                            class="control-label"><br></label>
                         </div>
-                        <div class="col-sm-10"><input type="password" class="form-control" id="inputPassword3"
+                        <div class="col-sm-10"><input type="password" class="form-control" id="inputWachtwoord3"
                                                       disabled="disabled"></div>
                     </div>
                     <div class="form-group has-feedback">
                         <div class="col-sm-2"><label for="inputEmail3" class="control-label">Nieuw
-                                Wachtwoord<br></label><label for="inputEmail3" class="control-label"><br></label><label
-                                for="inputEmail3" class="control-label"><br></label><label for="inputEmail3"
+                                Wachtwoord<br></label><label for="inputEmailAdres3" class="control-label"><br></label><label
+                                for="inputEmailAdres3" class="control-label"><br></label><label for="inputEmailAdres3"
                                                                                            class="control-label"><br></label>
                         </div>
-                        <div class="col-sm-10"><input type="password" class="form-control" id="inputPassword3"
+                        <div class="col-sm-10"><input type="password" class="form-control" id="inputWachtwoord3"
                                                       disabled="disabled"></div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
-<div class="section">
-    <div class="container"></div>
-</div>
-<div class="section">
-    <div class="container"></div>
-</div>
-<div class="section">
-    <div class="container"></div>
-</div>
 </body>
 </html>

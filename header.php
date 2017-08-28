@@ -28,7 +28,7 @@ if (isset($_SESSION['rol'])) {
             <ul class=\"nav navbar-nav navbar-right\">
                 <li><a href=\"index.php?content=algemeneHomepage\">Home</a></li>
                 <li><a href=\"index.php?content=winkelmand\">Winkelmand</a></li>
-                <li><a href=\"index.php?content=producten\">>Auto's</a></li>
+                <li><a href=\"index.php?content=producten\">Auto's</a></li>
                 <li><a href=\"index.php?content=mijnAccountGegevens\">Mijn Account</a></li>
                 <li><a href=\"index.php?content=logout\">Uitloggen</a></li>
             </ul>

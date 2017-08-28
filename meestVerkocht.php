@@ -11,7 +11,7 @@ require_once("./security.php");
 <?php
 
 if (isset($_POST['favoriet'])) {
-   require_once("./classes/FavorietClass.php");
+    require_once("./classes/FavorietClass.php");
 
     if (FavorietClass::check_if_exists($_POST)) {
         //Zo ja, geef een melding dat het emailadres bestaat en stuur
@@ -20,16 +20,16 @@ if (isset($_POST['favoriet'])) {
         header("refresh:5;url=index.php?content=favorieteProducten");
     } else {
         echo "<h3 style='text-align: center;' ></h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-        header("refresh:10;url=index.php?content=producten");
+        header("refresh:10;url=index.php?content=favorieteProducten");
         FavorietClass::add_to_favorites($_POST);
     }
 
 } else if (isset($_POST['submit'])) {
 
-    echo "<h3 style='text-align: center;' >Item toegevoegd aan winkelmand.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-    header("refresh:4;url=index.php?content=producten");
+    echo "<h3 style='text-align: center;' >Meest verkocht Item toegevoegd aan winkelmand.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+    header("refresh:4;url=index.php?content=favorieteProducten");
     require_once("./classes/VerkoopClass.php");
-    VerkoopClass::insert_winkelmanditem_database($_POST);
+    VerkoopClass::insert_most_sold_winkelmanditem_database($_POST);
 } else {
     ?>
     <html>
@@ -107,8 +107,7 @@ if (isset($_POST['favoriet'])) {
 
                                 <br><br><br>
                             </div>
-
-
+                            <?php
                             if (isset($_POST['zoekBeschrijving'])) {
                                 echo "<div class=\"col-md-12\"><h2>Gevonden producten op Beschrijving</h2>";
                             } else if (isset($_POST['zoekArtikelcode'])) {
@@ -121,122 +120,121 @@ if (isset($_POST['favoriet'])) {
                                 echo "<div class=\"col-md-12\"><h2>Producten</h2>";
                             }
                             ?>
-                                <form role=\"form\" action='' method='post'>
-                                    <button type='submit' name='reset' class='btn btn-success'>Reset<br></button>
-                                </form>
-                                <br>
-                            </div>
-                            <?php
-                            require_once("classes/LoginClass.php");
-                            require_once("classes/SessionClass.php");
-
-                            if (isset($_POST['zoekBeschrijving'])) {
-                                $result = ProductClass::get_products_by_description($_POST);
-                            } else if (isset($_POST['zoekArtikelcode'])) {
-                                $result = ProductClass::get_products_by_id($_POST);
-                            } else if (isset($_POST['zoekType'])) {
-                                $result = ProductClass::get_products_by_type($_POST);
-                            } else if (isset($_POST['zoekPrijs'])) {
-                                $result = ProductClass::get_products_by_prijs($_POST);
-                            } else if (isset($_POST['reset'])) {
-                                $result = ProductClass::get_available_products();
-                            } else {
-                                $result = ProductClass::get_available_products();
-                            }
-                            // <Wijzigingsopdracht>
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    if ($row["beschikbaar"]) {
-                                        echo "
-                                                    <div style='height: 1000px; margin-bottom: -20px;' class=\"col-md-3\">
-                                                        <img style='height: 400px' src=\"images/" . $row["foto"] . "\" class=\"img-responsive\">
-                                                        <h3>" . $row["naam"] . "</h3>
-                                                        <p class=\"videos\">" . $row["prijs"] . "</p>
-                                                        <p class=\"videos\">" . $row["beschrijving"] . "</p>
-            
-                                                        <a href='index.php?content=productPagina&idProduct=" . $row["idProduct"] . "'>
-                                                        <button type=\"button\" class=\"btn btn-info\">Meer Informatie</button></a>
-                                                        
-                                                        
-                                                         <form role = \"form\" action='' method='post'>
-                                                         <b>Aantal:     </b><input type='number' name='amount' max='" . $row["aantalBeschikbaar"] . "'/>
-                                                        <input type='hidden' name='idProduct' value='" . $row['idProduct'] . "'>
-                                                        <input type='hidden' name='idUser' value='" . $_SESSION['idUser'] . "'>
-                                                        <input type='hidden' name='naam' value='" . $row['naam'] . "'>
-                                                        <input type='hidden' name='prijs' value='" . $row['prijs'] . "'>
-                                                        <input type='hidden' name='dagProduct' value='" . $row['dagProduct'] . "'>
-                
-                                                        <button type='submit' name='submit' class='btn btn-info'>Toevoegen aan winkelmand<br></button>
-                                                        </form>
-                                                        
-                                                        <form role=\"form\" action='' method='post'>
-                                                            <input type='submit' class=\"btn btn-danger\" style='background: red;' name='favoriet' value='Voeg toe aan favoriete producten'>
-                                                            <input type='hidden' class=\"btn btn-success\" name='idProduct' value='" . $row['idProduct'] . "'/>
-                                                        </form>
-                                                        
-                                                        <br><br><br>
-                                                    </div>
-                                                ";
-                                    }
-                                }
-                            } else {
-                                echo "0 results";
-                            }
-                            ?>
-                            <div class="col-md-12"><h2>Accessoires</h2><br></div>
-
-                            <?php
-                            require_once("classes/LoginClass.php");
-                            require_once("classes/SessionClass.php");
-                            require_once("classes/ProductClass.php");
-
-                            $result1 = ProductClass::selecteer_accessoires();
-
-
-                            if ($result1->num_rows > 0) {
-                                while ($row = $result1->fetch_assoc()) {
-                                    if ($row["beschikbaar"]) {
-                                        echo "
-                                                    <div style='height: 1000px; margin-bottom: -20px;' class=\"col-md-3\">
-                                                        <img style='height: 400px' src=\"images/" . $row["foto"] . "\" class=\"img-responsive\">
-                                                        <h3>" . $row["naam"] . "</h3>
-                                                        <p class=\"videos\">" . $row["prijs"] . "</p>
-                                                        <p class=\"videos\">" . $row["beschrijving"] . "</p>
-            
-                                                        <a href='index.php?content=productPagina&idProduct=" . $row["idProduct"] . "'>
-                                                        <button type=\"button\" class=\"btn btn-info\">Meer Informatie</button></a>
-                                                        
-                                                        
-                                                         <form role = \"form\" action='' method='post'>
-                                                         <b>Aantal:     </b><input type='number' name='amount' max='" . $row["aantalBeschikbaar"] . "'/>
-                                                        <input type='hidden' name='idProduct' value='" . $row['idProduct'] . "'>
-                                                        <input type='hidden' name='idUser' value='" . $_SESSION['idUser'] . "'>
-                                                        <input type='hidden' name='naam' value='" . $row['naam'] . "'>
-                                                        <input type='hidden' name='prijs' value='" . $row['prijs'] . "'>
-                                                        <input type='hidden' name='dagProduct' value='" . $row['dagProduct'] . "'>
-                
-                                                        <button type='submit' name='submit' class='btn btn-info'>Toevoegen aan winkelmand<br></button>
-                                                        </form>
-                                                        
-                                                        <form role=\"form\" action='' method='post'>
-                                                            <input type='submit' class=\"btn btn-danger\" style='background: red;' name='favoriet' value='Voeg toe aan favoriete producten'>
-                                                            <input type='hidden' class=\"btn btn-success\" name='idProduct' value='" . $row['idProduct'] . "'/>
-                                                        </form>
-                                                        
-                                                        <br><br><br>
-                                                    </div>
-                                                ";
-                                    }
-                                }
-                            } else {
-                                echo "Geen accessoires";
-                            }
-                            ?>
+                            <form role=\"form\" action='' method='post'>
+                                <button type='submit' name='reset' class='btn btn-success'>Reset<br></button>
+                            </form>
+                            <br>
                         </div>
+                        <?php
+                        require_once("classes/LoginClass.php");
+                        require_once("classes/SessionClass.php");
+
+                        if (isset($_POST['zoekBeschrijving'])) {
+                            $result = ProductClass::get_products_by_description($_POST);
+                        } else if (isset($_POST['zoekArtikelcode'])) {
+                            $result = ProductClass::get_products_by_id($_POST);
+                        } else if (isset($_POST['zoekType'])) {
+                            $result = ProductClass::get_products_by_type($_POST);
+                        } else if (isset($_POST['zoekPrijs'])) {
+                            $result = ProductClass::get_products_by_prijs($_POST);
+                        } else if (isset($_POST['reset'])) {
+                            $result = ProductClass::get_available_products();
+                        } else {
+                            $result = ProductClass::get_available_products();
+                        }
+                        // <Wijzigingsopdracht>
+
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                if ($row["beschikbaar"]) {
+                                    echo "
+                                                    <div style='height: 1000px; margin-bottom: -20px;' class=\"col-md-3\">
+                                                        <img style='height: 400px' src=\"images/" . $row["foto"] . "\" class=\"img-responsive\">
+                                                        <h3>" . $row["naam"] . "</h3>
+                                                        <p class=\"videos\">" . $row["prijs"] . "</p>
+                                                        <p class=\"videos\">" . $row["beschrijving"] . "</p>
+            
+                                                        <a href='index.php?content=productPagina&idProduct=" . $row["idProduct"] . "'>
+                                                        <button type=\"button\" class=\"btn btn-info\">Meer Informatie</button></a>
+                                                        
+                                                        
+                                                         <form role = \"form\" action='' method='post'>
+                                                         <b>Aantal:     </b><input type='number' name='amount' max='" . $row["aantalBeschikbaar"] . "'/>
+                                                        <input type='hidden' name='idProduct' value='" . $row['idProduct'] . "'>
+                                                        <input type='hidden' name='idUser' value='" . $_SESSION['idUser'] . "'>
+                                                        <input type='hidden' name='naam' value='" . $row['naam'] . "'>
+                                                        <input type='hidden' name='prijs' value='" . $row['prijs'] . "'>
+                
+                                                        <button type='submit' name='submit' class='btn btn-info'>Toevoegen aan winkelmand<br></button>
+                                                        </form>
+                                                        
+                                                        <form role=\"form\" action='' method='post'>
+                                                            <input type='submit' class=\"btn btn-danger\" style='background: red;' name='favoriet' value='Voeg toe aan favoriete producten'>
+                                                            <input type='hidden' class=\"btn btn-success\" name='idProduct' value='" . $row['idProduct'] . "'/>
+                                                        </form>
+                                                        
+                                                        <br><br><br>
+                                                    </div>
+                                                ";
+                                }
+                            }
+                        } else {
+                            echo "0 results";
+                        }
+                        ?>
+                        <div class="col-md-12"><h2>Accessoires</h2><br></div>
+
+                        <?php
+                        require_once("classes/LoginClass.php");
+                        require_once("classes/SessionClass.php");
+                        require_once("classes/ProductClass.php");
+
+                        $result1 = ProductClass::selecteer_accessoires();
+
+
+                        if ($result1->num_rows > 0) {
+                            while ($row = $result1->fetch_assoc()) {
+                                if ($row["beschikbaar"]) {
+                                    echo "
+                                                    <div style='height: 1000px; margin-bottom: -20px;' class=\"col-md-3\">
+                                                        <img style='height: 400px' src=\"images/" . $row["foto"] . "\" class=\"img-responsive\">
+                                                        <h3>" . $row["naam"] . "</h3>
+                                                        <p class=\"videos\">" . $row["prijs"] . "</p>
+                                                        <p class=\"videos\">" . $row["beschrijving"] . "</p>
+            
+                                                        <a href='index.php?content=productPagina&idProduct=" . $row["idProduct"] . "'>
+                                                        <button type=\"button\" class=\"btn btn-info\">Meer Informatie</button></a>
+                                                        
+                                                        
+                                                         <form role = \"form\" action='' method='post'>
+                                                         <b>Aantal:     </b><input type='number' name='amount' max='" . $row["aantalBeschikbaar"] . "'/>
+                                                        <input type='hidden' name='idProduct' value='" . $row['idProduct'] . "'>
+                                                        <input type='hidden' name='idUser' value='" . $_SESSION['idUser'] . "'>
+                                                        <input type='hidden' name='naam' value='" . $row['naam'] . "'>
+                                                        <input type='hidden' name='prijs' value='" . $row['prijs'] . "'>
+                
+                                                        <button type='submit' name='submit' class='btn btn-info'>Toevoegen aan winkelmand<br></button>
+                                                        </form>
+                                                        
+                                                        <form role=\"form\" action='' method='post'>
+                                                            <input type='submit' class=\"btn btn-danger\" style='background: red;' name='favoriet' value='Voeg toe aan favoriete producten'>
+                                                            <input type='hidden' class=\"btn btn-success\" name='idProduct' value='" . $row['idProduct'] . "'/>
+                                                        </form>
+                                                        
+                                                        <br><br><br>
+                                                    </div>
+                                                ";
+                                }
+                            }
+                        } else {
+                            echo "Geen accessoires";
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     </body>
     </html>

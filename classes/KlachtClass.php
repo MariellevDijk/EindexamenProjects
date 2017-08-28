@@ -49,8 +49,8 @@ class KlachtClass
     public static function insert_klacht_into_database($klacht)
     {
         global $database;
-        $query = "INSERT INTO `klachten` (`idKlacht`, `idUser`, `klacht`, `emailKlant`) 
-                      VALUES (NULL, '" . $_SESSION['idUser'] . "', '" . $klacht . "', '" . $_SESSION['emailAdres'] . "')";
+        $query = "INSERT INTO `klacht` (`idKlacht`, `idUser`, `klacht`) 
+                      VALUES (NULL, '" . $_SESSION['idUser'] . "', '" . $klacht . "')";
         //echo $_SESSION['idUser'];
         //echo $klacht;
         // echo $query;

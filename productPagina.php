@@ -56,8 +56,19 @@ if (isset($_POST['reserveer'])) {
 
                     $idProduct = $_GET['idProduct'];
                     $result = ProductClass::get_product_detail($idProduct);
+                    $checkDagProduct = ProductClass::check_if_product_van_de_dag($idProduct);
+
+
+
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
+                            if ($checkDagProduct->num_rows > 0) {
+                                $isDagProduct = true;
+                                $rowDagProduct = $checkDagProduct->fetch_assoc();
+                            }
+                            else {
+                                $isDagProduct = false;
+                            }
                             echo "
                             <div class=\"container\">
                                 <div class=\"row\">
@@ -75,20 +86,39 @@ if (isset($_POST['reserveer'])) {
                             } else {
                                 echo "<b>Deze video is helaas uitverkocht. Plaats een reservering om de video te kunnen huren als die weer beschikbaar is.<br><br></b>";
                             }
-                            echo "
-                            <b>Prijs: </b>
-                            &euro; " . $row["prijs"] .
-                                " </p >
-                                           
-                                        <p ><form role = \"form\" action='' method='post'>
+
+                            if ($isDagProduct == true) {
+                                echo "
+                                    <b>Prijs: </b>
+                                    <strike>&euro; " . $row["prijs"] . " </strike> &euro; " . $rowDagProduct['prijsDagProduct'] . "</p >
+                                    
+                                    <p><form role = \"form\" action='' method='post'>
+                                        <b>Aantal:     </b><input type='number' name='amount' max='" . $row["aantalBeschikbaar"] . "'/><br><br><br>
+                                        <input type='hidden' name='idProduct' value='" . $row['idProduct'] . "'/>
+                                        <input type='hidden' name='idUser' value='" . $_SESSION['idUser'] . "'/>
+                                        <input type='hidden' name='naam' value='" . $row['naam'] . "'/>
+                                        <input type='hidden' name='prijs' value='" . $rowDagProduct['prijsDagProduct'] . "'/>
+                                        <input type='hidden' name='dagProduct' value='" . $row['dagProduct'] . "'>
+                                        
+                                        
+                                    ";
+                            }
+                            else if ($isDagProduct == false) {
+                                echo "
+                                    <b>Prijs: </b>
+                                        &euro; " . $row["prijs"] . "</p >
+                                    
+                                    <p><form role = \"form\" action='' method='post'>
                                         <b>Aantal:     </b><input type='number' name='amount' max='" . $row["aantalBeschikbaar"] . "'/><br><br><br>
                                         <input type='hidden' name='idProduct' value='" . $row['idProduct'] . "'/>
                                         <input type='hidden' name='idUser' value='" . $_SESSION['idUser'] . "'/>
                                         <input type='hidden' name='naam' value='" . $row['naam'] . "'/>
                                         <input type='hidden' name='prijs' value='" . $row['prijs'] . "'/>
+                                        <input type='hidden' name='dagProduct' value='" . $row['dagProduct'] . "'>
                                         
                                         
                                     ";
+                            }
                             if ($row["aantalBeschikbaar"] > 0) {
 
                                 echo "

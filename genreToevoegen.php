@@ -5,10 +5,10 @@ require_once("./security.php");
 
 <?php
 
-require_once("./classes/GenreClass.php");
+require_once("./classes/TypeClass.php");
 if (isset($_POST['submit-Genre'])) {
 
-    GenreClass::insert_genre_into_database($_POST['genre']);
+    TypeClass::insert_genre_into_database($_POST['genre']);
     echo "<h3 style='text-align: center;' >U heeft een nieuw genre toegevoegd.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
     header("refresh:4;url=index.php?content=adminHomepage");
 } else {

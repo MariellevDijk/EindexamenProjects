@@ -85,24 +85,28 @@ class ProductClass
     {
         global $database;
 
-        $query = "INSERT INTO `product` (`idProduct`,
+        $query = "INSERT INTO `producten` (`idProduct`,
 										   `naam`,
 										   `beschrijving`,
 										   `prijs`,
                                            `foto`,
                                            `beschikbaar`,
                                            `aantalBeschikbaar`,
-                                           `isAccessoire`)
+                                           `aantalVerkocht`,
+                                           `isAccessoire`,
+                                           `type`)
 					  VALUES			  (NULL,
 										   '" . $post['naam'] . "',
 										   '" . $post['beschrijving'] . "',
 										   '" . $post['prijs'] . "',
                                            '" . $post['foto'] . "',
                                            '" . '1' . "',
-                                           '" . $post['aantalBeschikbaar'] . "'
-                                           '" . $post['isAccessoire'] ."')";
+                                           '" . $post['aantalBeschikbaar'] . "',
+                                           '" . '1' . "',
+                                           '" . $post['isAccessoire'] ."',
+                                           '" . $post['type'] . "')";
 
-        echo $query;
+        // echo $query;
 
         $database->fire_query($query);
         $last_id = mysqli_insert_id($database->getDb_connection());
@@ -141,7 +145,7 @@ class ProductClass
     public static function get_available_products () {
         global $database;
 
-        $query = "SELECT * FROM producten where `beschikbaar` = '1' and `isAccessoire` = '0'";
+        $query = "SELECT * FROM producten where `beschikbaar` = '1' and `isAccessoire` = '0' AND `dagProduct` = '0'";
         $result = $database->fire_query($query);
 
         // echo $query;
@@ -162,7 +166,8 @@ class ProductClass
     public static function selecteer_alle_winkelmand_items()
     {
         global $database;
-        $sql = "select `idWinkelmand`, `idProductWm`, `prijs`, `aantalWm`,`aantalWm` * `prijs` as totaalPrijs, `naam`  from `winkelmand`
+
+        $sql = "select `idWinkelmand`, `idProductWm`, `prijs`, `aantalWm`,`aantalWm` * `prijs` as totaalPrijs, `naam`, `dagProduct`  from `winkelmand`
                 INNER JOIN `producten` on winkelmand.idProductWm = producten.idProduct
                 where `idUserWm` = " . $_SESSION['idUser'] . " ";
 
@@ -176,11 +181,95 @@ class ProductClass
         global $database;
 
         $query = "SELECT * FROM `producten` 
-                                 WHERE `isAccessoire` = '1'";
+                                 WHERE `isAccessoire` = '1' AND `dagProduct` = '0'";
         $result = $database->fire_query($query);
 
         return $result;
     }
+
+    public static function get_products_by_description($post){
+        global $database;
+
+        $query = "SELECT * FROM producten where `beschikbaar` = '1' AND beschrijving LIKE "."'%". $_POST['zoekterm'] ."%'" . " ";
+
+        return $database->fire_query($query);
+    }
+
+    public static function get_products_by_id($post){
+        global $database;
+
+        $query = "SELECT * FROM producten where `beschikbaar` = '1' AND idProduct = '" . $_POST['artikelcode'] ."' ";
+
+
+        return $database->fire_query($query);
+    }
+
+    public static function get_products_by_type($post){
+        global $database;
+
+        $query = "SELECT * FROM producten where `beschikbaar` = '1' AND `type` = '" . $_POST['type'] ."' ";
+
+
+        return $database->fire_query($query);
+    }
+
+    public static function get_products_by_prijs($post){
+        global $database;
+
+        $query = "SELECT * FROM producten where `beschikbaar` = '1' AND prijs >= '" . $_POST['hogerDan'] ."' AND prijs <= '" . $_POST['lagerDan'] . "'";
+
+
+        return $database->fire_query($query);
+    }
+    public static function set_Product_Van_De_Dag($idProduct)
+    {
+        global $database;
+
+        $query = "UPDATE `producten` SET `dagProduct` = 1 WHERE `idProduct` = $idProduct";
+        // echo $query;
+        $database->fire_query($query);
+        self::remove_andere_producten_van_de_dag($idProduct);
+    }
+
+    public static function remove_andere_producten_van_de_dag($idProduct)
+    {
+        global $database;
+
+        $query = "UPDATE `producten` SET `dagProduct` = 0 WHERE `idProduct` != $idProduct";
+
+        $database->fire_query($query);
+    }
+    public static function get_Product_Van_De_Dag()
+    {
+        global $database;
+
+        $query = "SELECT *, `prijs` * 0.5 as prijsDagProduct 
+                  FROM `producten`
+                  WHERE `dagProduct` = '1'";
+        $result = $database->fire_query($query);
+        // echo $query;
+
+        return $result;
+    }
+    public static function remove_Product_Van_De_Dag()
+    {
+        global $database;
+
+        $query = "UPDATE `producten` SET `dagProduct` = '0' WHERE `dagProduct` = '1'";
+
+        $database->fire_query($query);
+    }
+    public static function check_if_product_van_de_dag($idProduct)
+    {
+        global $database;
+
+        $query = "SELECT *, `prijs` * 0.5 as prijsDagProduct FROM `producten` WHERE `idProduct` = $idProduct AND `dagProduct` = '1'";
+
+        $result = $database->fire_query($query);
+
+        return $result;
+    }
+
 
 }
 

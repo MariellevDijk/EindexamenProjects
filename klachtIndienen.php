@@ -10,7 +10,7 @@ if (isset($_POST['submit-klacht'])) {
 
     KlachtClass::insert_klacht_into_database($_POST['klacht']);
     echo "<h3 style='text-align: center;' >Uw klacht of opmerking is verzonden.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-    header("refresh:4;url=index.php?content=klantHomepage");
+    header("refresh:4;url=index.php?content=algemeneHomepage");
 } else {
     ?>
     <html>

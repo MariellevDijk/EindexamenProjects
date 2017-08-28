@@ -3,17 +3,7 @@ $rollen = array("admin");
 require_once("./security.php");
 
 require_once("./classes/VerkoopClass.php");
-    if (isset($_POST['mail'])) {
-
-//        VerkoopClass::send_memory_email_day_before();
-//        VerkoopClass::send_memory_email_3_days_after();
-//        VerkoopClass::send_memory_email_3_weeks_after();
-//        VerkoopClass::set_video_not_new();
-//        echo "<h3 style='text-align: center;' >Herinnering mails worden verstuurd.</h3><br><br><br><br><br><br><br><br>         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-//        header("refresh:4;url=index.php?content=adminHomepage");
-    } else {
 ?>
-
 <html>
 <head>
     <meta charset="utf-8">
@@ -44,13 +34,14 @@ require_once("./classes/VerkoopClass.php");
             <div class="col-md-12">
                 <ul class="list-group">
                     <li class="list-group-item"><a href="index.php?content=adminHomepage">Admin Homepage</a></li>
-                    <li class="list-group-item"><a href="index.php?content=videoToevoegen">Video's Toevoegen</a></li>
-                    <li class="list-group-item"><a href="index.php?content=videosBeheren">Video's beheren</a></li>
-                    <li class="list-group-item"><a href="index.php?content=verwijderFilm">Video's verwijderen</a></li>
+                    <li class="list-group-item"><a href="index.php?content=productenToevoegen">Producten Toevoegen</a></li>
+                    <li class="list-group-item"><a href="index.php?content=productVanDeDag">Product van de dag</a></li>
+                    <li class="list-group-item"><a href="index.php?content=productenBeheren">Producten beheren</a></li>
+                    <li class="list-group-item"><a href="index.php?content=verwijderProduct">Producten verwijderen</a></li>
                     <!-- <Wijzigingsopdracht>  -->
-                    <li class="list-group-item"><a href="index.php?content=nieuweFilms">Nieuwe video's</a></li>
+                    <li class="list-group-item"><a href="index.php?content=nieuweProducten">Nieuwe producten</a></li>
                     <!-- </Wijzigingsopdracht> -->
-                    <li class="list-group-item"><a href="index.php?content=beschikbaarMaken">Video's beschikbaar
+                    <li class="list-group-item"><a href="index.php?content=beschikbaarMaken">Producten beschikbaar
                             maken</a></li>
                     <li class="list-group-item"><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
                     <li class="list-group-item"><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
@@ -58,20 +49,9 @@ require_once("./classes/VerkoopClass.php");
                             verwijderen</a></li>
                 </ul>
                 <br><br>
-                <div class="row">
-                <div class="col-md-12"><h3>Stuur herinnering mails</h3></div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <form role=\"form\" action='' method='post'>
-                        <input type='submit' class="btn btn-info" name='mail' value='Stuur herrinering mails'>
-                    </form>
-                </div>
-            </div>
-            </div>
         </div>
         <div class="row">
-            <div class="col-md-12"><h3>Meest gewilde video's</h3></div>
+            <div class="col-md-12"><h3>Meest gewilde producten</h3></div>
         </div>
         <div class="row">
             <?php
@@ -79,32 +59,18 @@ require_once("./classes/VerkoopClass.php");
             require_once("classes/VerkoopClass.php");
             require_once("classes/SessionClass.php");
 
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "examendatabase";
-
-            // Create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            // Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-
-
-            $sql = "SELECT * FROM video WHERE `datumToegevoegd` >= (DATE_SUB(CURDATE(), INTERVAL 4 MONTH)) ORDER BY aantalverhuurd DESC LIMIT 4";
-            $result = $conn->query($sql);
+            $result = VerkoopClass::get_most_popular_products();
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     if ($row["beschikbaar"]) {
-                        echo " <div style='height: 650px;' class=\"col-md-3\">
-               <h4 class=\"videos\"> Aantal keer verhuurd: " . $row["aantalverhuurd"] . "</h4>
-               <img style='height: 400px' src=\"images/" . $row["fotopad"] . "\" class=\"img-responsive\">
-               <h3>" . $row["titel"] . "</h3>
+                        echo " <div style='height: 800px;' class=\"col-md-3\">
+               <h4 class=\"videos\"> Aantal keer verkocht: " . $row["aantalVerkocht"] . "</h4>
+               <img style='height: 400px' src=\"images/" . $row["foto"] . "\" class=\"img-responsive\">
+               <h3>" . $row["naam"] . "</h3>
                <p class=\"videos\">" . $row["beschrijving"] . "</p>
 
-               <a href='index.php?content=videoPagina&idVideo=" . $row["idVideo"] . "'><button type=\"button\" class=\"btn btn-primary\">Meer Informatie</button></a>
+               <a href='index.php?content=productPagina&idProduct=" . $row["idProduct"] . "'><button type=\"button\" class=\"btn btn-primary\">Meer Informatie</button></a>
 
                <br><br><br></div>
              ";
@@ -113,8 +79,6 @@ require_once("./classes/VerkoopClass.php");
             } else {
                 echo "0 results";
             }
-
-            $conn->close();
             ?>
 
             <br><br>
@@ -124,6 +88,3 @@ require_once("./classes/VerkoopClass.php");
 </div>
 </body>
 </html>
-<?php
-    }
-?>

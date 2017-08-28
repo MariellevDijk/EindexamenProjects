@@ -119,7 +119,6 @@
     <div class="container" style="height: 450px;">
         <div class="row">
             <div class="col-md-12 text-center fronttext" style="margin-top: 150px;">
-
                 <br>
                 <br>
             </div>
@@ -148,6 +147,22 @@
         </div>
     </div>
 </div>
+
+<div class="section1">
+    <div class="container">
+        <div class="row">
+            <?php include("dagAanbieding.php"); ?>
+        </div>
+    </div>
+</div>
+<div class="section1">
+    <div class="container">
+        <div class="row">
+            <?php include("meestVerkochtHome.php"); ?>
+        </div>
+    </div>
+</div>
+
 <div class="section2">
     <div class="container">
         <div class="row">

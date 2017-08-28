@@ -214,7 +214,7 @@ class LoginClass
 
     private static function send_email($idUser, $post, $wachtwoord)
     {
-        print_r($_POST);
+        // print_r($_POST);
         $to = $post['emailAdres'];
         $subject = "Activatiemail Webshop";
         $message = "Geachte heer/mevrouw " . $post['naam'] . " <br> ";
@@ -247,7 +247,7 @@ class LoginClass
     {
         global $database;
         $query = "UPDATE `users`
-					  SET `geactiveerd` = '1'
+					  SET `geactiveerd` = '1'   
 					  WHERE `idUser` = '" . $idUser . "'";
 
         $database->fire_query($query);
@@ -326,6 +326,65 @@ class LoginClass
         global $database;
 
         $query = "SELECT * FROM `users` where `idUser` = '" . $_SESSION['idUser'] . "'";
+
+        $result = $database->fire_query($query);
+
+        return $result;
+    }
+
+    public static function update_account_info($post)
+    {
+        global $database;
+
+        $query = "UPDATE	`users` 
+			                 SET 		`naam`		=	'" . $_POST['naam'] . "',
+						                `adres`	= 	'" . $_POST['adres'] . "',
+						                `woonplaats`	= 	'" . $_POST['woonplaats'] . "'
+			                 WHERE	`idUser`			=	'" . $_SESSION['idUser'] . "';";
+
+        $database->fire_query($query);
+    }
+
+    public static function update_betaalmethode($post)
+    {
+        global $database;
+
+        $query = "UPDATE `users` SET `betaalwijze` = '" . $_POST['idBetaalmethode'] . "'
+                  WHERE `idUser` = '" . $_SESSION['idUser'] . "'";
+
+        echo $query;
+        $database->fire_query($query);
+    }
+
+    public static function get_klant_betaalmethode()
+    {
+        global $database;
+
+        $query = "select betaalwijze, betaalwijze.naam from `users` INNER JOIN `betaalwijze` 
+                  on users.betaalwijze = betaalwijze.idBetaalwijze 
+                  WHERE `idUser` = '" . $_SESSION['idUser'] . "' ";
+
+        // echo $query;
+        return $database->fire_query($query);
+
+    }
+
+    public static function get_all_payment_methods()
+    {
+        global $database;
+
+        $query = "select * from betaalwijze";
+
+        $result = $database->fire_query($query);
+
+        return $result;
+    }
+
+    public static function get_all_users()
+    {
+        global $database;
+
+        $query = "select * from users";
 
         $result = $database->fire_query($query);
 
