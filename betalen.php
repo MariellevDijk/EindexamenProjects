@@ -27,7 +27,7 @@ if ($totalePrijs["totaalPrijs"] > '50') {
 if (isset($_POST['pay'])) {
     require_once("./classes/VerkoopClass.php");
     echo "<h3 style='text-align: center;' >Uw gegevens zijn verwerkt. Bedankt voor uw bestelling</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-    VerkoopClass::clear_winkelmand($_POST);
+
     VerkoopClass::insert_bestelling_database($_POST, $priceTotal);
 
     if ($allItemsInBasket->num_rows > 0) {
@@ -36,6 +36,7 @@ if (isset($_POST['pay'])) {
                 $row['totaalPrijs'] = ($row['totaalPrijs'] * 0.5);
             }
             VerkoopClass::insert_order_in_orderregel($row, $priceTotal);
+            VerkoopClass::clear_winkelmand($_POST);
             // print_r($row);
 //            echo "<br>";
         }

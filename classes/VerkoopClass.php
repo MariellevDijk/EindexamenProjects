@@ -30,6 +30,7 @@
         //Methods
         public static function insert_winkelmanditem_database($post)
         {
+            // Deze functie insert het winkelmand item die van de product pagina komt, in de winkelmand tabel zodat de klant zijn eigen winkelmand bijhoud.
             $idUserWm = $_POST['idUser'];
             $idProductWm = $_POST['idProduct'];
             $idAantalWm = $_POST['amount'];
@@ -45,6 +46,7 @@
         }
         public static function clear_winkelmand()
         {
+            // Deze functie haalt de winkelmand leeg nadat de order in de database zit
             global $database;
 
             $query = "DELETE FROM `winkelmand` WHERE `idUserWm` = " . $_SESSION['idUser'] . " ";
@@ -53,6 +55,7 @@
         }
         public static function remove_item_winkelmand($post)
         {
+            // Deze functie haalt een item uit de winkelmand als de klant hem niet meer wilt kopen
             global $database;
 
             $query = "DELETE FROM `winkelmand` WHERE `idUserWm` = " . $_SESSION['idUser'] . "
@@ -62,6 +65,7 @@
         }
         public static function insert_bestelling_database($post, $priceTotal)
         {
+            // Deze functie insert de bestelling vanuit de winkelmand in de tabel met orders.
             global $database;
 
             $datetime = date('Y-m-d');
@@ -81,65 +85,25 @@
         }
         public static function insert_order_in_orderregel($row, $priceTotal)
         {
+            // Voor elk verkochte afzonderlijke product in een order komt er een nieuwe orderregel. Hier zit ook mijn extra opdracht in.
             global $database;
 
             $sql = "SELECT `idOrder` from `order` WHERE `idUser` = '" . $_SESSION['idUser']. "' AND `totaalPrijs` = '" . $priceTotal . "'";
 
             $idOrderVoorRegels = $database->fire_query($sql);
-
             $idOrderVoorRegel = $idOrderVoorRegels->fetch_assoc();
 
-            $query = "INSERT INTO `orderregel` (`idOrderregel`, 
-                                        `idProduct`,
-                                         `idOrder`,
-                                        `prijsOr`,
-                                        `aantal`) 
-              VALUES                    (NULL, 
-                                        '" . $row['idProductWm'] . "',
-                                        '" . $idOrderVoorRegel['idOrder'] . "', 
-                                        '" . $row['totaalPrijs'] . "', 
-                                        '" . $row['aantalWm'] . "')";
 
-            $database->fire_query($query);
+            $queryMeestVerkocht = "SELECT `fromMeestVerkocht` FROM `winkelmand` WHERE `idProductWm` ='" . $row['idProductWm'] . "'";
 
-            self::lower_amount_Artikelen($row);
-            self::increase_amount_hired($row);
-        }
-        public static function insert_most_sold_winkelmanditem_database($post)
-        {
-            global $database;
+            $resultMeestVerkocht = $database->fire_query($queryMeestVerkocht);
 
-            $datetime = date('Y-m-d');
+            $resultsMeestVerkocht = $resultMeestVerkocht->fetch_assoc();
 
-            $query = "INSERT INTO `order` (`idOrder`, 
-                                                `idUser`, 
-                                                `totaalPrijs`,
-                                                `orderdatum`) 
-                      VALUES                    (NULL, 
-                                                '" . $_SESSION['idUser'] . "', 
-                                                '" . $priceTotal . "',
-                                                '" . $datetime . "')";
-
-            $database->fire_query($query);
-
-            self::insert_most_sold_winkelmand_orderregel();
-    //        self::lower_amount_Artikelen($post);
-    //        self::send_email($post, $last_id, $ophaaldatum);
-    //        self::increase_amount_hired($post);
-    //        self::update_beschikbaar();
-        }
-        public static function insert_most_sold_winkelmand_orderregel($row, $priceTotal)
-        {
-            global $database;
-
-            $sql = "SELECT `idOrder` from `order` WHERE `idUser` = '" . $_SESSION['idUser']. "' AND `totaalPrijs` = '" . $priceTotal . "'";
-
-            $idOrderVoorRegels = $database->fire_query($sql);
-
-            $idOrderVoorRegel = $idOrderVoorRegels->fetch_assoc();
-
-            $query = "INSERT INTO `orderregel` (`idOrderregel`, 
-                                        `idProduct`,
+            if ($resultsMeestVerkocht['fromMeestVerkocht'] == '1') {
+//                echo ">>>>>123<<<<<";
+                $query = "INSERT INTO `orderregel` (`idOrderregel`, 
+                                        `idProductOr`,
                                          `idOrder`,
                                         `prijsOr`,
                                         `aantal`,
@@ -149,8 +113,23 @@
                                         '" . $idOrderVoorRegel['idOrder'] . "', 
                                         '" . $row['totaalPrijs'] . "', 
                                         '" . $row['aantalWm'] . "',
-                                        '1')";
-
+                                        '" . '1' ."')";
+                //echo $query;
+            } else {
+//                echo ">>>> ABC <<<<<";
+                $query = "INSERT INTO `orderregel` (`idOrderregel`, 
+                                        `idProductOr`,
+                                         `idOrder`,
+                                        `prijsOr`,
+                                        `aantal`) 
+              VALUES                    (NULL, 
+                                        '" . $row['idProductWm'] . "',
+                                        '" . $idOrderVoorRegel['idOrder'] . "', 
+                                        '" . $row['totaalPrijs'] . "', 
+                                        '" . $row['aantalWm'] . "')";
+                // echo $query;
+            }
+            // echo $query;
             $database->fire_query($query);
 
             self::lower_amount_Artikelen($row);
@@ -158,6 +137,7 @@
         }
         public static function lower_amount_Artikelen($row)
         {
+            // Nadat er een product verkocht is moet er natuurlijk ook het aantal wat beschikbaar is omlaag gehaald worden.
             global $database;
 
             $query = "UPDATE `producten`
@@ -169,6 +149,7 @@
         }
         private static function send_email()
         {
+            // Een Email naar de klant zenden wegens de aankoop bij de webshop
             $to = $_SESSION['emailAdres'];
 
             $subject = "Bevestigingsmail Bestelling Webshop AutoTrader";
@@ -189,6 +170,7 @@
         }
         public static function increase_amount_sold($row)
         {
+            // Haal het aantal verkocht omhoog
             global $database;
 
             $query = "UPDATE `producten` SET `aantalVerkocht` =  `aantalVerkocht` + '" .$row['aantalWm'] . "' WHERE `idProduct` = '" . $row['idProductWm'] ."'";
@@ -197,6 +179,7 @@
         }
         public static function get_all_orders()
         {
+            // Alle orders binnenhalen
             global $database;
 
             $sql = "SELECT * FROM `order` WHERE `idUser` = " . $_SESSION['idUser'] . " ";
@@ -207,6 +190,7 @@
         }
         public static function get_regels_by_order($opgehaaldeOrders)
         {
+            // Alle regels bij alle orders binnenhalen
             global $database;
 
             $sql = "SELECT * FROM `orderregel` INNER JOIN `producten` on orderregel.idProduct = producten.idProduct WHERE `idOrder` = " . $opgehaaldeOrders["idOrder"] . " ";
@@ -219,6 +203,7 @@
         }
         public static function get_total_price_with_shipping()
         {
+            // Totale prijs met verzendkosten ophalen
             global $database;
             $sql = "select `idWinkelmand`, `idProductWm`, `prijs`, `aantalWm`,`aantalWm` * `prijs` as totaalPrijs, `naam`  from `winkelmand`
                     INNER JOIN `producten` on winkelmand.idProductWm = producten.idProduct
@@ -230,6 +215,7 @@
         }
         public static function selecteer_totaal_prijs_winkelmand_items()
         {
+            // Totale prijs van alle winkelmand items ophalen
             global $database;
 
             $sql =  "select sum(`aantalWm` * `prijs`) as totaalPrijs  from `winkelmand`
@@ -244,6 +230,7 @@
         }
         public static function get_most_popular_products()
         {
+            // Haal de meest populaire producten op ( Extra opdracht )
             global $database;
 
             $query = "SELECT * FROM producten 
@@ -255,6 +242,7 @@
         }
         public static function get_most_popular_products_extra_page()
         {
+            // Haal de meest populaire producten op ( Extra opdracht )
             global $database;
 
             $query = "SELECT * FROM producten 
@@ -266,7 +254,7 @@
         }
         public static function dagProductAanwezig()
         {
-
+            // Checken of er een dag product aanwezig is in de winkelmand. ( Wijzigingsopdracht )
             global $database;
 
             $query = "SELECT * FROM `winkelmand` where `dagProductWm` = 1 AND `idUserWm` =  ".$_SESSION['idUser']." ";
@@ -277,6 +265,7 @@
         }
         public static function selecteer_totaal_prijs_niet_dagproduct_winkelmand_items()
         {
+            // Het selecteren van de totaal prijs van alle niet dagproducten in het winkelmandje ( Wijzigingsopdracht )
             global $database;
 
             $sql =  "select `dagProduct`, sum(`aantalWm` * `prijs`) as totaalPrijs  from `winkelmand`
@@ -291,6 +280,7 @@
         }
         public static function selecteer_totaal_prijs_dagproduct_winkelmand_items()
         {
+            // Totaal prijs van de dagproducten in de winkelmand
             global $database;
 
             $sql =  "select sum(`aantalWm` * (`prijs` * 0.5)) as totaalPrijs, `dagProduct`  from `winkelmand`
@@ -303,5 +293,35 @@
 
             return $totalePrijs;
         }
+
+        // Extra Opdracht
+        public static function insert_most_sold_in_winkelmand($post)
+        {
+            // Insert een product van de homepagina van Meest verkocht in het winkelmandje
+            $idUserWm = $_POST['idUser'];
+            $idProductWm = $_POST['idProduct'];
+            $idAantalWm = $_POST['amount'];
+
+            global $database;
+
+            $query = "INSERT INTO `winkelmand` (`idWinkelmand`, `idUserWm`, `idProductWm`, `aantalWm`, `fromMeestVerkocht`) 
+                                        VALUES (NULL, '" . $idUserWm . "', '" . $idProductWm . "', " . $idAantalWm . ", '1')";
+
+            $database->fire_query($query);
+
+            $last_id = mysqli_insert_id($database->getDb_connection());
+        }
+        public static function meestVerkochteProducten()
+        {
+            // Haal alle verkochte meestverkochte producten op voor een overzicht voor de admin
+            global $database;
+
+            $query = "SELECT *, producten.naam FROM `producten` INNER JOIN `orderregel` on `idProductOr` = `idProduct` WHERE `verkochtViaMeestVerkocht` = '1'";
+
+            $result = $database->fire_query($query);
+
+            return $result;
+        }
+
     }
 ?>

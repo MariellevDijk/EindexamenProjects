@@ -10,24 +10,9 @@ require_once("./security.php");
 
 <?php
 
-if (isset($_POST['favoriet'])) {
-    require_once("./classes/FavorietClass.php");
-
-    if (FavorietClass::check_if_exists($_POST)) {
-        //Zo ja, geef een melding dat het emailadres bestaat en stuur
-        //door naar register_form.php
-        echo "<h3 style='text-align: center;' >Uw heeft dit product al in uw favorieten</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-        header("refresh:5;url=index.php?content=favorieteProducten");
-    } else {
-        echo "<h3 style='text-align: center;' ></h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-        header("refresh:10;url=index.php?content=favorieteProducten");
-        FavorietClass::add_to_favorites($_POST);
-    }
-
-} else if (isset($_POST['submit'])) {
-
+if (isset($_POST['submit'])) {
     echo "<h3 style='text-align: center;' >Meest verkocht Item toegevoegd aan winkelmand.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-    header("refresh:4;url=index.php?content=favorieteProducten");
+    header("refresh:4;url=index.php?content=winkelmand");
     require_once("./classes/VerkoopClass.php");
     VerkoopClass::insert_most_sold_winkelmanditem_database($_POST);
 } else {

@@ -7,15 +7,15 @@ require_once("SessionClass.php");
     {
         //Fields
         private $idKlacht;
-        private $idUser;
+        private $idUserKlacht;
         private $klacht;
 
         public function getIdKlacht()       { return $this->idKlacht; }
-        public function getidUser()         { return $this->idUser; }
+        public function getidUserKlacht()   { return $this->idUserKlacht; }
         public function getKlacht()         { return $this->klacht; }
 
         public function setIdKlacht($value) { $this->idKlacht = $value; }
-        public function setidUser($value)   { $this->klacht = $value; }
+        public function setidUserKlacht($value)   { $this->idUserKlacht = $value; }
         public function setKlacht($value)   { $this->klacht = $value; }
 
         // Constructor
@@ -28,7 +28,7 @@ require_once("SessionClass.php");
         {
             global $database;
 
-            $query = "INSERT INTO `klacht` (`idKlacht`, `idUser`, `klacht`) 
+            $query = "INSERT INTO `klacht` (`idKlacht`, `idUserKlacht`, `klacht`) 
                       VALUES (NULL, '" . $_SESSION['idUser'] . "', '" . $klacht . "')";
 
             $database->fire_query($query);
@@ -37,7 +37,7 @@ require_once("SessionClass.php");
 
             self::send_email($klacht);
         }
-        private static function send_email($klacht)
+        public static function send_email($klacht)
         {
             $to = $_SESSION['emailAdres'];
 
@@ -57,6 +57,26 @@ require_once("SessionClass.php");
             $headers .= 'X-Mailer: PHP/' . phpversion();
 
             mail($to, $subject, $message, $headers);
+        }
+        public static function get_all_klachten()
+        {
+            global $database;
+
+            $query = "SELECT * FROM `klacht`";
+
+            $result = $database->fire_query($query);
+
+            return $result;
+        }
+        public static function get_email_klant_with_klacht($row)
+        {
+            global $database;
+
+            $query = "SELECT *, users.naam FROM `users` INNER JOIN `klacht` on `idUserKlacht` = `idUser` WHERE `idUser` = '" . $row['idUserKlacht'] . "'";
+
+            $result = $database->fire_query($query);
+
+            return $result;
         }
     }
 ?>

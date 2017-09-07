@@ -39,8 +39,10 @@ require_once("./security.php");
                                 <li><a href="index.php?content=\beheerpaginas\productenBeheren">Producten beheren</a></li>
                                 <li><a href="index.php?content=\beheerpaginas\verwijderProduct">Producten verwijderen</a></li>
                                 <li><a href="index.php?content=\beheerpaginas\beschikbaarMaken">Producten beschikbaar maken</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\meestVerkochtProductOverview">Meest Verkochte Producten Overview</a></li>
                                 <li><a href="index.php?content=\beheerpaginas\rolWijzigen">Gebruikerrol veranderen</a></li>
                                 <li><a href="index.php?content=\beheerpaginas\blokkeren">Gebruiker blokkeren</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\klachtenBekijken">Klachten Bekijken</a></li>
                             </ul>
                         </div>
                     </div>

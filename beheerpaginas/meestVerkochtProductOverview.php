@@ -1,56 +1,18 @@
 <?php
-$rollen = array("admin");
+$rollen = array("admin", "eigenaar");
 require_once("./security.php");
 ?>
 
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
-          type="text/css">
-    <link href="style.css" rel="stylesheet" type="text/css">
-    <style>
-        .header {
-            font-size: 24px;
-            padding: 20px;
-        }
 
-        th {
-            min-width: 300px;
-        }
-    </style>
-</head>
+<html>
 <body>
 <div class="section">
     <div class="container">
-        <?php
-
-
-        require_once("classes/VerkoopClass.php");
-        if (isset($_POST['updateBlock'])) {
-            include('connect_db.php');
-
-            $sql = "UPDATE	`producten` 
-                     SET 		`beschikbaar`		=	'" . $_POST['blockSelect'] . "'
-                     WHERE	    `idProduct`			=	 " . $_POST['idProduct'] . " ";
-
-            // echo $sql;
-            $database->fire_query($sql);
-            $result = mysqli_query($connection, $sql);
-
-            echo "<h3 style='text-align: center;' >Uw wijzigingen zijn verwerkt.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-            header("refresh:4;url=index.php?content=beschikbaarmaken");
-
-        } else {
-        ?>
         <div class="row">
             <div class="section">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12"><h2>Product Beschikbaar Maken</h2></div>
+                        <div class="col-md-12"><h2>Meest verkochte producten verkocht</h2></div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -75,9 +37,8 @@ require_once("./security.php");
                     require_once("classes/LoginClass.php");
                     require_once("classes/VerkoopClass.php");
                     require_once("classes/SessionClass.php");
-                    require_once("classes/ProductClass.php");
 
-                    $result = ProductClass::get_all_products();
+                    $result = VerkoopClass::meestVerkochteProducten();
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -87,38 +48,38 @@ require_once("./security.php");
                             <thead>
                             <tr>
                                 <th>
-                                        Titel:
+                                        id Order
                                 </th>
                                 <th>
-                                        AantalBeschikbaar:
+                                        id Product
                                 </th>
                                 <th>
-                                        Beschikbaar:
+                                        Naam Product
+                                </th>
+                                <th>
+                                        Prijs
+                                </th>
+                                <th>
+                                        Aantal
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td>
+                                        " . $row['idOrder'] . "
+                                </td>
+                                <td>
+                                        " . $row['idProductOr'] . "
+                                </td>
+                                <td>
                                         " . $row['naam'] . "
                                 </td>
-
                                 <td>
-                                        " . $row['aantalBeschikbaar'] . "
+                                        " . $row['prijsOr'] . "
                                 </td>
                                 <td>
-                                        " . $row['beschikbaar'] . "
-                                </td>
-                                <td>
-                                        <form role=\"form\" action='' method='post'>
-                                            <select name='blockSelect'>
-                                                <option value='1'>Beschikbaar ( 1 )</option>
-                                                <option value='0'>Niet beschikbaar ( 0 )</option>
-                                                </select>
-                                            <input type='hidden' class=\"btn btn-info\" name='idProduct' value='" . $row['idProduct'] . "'/>
-                                            <input type='submit' class=\"btn btn-info\" name='updateBlock' value='Update Beschikbaarheid'>
-                                            
-                                        </form>
+                                        " . $row['aantal'] . "
                                 </td>
                             </tr>
                             </tbody>
@@ -133,10 +94,6 @@ require_once("./security.php");
                     <br><br>
                 </div>
             </div>
-            <?php
-
-            }
-            ?>
             </row>
         </div>
     </div>

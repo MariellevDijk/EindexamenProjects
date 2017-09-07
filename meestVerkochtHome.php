@@ -14,7 +14,7 @@
            <h3>" . $row["naam"] . "</h3>
            <p class=\"videos\">" . $row["beschrijving"] . "</p>
 
-           <a href='index.php?content=productPagina&idProduct=" . $row["idProduct"] . "'><button type=\"button\" class=\"btn btn-primary\">Meer Informatie</button></a>
+           <a href='index.php?content=productPaginaMeestVerkocht&idProduct=" . $row["idProduct"] . "'><button type=\"button\" class=\"btn btn-primary\">Meer Informatie</button></a>
 
            <br><br><br></div>
          ";
@@ -24,3 +24,4 @@
             echo "0 results";
         }
     ?>
+

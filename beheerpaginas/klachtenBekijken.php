@@ -5,19 +5,6 @@ require_once("./security.php");
 
 
 <html>
-<head>
-
-    <style>
-        .header {
-            font-size: 24px;
-            padding: 20px;
-        }
-
-        th {
-            min-width: 300px;
-        }
-    </style>
-</head>
 <body>
 <div class="section">
     <div class="container">
@@ -36,8 +23,10 @@ require_once("./security.php");
                                 <li><a href="index.php?content=\beheerpaginas\productenBeheren">Producten beheren</a></li>
                                 <li><a href="index.php?content=\beheerpaginas\verwijderProduct">Producten verwijderen</a></li>
                                 <li><a href="index.php?content=\beheerpaginas\beschikbaarMaken">Producten beschikbaar maken</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\meestVerkochtProductOverview">Meest Verkochte Producten Overview</a></li>
                                 <li><a href="index.php?content=\beheerpaginas\rolWijzigen">Gebruikerrol veranderen</a></li>
                                 <li><a href="index.php?content=\beheerpaginas\blokkeren">Gebruiker blokkeren</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\klachtenBekijken">Klachten Bekijken</a></li>
                             </ul>
                         </div>
                     </div>
@@ -46,30 +35,18 @@ require_once("./security.php");
                 <div class="col-md-6">
                     <?php
                     require_once("classes/LoginClass.php");
-                    require_once("classes/VerkoopClass.php");
+                    require_once("classes/KlachtClass.php");
                     require_once("classes/SessionClass.php");
 
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    // <Wijzigingsopdracht>
-                    $dbname = "examendatabase";
-                    // </Wijzigingsopdracht>
+                    $result = KlachtClass::get_all_klachten();
 
-                    // Create connection
-                    $conn = new mysqli($servername, $username, $password, $dbname);
-                    // Check connection
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
-
-
-                    $sql = "SELECT * FROM `klachten`";
-                    $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
+                            $result2 = KlachtClass::get_email_klant_with_klacht($row);
+                            $row2 = $result2->fetch_assoc();
 
+                            $emailAdresKlant = $row2['emailAdres'];
                             echo "
                         <table class=\"table table - responsive\">
                             <thead>
@@ -86,7 +63,7 @@ require_once("./security.php");
                             <tr>
 
                                 <td>
-                                        " . $row['emailKlant'] . "
+                                        <a href='mailto:" . $row2['emailAdres'] . "'/>Klik om te mailen</a>
                                 </td>
                                 <td>
                                         " . $row['klacht'] . "
@@ -99,7 +76,6 @@ require_once("./security.php");
                     } else {
                         echo "Geen resultaten<br><br><br><br><br><br><br>";
                     }
-                    $conn->close();
                     ?>
 
                     <br><br>
