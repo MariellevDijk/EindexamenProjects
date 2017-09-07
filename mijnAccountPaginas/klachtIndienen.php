@@ -10,7 +10,7 @@ if (isset($_POST['submit-klacht'])) {
 
     KlachtClass::insert_klacht_into_database($_POST['klacht']);
     echo "<h3 style='text-align: center;' >Uw klacht of opmerking is verzonden.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-    header("refresh:4;url=index.php?content=algemeneHomepage");
+    header("refresh:4;url=index.php?content=\mijnAccountPaginas\mijnAccountGegevens");
 } else {
     ?>
     <html>
@@ -43,10 +43,10 @@ if (isset($_POST['submit-klacht'])) {
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="index.php?content=klantHomepage">Winkelmand</a></li>
-                        <li><a href="index.php?content=mijnBestellingen">Mijn bestellingen</a></li>
-                        <li><a href="index.php?content=reserveringen">Reserveringen</a></li>
-                        <li><a href="index.php?content=klachtIndienen">Klacht indienen</a></li>
+                        <li><a href="index.php?content=\mijnAccountPaginas\mijnAccountGegevens">Gegevens Aanpassen</a></li>
+                        <li><a href="index.php?content=\mijnAccountPaginas\wijzig_wachtwoord">Wachtwoord Veranderen</a></li>
+                        <li><a href="index.php?content=\mijnAccountPaginas\wijzig_betaalmeathode">Wijzig betaalmethode</a></li>
+                        <li><a href="index.php?content=\mijnAccountPaginas\klachtIndienen">Klacht indienen</a></li>
                     </ul>
                 </div>
             </div>
@@ -57,13 +57,11 @@ if (isset($_POST['submit-klacht'])) {
                     <div class="row">
                         <div class="col-md-12 text-left">
                             <form role="form" action="" method="post">
-
                                 <div class="form-group"><label class="control-label"
                                                                for="comment">Klacht/Opmerking</label>
                                     <textarea class="form-control" id="klacht" placeholder="Klacht/Opmerking"
                                               type="text" name="klacht" rows="8" required></textarea></div>
                                 <button type="submit" class="btn btn-primary" name="submit-klacht">Verzend</button>
-
                             </form>
                         </div>
                     </div>

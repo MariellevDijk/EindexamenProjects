@@ -1,8 +1,7 @@
 <?php
-$rollen = array("admin");
+$rollen = array("admin", "eigenaar");
 require_once("./security.php");
 ?>
-
 <html>
 <head>
     <meta charset="utf-8">
@@ -26,23 +25,22 @@ require_once("./security.php");
 <body>
 <div class="section">
     <div class="container">
+
         <?php
 
-
-        require_once("classes/VerkoopClass.php");
-        if (isset($_POST['updateBlock'])) {
+        require_once("classes/LoginClass.php");
+        if (isset($_POST['removeUser'])) {
             include('connect_db.php');
 
-            $sql = "UPDATE	`producten` 
-                     SET 		`beschikbaar`		=	'" . $_POST['blockSelect'] . "'
-                     WHERE	    `idProduct`			=	 " . $_POST['idProduct'] . " ";
+            $sql = "DELETE FROM	`login` WHERE `idUser` = " . $_POST['idUser'] . " ";
 
-            // echo $sql;
+
+            //echo $sql;
             $database->fire_query($sql);
-            $result = mysqli_query($connection, $sql);
+            //$result = mysqli_query($connection, $sql);
 
             echo "<h3 style='text-align: center;' >Uw wijzigingen zijn verwerkt.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-            header("refresh:4;url=index.php?content=beschikbaarmaken");
+            header("refresh:4;url=index.php?content=adminHomepage");
 
         } else {
         ?>
@@ -50,19 +48,20 @@ require_once("./security.php");
             <div class="section">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12"><h2>Product Beschikbaar Maken</h2></div>
+                        <div class="col-md-12"><h2>Gebruiker verwijderen</h2></div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li><a href="index.php?content=adminHomepage">Admin Homepage</a></li>
-                                <li><a href="index.php?content=productenToevoegen">Producten Toevoegen</a></li>
-                                <li><a href="index.php?content=productenBeheren">Producten beheren</a></li>
-                                <li><a href="index.php?content=verwijderProduct">Producten verwijderen</a></li>
-                                <li><a href="index.php?content=beschikbaarMaken">Producten beschikbaar maken</a></li>
-                                <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
-                                <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
-                                <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\adminHomepage">Admin Homepage</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\productenToevoegen">Producten Toevoegen</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\productVanDeDag">Product van de dag</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\productenBeheren">Producten beheren</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\verwijderProduct">Producten verwijderen</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\beschikbaarMaken">Producten beschikbaar maken</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\rolWijzigen">Gebruikerrol veranderen</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\blokkeren">Gebruiker blokkeren</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\gebruikerVerwijderen">Gebruiker verwijderen</a></li>
                             </ul>
                         </div>
                     </div>
@@ -73,9 +72,8 @@ require_once("./security.php");
                     require_once("classes/LoginClass.php");
                     require_once("classes/VerkoopClass.php");
                     require_once("classes/SessionClass.php");
-                    require_once("classes/ProductClass.php");
 
-                    $result = ProductClass::get_available_products();
+                    $result = LoginClass::get_all_users();
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -85,37 +83,31 @@ require_once("./security.php");
                             <thead>
                             <tr>
                                 <th>
-                                        Titel:
+                                        Naam:
                                 </th>
                                 <th>
-                                        AantalBeschikbaar:
+                                        E-mail:
                                 </th>
                                 <th>
-                                        Beschikbaar:
+                                        Rol:
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td>
-                                        " . $row['naam'] . "
-                                </td>
-
-                                <td>
-                                        " . $row['aantalBeschikbaar'] . "
+                                        " . $row["naam"] . "
                                 </td>
                                 <td>
-                                        " . $row['beschikbaar'] . "
+                                        " . $row['emailAdres'] . "
+                                </td>
+                                <td>
+                                        " . $row['rol'] . "
                                 </td>
                                 <td>
                                         <form role=\"form\" action='' method='post'>
-                                            <select name='blockSelect'>
-                                                <option value='1'>Beschikbaar ( 1 )</option>
-                                                <option value='0'>Niet beschikbaar ( 0 )</option>
-                                                </select>
-                                            <input type='hidden' class=\"btn btn-info\" name='idProduct' value='" . $row['idProduct'] . "'/>
-                                            <input type='submit' class=\"btn btn-info\" name='updateBlock' value='Update Beschikbaarheid'>
-                                            
+                                            <input type='submit' class=\"btn btn-info\" name='removeUser' value='Verwijder Gebruiker'>
+                                            <input type='hidden' class=\"btn btn-info\" name='idUser' value='" . $row['idUser'] . "'/>
                                         </form>
                                 </td>
                             </tr>

@@ -329,6 +329,7 @@
 
             $result = $database->fire_query($query);
 
+            echo $query;
             return $result;
         }
         public static function get_all_users()

@@ -7,12 +7,16 @@ require_once("./security.php");
 
 require_once("classes/LoginClass.php");
 if (isset($_POST['changePaymentMethod'])) {
-    LoginClass::update_betaalmethode($_POST);
+    var_dump($_POST['changePaymentMethod']);
+    if (!($_POST['changePaymentMethod'] = '')) {
+        LoginClass::update_betaalmethode($_POST);
+        echo "<h3 style='text-align: center;' >Uw wijzigingen zijn verwerkt.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+        header("refresh:4;url=index.php?content=\mijnAccountPaginas\wijzig_betaalmeathode");
+    } else {
+        echo "<h3 style='text-align: center;' >Kies een betaalmethode.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
 
-    echo "<h3 style='text-align: center;' >Uw wijzigingen zijn verwerkt.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-    header("refresh:4;url=index.php?content=mijnAccountGegevens");
-
-
+        header("refresh:4;url=index.php?content=\mijnAccountPaginas\wijzig_betaalmeathode");
+    }
 } else {
     ?>
 
@@ -28,7 +32,7 @@ if (isset($_POST['changePaymentMethod'])) {
         <link href="mijnAccountGegevens.css" rel="stylesheet" type="text/css">
         <style>
             .header {
-                font-size: 24;
+                font-size: 24px;
                 padding: 20px;
             }
         </style>
@@ -42,10 +46,10 @@ if (isset($_POST['changePaymentMethod'])) {
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li><a href="index.php?content=mijnAccountGegevens">Gegevens Aanpassen</a></li>
-                                <li><a href="index.php?content=wijzig_wachtwoord">Wachtwoord Veranderen</a></li>
-                                <li><a href="index.php?content=wijzig_betaalmethode">Wijzig betaalmethode</a></li>
-                                <li><a href="index.php?content=klachtIndienen">Klacht indienen</a></li>
+                                <li><a href="index.php?content=\mijnAccountPaginas\mijnAccountGegevens">Gegevens Aanpassen</a></li>
+                                <li><a href="index.php?content=\mijnAccountPaginas\wijzig_wachtwoord">Wachtwoord Veranderen</a></li>
+                                <li><a href="index.php?content=\mijnAccountPaginas\wijzig_betaalmeathode">Wijzig betaalmethode</a></li>
+                                <li><a href="index.php?content=\mijnAccountPaginas\klachtIndienen">Klacht indienen</a></li>
                             </ul>
                         </div>
                     </div>
@@ -61,20 +65,25 @@ if (isset($_POST['changePaymentMethod'])) {
                             $betaalwijze = LoginClass::get_all_payment_methods();
                             $result = LoginClass::get_klant_betaalmethode();
                             $row2 = $result->fetch_assoc();
+
                             ?>
+
                     <div style=' margin-bottom: -20px;' class="col-md-3">
                         <?php
-                            echo "Uw huidige betaalmethode is: " . $row2['naam'];
+                            echo "Uw huidige betaalmethode is: " . $row2['naam'] . "<br>";
                         ?>
+                        <br>
                         <form role=\"form\" action='' method='post'>
                             <select class="form-control" name="idBetaalmethode">
                                 <option value="none" selected="selected" disabled="disabled">--- Kies een optie ---</option>
                                 <?php
                                 while ($row = $betaalwijze->fetch_assoc()) {
+                                    var_dump($row);
                                     echo "<option value='" . $row['idBetaalwijze'] . "'>" . $row['naam'] . "</option>";
                                 }
                                 ?>
                             </select>
+                            <BR>
                             <button type='submit' name='changePaymentMethod' class='btn btn-success'>Verander betaalmethode</button>
                         </form>
 

@@ -30,8 +30,10 @@ if (isset($_POST['submit'])) {
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="index.php?content=mijnAccountGegevens">Gegevens Aanpassen</a></li>
-                        <li><a href="index.php?content=wijzig_wachtwoord">Wachtwoord Veranderen</a></li>
+                        <li><a href="index.php?content=\mijnAccountPaginas\mijnAccountGegevens">Gegevens Aanpassen</a></li>
+                        <li><a href="index.php?content=\mijnAccountPaginas\wijzig_wachtwoord">Wachtwoord Veranderen</a></li>
+                        <li><a href="index.php?content=\mijnAccountPaginas\wijzig_betaalmeathode">Wijzig betaalmethode</a></li>
+                        <li><a href="index.php?content=\mijnAccountPaginas\klachtIndienen">Klacht indienen</a></li>
                     </ul>
                 </div>
             </div>

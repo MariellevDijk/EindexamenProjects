@@ -45,14 +45,15 @@ if (isset($_POST['create'])) {
     <div class="row">
         <div class="col-md-12">
             <ul class="breadcrumb">
-                <li><a href="index.php?content=adminHomepage">Admin Homepage</a></li>
-                <li><a href="index.php?content=productenToevoegen">Producten Toevoegen</a></li>
-                <li><a href="index.php?content=productenBeheren">Producten beheren</a></li>
-                <li><a href="index.php?content=verwijderProduct">Producten verwijderen</a></li>
-                <li><a href="index.php?content=beschikbaarMaken">Producten beschikbaar maken</a></li>
-                <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
-                <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
-                <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
+                <li><a href="index.php?content=\beheerpaginas\adminHomepage">Admin Homepage</a></li>
+                <li><a href="index.php?content=\beheerpaginas\productenToevoegen">Producten Toevoegen</a></li>
+                <li><a href="index.php?content=\beheerpaginas\productVanDeDag">Product van de dag</a></li>
+                <li><a href="index.php?content=\beheerpaginas\productenBeheren">Producten beheren</a></li>
+                <li><a href="index.php?content=\beheerpaginas\verwijderProduct">Producten verwijderen</a></li>
+                <li><a href="index.php?content=\beheerpaginas\beschikbaarMaken">Producten beschikbaar maken</a></li>
+                <li><a href="index.php?content=\beheerpaginas\rolWijzigen">Gebruikerrol veranderen</a></li>
+                <li><a href="index.php?content=\beheerpaginas\blokkeren">Gebruiker blokkeren</a></li>
+                <li><a href="index.php?content=\beheerpaginas\gebruikerVerwijderen">Gebruiker verwijderen</a></li>
             </ul>
         </div>
     </div>

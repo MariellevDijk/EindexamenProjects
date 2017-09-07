@@ -1,5 +1,5 @@
 <?php
-$rollen = array("admin", "eigenaar");
+$rollen = array("admin");
 require_once("./security.php");
 ?>
 
@@ -25,7 +25,7 @@ if (isset($_POST['create'])) {
         }
 
         th {
-            min-width: 300px;
+            min-width: 250px;
         }
     </style>
 </head>
@@ -36,19 +36,19 @@ if (isset($_POST['create'])) {
 
 
         require_once("classes/LoginClass.php");
-        if (isset($_POST['updaterol'])) {
+        if (isset($_POST['updateBlock'])) {
             include('connect_db.php');
 
-            $sql = "UPDATE	`users` 
-                     SET 		`rol`		=	'" . $_POST['rolSelect'] . "'
+            $sql = "UPDATE	`login` 
+                     SET 		`geblokkeerd`		=	'" . $_POST['blockSelect'] . "'
                      WHERE	    `idUser`			=	 " . $_POST['idUser'] . " ";
 
-            //echo $sql;
+            // echo $sql;
             $database->fire_query($sql);
-            //$result = mysqli_query($connection, $sql);
+            $result = mysqli_query($connection, $sql);
 
-            echo "<h3 style='text-align: center;' >Uw wijzigingen zijn verwerkt.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-            header("refresh:4;url=index.php?content=adminHomepage");
+            echo "<h3 style='text-align: center;' >Uw wijzigingen zijn verwerkt.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+            header("refresh:4;url=index.php?content=blokkeren");
 
         } else {
         ?>
@@ -56,19 +56,20 @@ if (isset($_POST['create'])) {
             <div class="section">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12"><h2>Gebruikerrol Wijzigen</h2></div>
+                        <div class="col-md-12"><h2>Gebruiker Blokkeren</h2></div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li><a href="index.php?content=adminHomepage">Admin Homepage</a></li>
-                                <li><a href="index.php?content=productenToevoegen">Producten Toevoegen</a></li>
-                                <li><a href="index.php?content=productenBeheren">Producten beheren</a></li>
-                                <li><a href="index.php?content=verwijderProduct">Producten verwijderen</a></li>
-                                <li><a href="index.php?content=beschikbaarMaken">Producten beschikbaar maken</a></li>
-                                <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
-                                <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
-                                <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\adminHomepage">Admin Homepage</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\productenToevoegen">Producten Toevoegen</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\productVanDeDag">Product van de dag</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\productenBeheren">Producten beheren</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\verwijderProduct">Producten verwijderen</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\beschikbaarMaken">Producten beschikbaar maken</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\rolWijzigen">Gebruikerrol veranderen</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\blokkeren">Gebruiker blokkeren</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\gebruikerVerwijderen">Gebruiker verwijderen</a></li>
                             </ul>
                         </div>
                     </div>
@@ -82,7 +83,7 @@ if (isset($_POST['create'])) {
 
                     $result = LoginClass::get_all_users();
 
-                     if ($result->num_rows > 0) {
+                    if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
 
                             echo "
@@ -93,10 +94,13 @@ if (isset($_POST['create'])) {
                                         Naam:
                                 </th>
                                 <th>
-                                        E-mailadres:
+                                        E-mail:
                                 </th>
                                 <th>
                                         Rol:
+                                </th>
+                                <th>
+                                        Geblokkeerd:
                                 </th>
                             </tr>
                             </thead>
@@ -112,13 +116,16 @@ if (isset($_POST['create'])) {
                                         " . $row['rol'] . "
                                 </td>
                                 <td>
+                                        " . $row['geblokkeerd'] . "
+                                </td>
+                                <td>
                                         <form role=\"form\" action='' method='post'>
-                                            <select name='rolSelect'>
-                                                <option disabled='disabled'>--- Kies een optie ---</option>
-                                                <option value='2'>Klant</option>
-                                                <option value='1'>Admin</option>
+                                            <select name='blockSelect'>
+                                                <option value='1'>Blokkeren ( 1 )</option>
+                                                <option value='0'>Deblokkeren ( 0 )</option>
+                                                </select>
                                             <input type='hidden' class=\"btn btn-info\" name='idUser' value='" . $row['idUser'] . "'/>
-                                            <input type='submit' class=\"btn btn-info\" name='updaterol' value='Update Rol'>
+                                            <input type='submit' class=\"btn btn-info\" name='updateBlock' value='Update Blokkade'>
                                             
                                         </form>
                                 </td>

@@ -12,7 +12,7 @@
         }
         container {
             position: absolute;
-            right: 20;
+            right: 20px;
             bottom: 0;
             left: 0;
             padding: 1rem;
@@ -30,7 +30,7 @@
 
 
                     <li><h4><a href="index.php?content=contact">Contact<br></a></h4></li>
-                    <li><h4><a href="index.php?content=voorwaarden">Voorwaarden<br></a></h4></li>
+                    <li><h4><a href="index.php?content=\voorwaarden\voorwaarden">Voorwaarden<br></a></h4></li>
 
                 </ul>
                 </p></div>

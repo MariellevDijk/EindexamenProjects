@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
     LoginClass::update_account_info($_POST);
 
     echo "<h3 style='text-align: center;' >Uw wijzigingen zijn verwerkt.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-    header("refresh:4;url=index.php?content=mijnAccountGegevens");
+    header("refresh:4;url=index.php?content=\mijnAccountPaginas\mijnAccountGegevens");
 
 
 } else {
@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
         <link href="mijnAccountGegevens.css" rel="stylesheet" type="text/css">
         <style>
             .header {
-                font-size: 24;
+                font-size: 24px;
                 padding: 20px;
             }
         </style>
@@ -43,10 +43,10 @@ if (isset($_POST['submit'])) {
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li><a href="index.php?content=mijnAccountGegevens">Gegevens Aanpassen</a></li>
-                                <li><a href="index.php?content=wijzig_wachtwoord">Wachtwoord Veranderen</a></li>
-                                <li><a href="index.php?content=wijzig_betaalmeathode">Wijzig betaalmethode</a></li>
-                                <li><a href="index.php?content=klachtIndienen">Klacht indienen</a></li>
+                                <li><a href="index.php?content=\mijnAccountPaginas\mijnAccountGegevens">Gegevens Aanpassen</a></li>
+                                <li><a href="index.php?content=\mijnAccountPaginas\wijzig_wachtwoord">Wachtwoord Veranderen</a></li>
+                                <li><a href="index.php?content=\mijnAccountPaginas\wijzig_betaalmeathode">Wijzig betaalmethode</a></li>
+                                <li><a href="index.php?content=\mijnAccountPaginas\klachtIndienen">Klacht indienen</a></li>
                             </ul>
                         </div>
                     </div>
@@ -63,9 +63,12 @@ if (isset($_POST['submit'])) {
 
                     $result = LoginClass::get_account_info();
 
-                    if ($result->num_rows > 0) {
+
+                    if ($result->num_rows == 1) {
                         while ($row = $result->fetch_assoc()) {
-                            echo "<form role=\"form\" action=\"index.php?content=mijnAccountGegevens\" method=\"post\">
+                            echo "Uw huidige gegevens zijn nu:<br>" . $row['naam'] . "<br>" . $row['adres'] . "<br>" . $row['woonplaats'] . "<br>";
+                            echo "<br> Hier onder kunt u uw gegevens veranderen <br>";
+                            echo "<br><form role=\"form\" action=\"index.php?content=\mijnAccountPaginas\mijnAccountGegevens\" method=\"post\">
                         <div class=\"form-group\"><label class=\"control-label\" for=\"naam\">Naam<br></label>
                             <input class=\"form-control\" id=\"naam\" placeholder=\"Naam\" type=\"text\" name=\"naam\" value='" . $row['naam'] . "' required></div>
                         <div class=\"form-group\"><label class=\"control-label\" for=\"adres\">Adres<br></label>

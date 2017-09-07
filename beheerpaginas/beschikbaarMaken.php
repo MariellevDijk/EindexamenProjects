@@ -3,12 +3,6 @@ $rollen = array("admin");
 require_once("./security.php");
 ?>
 
-<?php
-if (isset($_POST['create'])) {
-    require_once("./classes/VideoClass.php");
-    VideoClass::insert_film_database($_POST);
-}
-?>
 <html>
 <head>
     <meta charset="utf-8">
@@ -25,7 +19,7 @@ if (isset($_POST['create'])) {
         }
 
         th {
-            min-width: 250px;
+            min-width: 300px;
         }
     </style>
 </head>
@@ -35,20 +29,20 @@ if (isset($_POST['create'])) {
         <?php
 
 
-        require_once("classes/LoginClass.php");
+        require_once("classes/VerkoopClass.php");
         if (isset($_POST['updateBlock'])) {
             include('connect_db.php');
 
-            $sql = "UPDATE	`login` 
-                     SET 		`geblokkeerd`		=	'" . $_POST['blockSelect'] . "'
-                     WHERE	    `idUser`			=	 " . $_POST['idUser'] . " ";
+            $sql = "UPDATE	`producten` 
+                     SET 		`beschikbaar`		=	'" . $_POST['blockSelect'] . "'
+                     WHERE	    `idProduct`			=	 " . $_POST['idProduct'] . " ";
 
             // echo $sql;
             $database->fire_query($sql);
             $result = mysqli_query($connection, $sql);
 
             echo "<h3 style='text-align: center;' >Uw wijzigingen zijn verwerkt.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-            header("refresh:4;url=index.php?content=blokkeren");
+            header("refresh:4;url=index.php?content=beschikbaarmaken");
 
         } else {
         ?>
@@ -56,19 +50,20 @@ if (isset($_POST['create'])) {
             <div class="section">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12"><h2>Gebruiker Blokkeren</h2></div>
+                        <div class="col-md-12"><h2>Product Beschikbaar Maken</h2></div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li><a href="index.php?content=adminHomepage">Admin Homepage</a></li>
-                                <li><a href="index.php?content=productenToevoegen">Producten Toevoegen</a></li>
-                                <li><a href="index.php?content=productenBeheren">Producten beheren</a></li>
-                                <li><a href="index.php?content=verwijderProduct">Producten verwijderen</a></li>
-                                <li><a href="index.php?content=beschikbaarMaken">Producten beschikbaar maken</a></li>
-                                <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
-                                <li><a href="index.php?content=blokkeren">Gebruiker blokkeren</a></li>
-                                <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\adminHomepage">Admin Homepage</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\productenToevoegen">Producten Toevoegen</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\productVanDeDag">Product van de dag</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\productenBeheren">Producten beheren</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\verwijderProduct">Producten verwijderen</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\beschikbaarMaken">Producten beschikbaar maken</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\rolWijzigen">Gebruikerrol veranderen</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\blokkeren">Gebruiker blokkeren</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\gebruikerVerwijderen">Gebruiker verwijderen</a></li>
                             </ul>
                         </div>
                     </div>
@@ -79,8 +74,9 @@ if (isset($_POST['create'])) {
                     require_once("classes/LoginClass.php");
                     require_once("classes/VerkoopClass.php");
                     require_once("classes/SessionClass.php");
+                    require_once("classes/ProductClass.php");
 
-                    $result = LoginClass::get_all_users();
+                    $result = ProductClass::get_available_products();
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -90,41 +86,36 @@ if (isset($_POST['create'])) {
                             <thead>
                             <tr>
                                 <th>
-                                        Naam:
+                                        Titel:
                                 </th>
                                 <th>
-                                        E-mail:
+                                        AantalBeschikbaar:
                                 </th>
                                 <th>
-                                        Rol:
-                                </th>
-                                <th>
-                                        Geblokkeerd:
+                                        Beschikbaar:
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td>
-                                        " . $row["naam"] . "
+                                        " . $row['naam'] . "
+                                </td>
+
+                                <td>
+                                        " . $row['aantalBeschikbaar'] . "
                                 </td>
                                 <td>
-                                        " . $row['emailAdres'] . "
-                                </td>
-                                <td>
-                                        " . $row['rol'] . "
-                                </td>
-                                <td>
-                                        " . $row['geblokkeerd'] . "
+                                        " . $row['beschikbaar'] . "
                                 </td>
                                 <td>
                                         <form role=\"form\" action='' method='post'>
                                             <select name='blockSelect'>
-                                                <option value='1'>Blokkeren ( 1 )</option>
-                                                <option value='0'>Deblokkeren ( 0 )</option>
+                                                <option value='1'>Beschikbaar ( 1 )</option>
+                                                <option value='0'>Niet beschikbaar ( 0 )</option>
                                                 </select>
-                                            <input type='hidden' class=\"btn btn-info\" name='idUser' value='" . $row['idUser'] . "'/>
-                                            <input type='submit' class=\"btn btn-info\" name='updateBlock' value='Update Blokkade'>
+                                            <input type='hidden' class=\"btn btn-info\" name='idProduct' value='" . $row['idProduct'] . "'/>
+                                            <input type='submit' class=\"btn btn-info\" name='updateBlock' value='Update Beschikbaarheid'>
                                             
                                         </form>
                                 </td>
