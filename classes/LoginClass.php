@@ -329,7 +329,6 @@
 
             $result = $database->fire_query($query);
 
-            echo $query;
             return $result;
         }
         public static function get_all_users()
@@ -338,9 +337,7 @@
 
             $query = "select * from users";
 
-            $result = $database->fire_query($query);
-
-            return $result;
+            $database->fire_query($query);
         }
     }
 ?>

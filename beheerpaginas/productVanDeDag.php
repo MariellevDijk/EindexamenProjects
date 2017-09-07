@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
     ProductClass::set_product_van_de_dag($_POST['idProduct']);
 
     echo "<h3 style='text-align: center;' >Uw wijzigingen zijn verwerkt.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-    header("refresh:4;url=index.php?content=adminHomepage");
+    header("refresh:4;url=index.php?content=\beheerpaginas\adminHomepage");
 
 
 } else {
@@ -57,7 +57,6 @@ if (isset($_POST['submit'])) {
                 <li><a href="index.php?content=\beheerpaginas\beschikbaarMaken">Producten beschikbaar maken</a></li>
                 <li><a href="index.php?content=\beheerpaginas\rolWijzigen">Gebruikerrol veranderen</a></li>
                 <li><a href="index.php?content=\beheerpaginas\blokkeren">Gebruiker blokkeren</a></li>
-                <li><a href="index.php?content=\beheerpaginas\gebruikerVerwijderen">Gebruiker verwijderen</a></li>
             </ul>
         </div>
     </div>

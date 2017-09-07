@@ -129,13 +129,11 @@
         public static function wijzig_gegevens_product($post)
         {
             global $database;
-
+            var_dump($post);
             $sql = "UPDATE	`producten`  SET 	`naam`		=	'" . $_POST['naam'] . "',
                                                 `beschrijving`	= 	'" . $_POST['beschrijving'] . "',
                                                 `prijs`	= 	'" . $_POST['prijs'] . "',
                                                 `foto`	= 	'" . $_POST['foto'] . "',
-                                                `beschikbaar`	= 	'" . $_POST['beschikbaar'] . "',
-                                                `type`	= 	'" . $_POST['type'] . "',
                                                 `aantalBeschikbaar`	= 	'" . $_POST['aantalBeschikbaar'] . "'
                                         WHERE	`idProduct`			=	'" . $_POST['idProduct'] . "'";
 
@@ -148,6 +146,16 @@
             global $database;
 
             $query = "SELECT * FROM producten where `beschikbaar` = '1' and `isAccessoire` = '0' AND `dagProduct` = '0'";
+
+            $result = $database->fire_query($query);
+
+            return $result;
+        }
+        public static function get_all_products ()
+        {
+            global $database;
+
+            $query = "SELECT * FROM producten";
 
             $result = $database->fire_query($query);
 

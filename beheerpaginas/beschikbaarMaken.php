@@ -63,7 +63,6 @@ require_once("./security.php");
                                 <li><a href="index.php?content=\beheerpaginas\beschikbaarMaken">Producten beschikbaar maken</a></li>
                                 <li><a href="index.php?content=\beheerpaginas\rolWijzigen">Gebruikerrol veranderen</a></li>
                                 <li><a href="index.php?content=\beheerpaginas\blokkeren">Gebruiker blokkeren</a></li>
-                                <li><a href="index.php?content=\beheerpaginas\gebruikerVerwijderen">Gebruiker verwijderen</a></li>
                             </ul>
                         </div>
                     </div>
@@ -76,7 +75,7 @@ require_once("./security.php");
                     require_once("classes/SessionClass.php");
                     require_once("classes/ProductClass.php");
 
-                    $result = ProductClass::get_available_products();
+                    $result = ProductClass::get_all_products();
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {

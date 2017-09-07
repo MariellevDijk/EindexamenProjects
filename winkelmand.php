@@ -46,6 +46,13 @@ if (isset($_POST['removeItemCart'])) {
                 <div class="row">
                     <div class="col-md-12"><h2>Winkelmand</h2></div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="breadcrumb">
+                            <li><a href="index.php?content=favorieteProducten">Mijn favorieten</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-6">

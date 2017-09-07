@@ -15,7 +15,7 @@ if (!empty($_POST['emailAdres']) && !empty($_POST['wachtwoord'])) {
                 header("location:index.php?content=algemeneHomepage");
                 break;
             case '1':
-                header("location:index.php?content=adminHomepage");
+                header("location:index.php?content=\beheerpaginas\adminHomepage");
                 break;
             default :
                 header("location:index.php?content=inloggen_Registreren");

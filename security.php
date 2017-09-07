@@ -3,6 +3,7 @@
 //echo $_SESSION['rol'];
 require_once("./classes/LoginClass.php");
 require_once("./classes/SessionClass.php");
+include("head.php");
 if (!isset($_SESSION['idUser'])) {
     echo "<head><style>body{overflow-y: hidden; overflow-x: hidden;}</style></head><h3 style='text-align: center;' >U bent niet ingelogd en daarom niet bevoegd om deze pagina te bekijken. U wordt teruggestuurd naar de loginpagina.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
     header("refresh:5;url=index.php?content=inloggen_Registreren");

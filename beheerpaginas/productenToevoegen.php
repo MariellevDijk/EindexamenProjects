@@ -9,7 +9,7 @@ require_once("classes/SessionClass.php");
 
 if (isset($_POST['create'])) {
     echo "<h3 style='text-align: center;' >Product is toegevoegd aan database.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-    header("refresh:4;url=index.php?content=adminHomepage");
+    header("refresh:4;url=index.php?content=\beheerpaginas\adminHomepage");
     require_once("./classes/ProductClass.php");
     ProductClass::insert_product_database($_POST);
 } else {
@@ -53,7 +53,6 @@ if (isset($_POST['create'])) {
                 <li><a href="index.php?content=\beheerpaginas\beschikbaarMaken">Producten beschikbaar maken</a></li>
                 <li><a href="index.php?content=\beheerpaginas\rolWijzigen">Gebruikerrol veranderen</a></li>
                 <li><a href="index.php?content=\beheerpaginas\blokkeren">Gebruiker blokkeren</a></li>
-                <li><a href="index.php?content=\beheerpaginas\gebruikerVerwijderen">Gebruiker verwijderen</a></li>
             </ul>
         </div>
     </div>

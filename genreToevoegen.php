@@ -10,7 +10,7 @@ if (isset($_POST['submit-Genre'])) {
 
     TypeClass::insert_genre_into_database($_POST['genre']);
     echo "<h3 style='text-align: center;' >U heeft een nieuw genre toegevoegd.</h3><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
-    header("refresh:4;url=index.php?content=adminHomepage");
+    header("refresh:4;url=index.php?content=\beheerpaginas\adminHomepage");
 } else {
     ?>
     <html>
@@ -45,11 +45,9 @@ if (isset($_POST['submit-Genre'])) {
                     <div class="row">
                         <div class="col-md-12">
                             <ul class="breadcrumb">
-                                <li><a href="index.php?content=adminHomepage">Video's beheren</a></li>
+                                <li><a href="index.php?content=\beheerpaginas\adminHomepage">Video's beheren</a></li>
                                 <li><a href="index.php?content=rolWijzigen">Gebruikerrol veranderen</a></li>
                                 <li><a href="index.php?content=blokkeren">Gebruiker Blokkeren</a></li>
-                                <li><a href="index.php?content=gebruikerVerwijderen">Gebruiker verwijderen</a></li>
-                                <li><a href="index.php?content=verwijderFilm">Film verwijderen</a></li>
                             </ul>
                         </div>
                     </div>
