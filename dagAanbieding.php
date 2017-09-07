@@ -31,30 +31,32 @@ if ($resultDagProduct->num_rows > 0) {
                                                         <p class=\"videos\"><strike>" . $row["prijs"] . " euro</strike> " . $row["prijsDagProduct"] . " euro</p>
                                                        
                                                         <p class=\"videos\">" . $row["beschrijving"] . "</p>
-            
-                                                        <a href='index.php?content=productPagina&idProduct=" . $row["idProduct"] . "'>
-                                                        <button type=\"button\" class=\"btn btn-info\">Meer Informatie</button></a>
-                                                        
-                                                        
-                                                         <form role = \"form\" action='' method='post'>
-                                                         <b>Aantal:     </b><input type='number' name='amount' max='" . $row["aantalBeschikbaar"] . "'/>
-                                                        <input type='hidden' name='idProduct' value='" . $row['idProduct'] . "'>
-                                                        <input type='hidden' name='idUser' value='" . $_SESSION['idUser'] . "'>
-                                                        <input type='hidden' name='naam' value='" . $row['naam'] . "'>
-                                                        <input type='hidden' name='prijs' value='" . $row['prijsDagProduct'] . "'>
-                                                        <input type='hidden' name='dagProduct' value='" . $row['dagProduct'] . "'>
-                
-                                                        <button type='submit' name='submit' class='btn btn-info'>Toevoegen aan winkelmand<br></button>
-                                                        </form>
-                                                        
-                                                        <form role=\"form\" action='' method='post'>
-                                                            <input type='submit' class=\"btn btn-danger\" style='background: red;' name='favoriet' value='Voeg toe aan favoriete producten'>
-                                                            <input type='hidden' class=\"btn btn-success\" name='idProduct' value='" . $row['idProduct'] . "'/>
-                                                        </form>
-                                                        
-                                                        <br>
-                                                    </div>
-                                        ";
+                ";
+                                                        if (!(empty($_SESSION['idUser']))) {
+                                                            echo "
+                                                                <a href='index.php?content=productPagina&idProduct=" . $row["idProduct"] . "'>
+                                                                <button type=\"button\" class=\"btn btn-info\">Meer Informatie</button></a>
+                                                                
+                                                                
+                                                                 <form role = \"form\" action='' method='post'>
+                                                                 <b>Aantal:     </b><input type='number' name='amount' max='" . $row["aantalBeschikbaar"] . "'/>
+                                                                <input type='hidden' name='idProduct' value='" . $row['idProduct'] . "'>
+                                                                <input type='hidden' name='idUser' value='" . $_SESSION['idUser'] . "'>
+                                                                <input type='hidden' name='naam' value='" . $row['naam'] . "'>
+                                                                <input type='hidden' name='prijs' value='" . $row['prijsDagProduct'] . "'>
+                                                                <input type='hidden' name='dagProduct' value='" . $row['dagProduct'] . "'>
+                        
+                                                                <button type='submit' name='submit' class='btn btn-info'>Toevoegen aan winkelmand<br></button>
+                                                                </form>
+                                                                
+                                                                <form role=\"form\" action='' method='post'>
+                                                                    <input type='submit' class=\"btn btn-danger\" style='background: red;' name='favoriet' value='Voeg toe aan favoriete producten'>
+                                                                    <input type='hidden' class=\"btn btn-success\" name='idProduct' value='" . $row['idProduct'] . "'/>
+                                                                </form>
+                                                                
+                                                                <br>";
+                                                        }
+                                          echo "</div>";
             }
         }
         else if ($nu < $begin) {

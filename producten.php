@@ -108,7 +108,8 @@ if (isset($_POST['favoriet'])) {
                                 <br><br><br>
                             </div>
 
-
+                            <?php
+                                include("dagAanbieding.php");
                             if (isset($_POST['zoekBeschrijving'])) {
                                 echo "<div class=\"col-md-12\"><h2>Gevonden producten op Beschrijving</h2>";
                             } else if (isset($_POST['zoekArtikelcode'])) {
