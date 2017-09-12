@@ -167,9 +167,10 @@ if (isset($_POST['removeItemCart'])) {
                     }
                     echo "<h1>Alle eerdere bestellingen</h1>";
                     $result = VerkoopClass::get_all_orders();
-                    foreach ($result as $opgehaaldeOrders) {
-                        $result2 = VerkoopClass::get_regels_by_order($opgehaaldeOrders);
-                        echo "
+                    if($result->num_rows > 0) {
+                        foreach ($result as $opgehaaldeOrders) {
+                            $result2 = VerkoopClass::get_regels_by_order($opgehaaldeOrders);
+                            echo "
                             <table class=\"table table-responsive\">
                                         <thead>
                                             <tr>
@@ -201,8 +202,9 @@ if (isset($_POST['removeItemCart'])) {
                                         
                             </table>
                                 ";
-                        foreach ($result2 as $opgehaaldeOrderregels) {
-                            echo "<table class=\"table table-responsive\" style='margin-left: 25px;'>
+                            if($result2->num_rows > 0) {
+                                foreach ($result2 as $opgehaaldeOrderregels) {
+                                    echo "<table class=\"table table-responsive\" style='margin-left: 25px;'>
                                         <thead>
                                             <tr>
                                                 <th>
@@ -244,51 +246,15 @@ if (isset($_POST['removeItemCart'])) {
                                         </tbody>
                                         
                             </table>";
+                                }
+                            } else {
+                                echo "Geen bestellingsregels gevonden";
+                            }
+                            echo "<hr style='border-bottom: 1px solid black; width: 100%;'>";
                         }
-                        echo "<hr style='border-bottom: 1px solid black; width: 100%;'>";
+                    } else {
+                        echo "Geen eerdere bestellingen gevonden";
                     }
-
-                    ////                        if ($result->num_rows > 0) {
-                    ////                            while ($row = $result->fetch_assoc()) {
-                    //                                print_r($row);
-                    //                                echo $row2['idOrder'];
-                    //                                echo "
-                    //                                    <h1>Alle eerdere bestellingen</h1>
-                    //                            <table class=\"table table - responsive\">
-                    //                                <thead>
-                    //                                <tr>
-                    //                                    <th>
-                    //                                        Bestelling:
-                    //                                    </th>
-                    //                                    <th>
-                    //                                        Prijs per stuk:
-                    //                                    </th>
-                    //                                    <th>
-                    //                                        Prijs per stuk:
-                    //                                    </th>
-                    //                                    <th>
-                    //                                        Prijs per stuk:
-                    //                                    </th>
-                    //
-                    //
-                    //                                </tr>
-                    //                                </thead>
-                    //                                <tbody>
-                    //                                <tr>
-                    //                                    <td>
-                    //                                            " . $row["idVideo"] . "
-                    //                                    </td>
-                    //                                    <td>
-                    //                                            " . $row["prijs"] . "
-                    //                                    </td>
-                    //                                </tr>
-                    //                                </tbody>
-                    //                            </table>
-                    //                                ";
-                    ////                            }
-                    ////                        } else {
-                    ////                            echo "Geen resultaten<br><br><br><br><br><br><br><br><br><br><br>";
-                    ////                        }
 
                     ?>
                     <br><br><br><br><br><br>
