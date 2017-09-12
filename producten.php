@@ -198,7 +198,7 @@ if (isset($_POST['favoriet'])) {
                                 while ($row = $result1->fetch_assoc()) {
                                     if ($row["beschikbaar"]) {
                                         echo "
-                                                    <div style='height: 1000px; margin-bottom: -20px;' class=\"col-md-3\">
+                                                    <div style='height: 700px; margin-bottom: -20px;' class=\"col-md-3\">
                                                         <img style='height: 400px' src=\"images/" . $row["foto"] . "\" class=\"img-responsive\">
                                                         <h3>" . $row["naam"] . "</h3>
                                                         <p class=\"videos\">" . $row["prijs"] . "</p>

@@ -6,7 +6,7 @@ require_once("/classes/LoginClass.php");
 $current_time = date('H:i');
 // $current_time = "13:10";
 $beginDagProduct = "11:00";
-$endDagProduct = "16:20";
+$endDagProduct = "13:00";
 $nu = DateTime::createFromFormat('H:i', $current_time);
 $begin = DateTime::createFromFormat('H:i', $beginDagProduct);
 $eind = DateTime::createFromFormat('H:i', $endDagProduct);
@@ -66,7 +66,7 @@ if ($resultDagProduct->num_rows > 0) {
 }
 else if($current_time >= $endDagProduct) {
     ProductClass::remove_Product_Van_De_Dag();
-    echo "De actie van vandaag is afgelopen, kom morgen terug voor een nieuwe kans op een mooie aanbieding!<br>";
+    echo "De +tie van vandaag is afgelopen, kom morgen terug voor een nieuwe kans op een mooie aanbieding!<br>";
 }
 else {
     echo "Op dit moment is er geen product van de dag.";
